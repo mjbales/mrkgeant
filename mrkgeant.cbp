@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="mrkgeant" />
+		<Option makefile="GNUmakefile" />
+		<Option makefile_is_custom="1" />
+		<Option execution_dir="/home/mjbales/school/rdk/mrkgeantrun" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<MakeCommands>
+			<Build command="$make -f $makefile $target" />
+			<CompileFile command="$make -f $makefile $file" />
+			<Clean command="$make -f $makefile clean" />
+			<DistClean command="$make -f $makefile distclean$target" />
+			<AskRebuildNeeded command="$make -q -f $makefile" />
+			<SilentBuild command="$make -s -f $makefile" />
+		</MakeCommands>
+		<Build>
+			<Script file="lib_finder.script" />
+			<Target title="Debug">
+				<Option output="../bin/Linux-g++/mrkgeant" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="/home/mjbales/school/rdk/mrkgeantrun" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<MakeCommands>
+					<Build command="$make -f $makefile Debug" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -s -f $makefile $target" />
+				</MakeCommands>
+			</Target>
+			<Target title="Release">
+				<Option output="../bin/Linux-g++/mrkgeant" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="/home/mjbales/school/rdk/mrkgeantrun" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+				<MakeCommands>
+					<Build command="$make -f $makefile $target" />
+					<CompileFile command="$make -f $makefile $file" />
+					<Clean command="$make -f $makefile clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make -q -f $makefile $target" />
+					<SilentBuild command="$make -s -f $makefile $target" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fPIC -pthread -I/usr/local/root/include/root" />
+			<Add directory="/usr/local/root/include/root" />
+			<Add directory="/home/mjbales/school/geant/geant4/install/9.3.p01/include/geant4" />
+			<Add directory="/home/mjbales/school/geant/clhep/install/include" />
+			<Add directory="include" />
+			<Add directory="src" />
+		</Compiler>
+		<Linker>
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4digits_hits.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4error_propagation.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4event.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4FR.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4geometry.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4gl2ps.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4global.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4GMocren.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4graphics_reps.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4intercoms.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4interfaces.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4materials.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4modeling.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4OpenGL.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4parmodels.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4particles.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4persistency.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4physicslists.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4processes.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4RayTracer.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4readout.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4run.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4track.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4tracking.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4Tree.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4visHepRep.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4vis_management.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4visXXX.so" />
+			<Add library="/home/mjbales/school/geant/geant4/geant4.9.3.p01/lib/Linux-g++/libG4VRML.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-2.0.4.6.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Cast-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Cast-2.0.4.6.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Evaluator-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Evaluator-2.0.4.6.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Exceptions-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Exceptions-2.0.4.6.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-GenericFunctions-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-GenericFunctions-2.0.4.6.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Geometry-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Geometry-2.0.4.6.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Matrix-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Matrix-2.0.4.6.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Random-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Random-2.0.4.6.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-RandomObjects-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-RandomObjects-2.0.4.6.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-RefCount-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-RefCount-2.0.4.6.so" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Vector-2.0.4.6.a" />
+			<Add library="/home/mjbales/school/geant/clhep/install/lib/libCLHEP-Vector-2.0.4.6.so" />
+			<Add library="/usr/local/root/lib/root/libCint.so" />
+			<Add library="/usr/local/root/lib/root/libCore.so" />
+			<Add library="/usr/local/root/lib/root/libGpad.so" />
+			<Add library="/usr/local/root/lib/root/libGraf.so" />
+			<Add library="/usr/local/root/lib/root/libGraf3d.so" />
+			<Add library="/usr/local/root/lib/root/libGui.so" />
+			<Add library="/usr/local/root/lib/root/libHbook.so" />
+			<Add library="/usr/local/root/lib/root/libHist.so" />
+			<Add library="/usr/local/root/lib/root/libMathCore.so" />
+			<Add library="/usr/local/root/lib/root/libMatrix.so" />
+			<Add library="/usr/local/root/lib/root/libNet.so" />
+			<Add library="/usr/local/root/lib/root/libPhysics.so" />
+			<Add library="/usr/local/root/lib/root/libPostscript.so" />
+			<Add library="/usr/local/root/lib/root/libRint.so" />
+			<Add library="/usr/local/root/lib/root/libRIO.so" />
+			<Add library="/usr/local/root/lib/root/libThread.so" />
+			<Add library="/usr/local/root/lib/root/libTree.so" />
+			<Add directory="/home/mjbales/school/geant/geant4/install/9.3.p01/lib/geant4" />
+			<Add directory="/home/mjbales/school/geant/clhep/install/lib" />
+		</Linker>
+		<Unit filename="GNUmakefile" />
+		<Unit filename="include/GeneratorMessenger.hh" />
+		<Unit filename="include/MRKBAPDDetector.hh" />
+		<Unit filename="include/MRKBGODetector.hh" />
+		<Unit filename="include/MRKDetectorConstruction.hh" />
+		<Unit filename="include/MRKDetectorMessenger.hh" />
+		<Unit filename="include/MRKElementField.hh" />
+		<Unit filename="include/MRKEventAction.hh" />
+		<Unit filename="include/MRKField.hh" />
+		<Unit filename="include/MRKFieldMessenger.hh" />
+		<Unit filename="include/MRKGlobalField.hh" />
+		<Unit filename="include/MRKHit.hh" />
+		<Unit filename="include/MRKMaterials.hh" />
+		<Unit filename="include/MRKPrimaryGeneratorAction.hh" />
+		<Unit filename="include/MRKRun.hh" />
+		<Unit filename="include/MRKRunAction.hh" />
+		<Unit filename="include/MRKSteppingAction.hh" />
+		<Unit filename="include/MRKSteppingVerbose.hh" />
+		<Unit filename="include/MRKSurfaceBarrierDetector.hh" />
+		<Unit filename="include/PhysListEmStandard.hh" />
+		<Unit filename="include/PhysListEmStandardGS.hh" />
+		<Unit filename="include/PhysListEmStandardSS.hh" />
+		<Unit filename="include/PhysListEmStandardSSM.hh" />
+		<Unit filename="include/PhysListEmStandardWVI.hh" />
+		<Unit filename="include/PhysicsList.hh" />
+		<Unit filename="include/PhysicsListMessenger.hh" />
+		<Unit filename="include/ROOTField.hh" />
+		<Unit filename="include/RunActionMessenger.hh" />
+		<Unit filename="include/StepMax.hh" />
+		<Unit filename="include/StepMaxMessenger.hh" />
+		<Unit filename="include/cEvents.hh" />
+		<Unit filename="include/cMRKText.hh" />
+		<Unit filename="include/cVField.hh" />
+		<Unit filename="include/cVector.hh" />
+		<Unit filename="include/constants.hh" />
+		<Unit filename="include/mattphys.hh" />
+		<Unit filename="mrkgeant.cc" />
+		<Unit filename="src/GeneratorMessenger.cc" />
+		<Unit filename="src/MRKBAPDDetector.cc" />
+		<Unit filename="src/MRKBGODetector.cc" />
+		<Unit filename="src/MRKDetectorConstruction.cc" />
+		<Unit filename="src/MRKDetectorMessenger.cc" />
+		<Unit filename="src/MRKElementField.cc" />
+		<Unit filename="src/MRKEventAction.cc" />
+		<Unit filename="src/MRKField.cc" />
+		<Unit filename="src/MRKFieldMessenger.cc" />
+		<Unit filename="src/MRKGlobalField.cc" />
+		<Unit filename="src/MRKHit.cc" />
+		<Unit filename="src/MRKMaterials.cc" />
+		<Unit filename="src/MRKPrimaryGeneratorAction.cc" />
+		<Unit filename="src/MRKRun.cc" />
+		<Unit filename="src/MRKRunAction.cc" />
+		<Unit filename="src/MRKSteppingAction.cc" />
+		<Unit filename="src/MRKSteppingVerbose.cc" />
+		<Unit filename="src/MRKSurfaceBarrierDetector.cc" />
+		<Unit filename="src/PhysListEmStandard.cc" />
+		<Unit filename="src/PhysListEmStandardGS.cc" />
+		<Unit filename="src/PhysListEmStandardSS.cc" />
+		<Unit filename="src/PhysListEmStandardSSM.cc" />
+		<Unit filename="src/PhysListEmStandardWVI.cc" />
+		<Unit filename="src/PhysicsList.cc" />
+		<Unit filename="src/PhysicsListMessenger.cc" />
+		<Unit filename="src/ROOTField.cc" />
+		<Unit filename="src/RunActionMessenger.cc" />
+		<Unit filename="src/StepMax.cc" />
+		<Unit filename="src/StepMaxMessenger.cc" />
+		<Unit filename="src/cEvents.cc" />
+		<Unit filename="src/cMRKText.cc" />
+		<Unit filename="src/cVField.cc" />
+		<Unit filename="src/cVector.cc" />
+		<Unit filename="src/mattphys.cc" />
+		<Extensions>
+			<envvars set="geant" />
+			<code_completion>
+				<search_path add="../../../../root/root5.34.01/include" />
+				<search_path add="../../geant4.9.5.p01-install/include/Geant4" />
+			</code_completion>
+			<debugger>
+				<search_path add="include" />
+				<search_path add="src" />
+				<search_path add="../../geant4.9.5.p01-install/include/Geant4" />
+				<search_path add="../../../../root/root5.34.01/include" />
+			</debugger>
+			<lib_finder disable_auto="1">
+				<lib name="/usr/local/root/lib/root/libCore.so" />
+			</lib_finder>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

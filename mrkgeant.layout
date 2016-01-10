@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="include/GeneratorMessenger.hh" open="0" top="0" tabpos="1">
+		<Cursor position="724" topLine="6" />
+	</File>
+	<File name="include/MRKBAPDDetector.hh" open="0" top="0" tabpos="8">
+		<Cursor position="2022" topLine="29" />
+	</File>
+	<File name="include/MRKBGODetector.hh" open="0" top="0" tabpos="6">
+		<Cursor position="3005" topLine="50" />
+	</File>
+	<File name="include/MRKDetectorConstruction.hh" open="1" top="0" tabpos="3">
+		<Cursor position="12804" topLine="104" />
+	</File>
+	<File name="include/MRKDetectorMessenger.hh" open="0" top="0" tabpos="3">
+		<Cursor position="3749" topLine="51" />
+	</File>
+	<File name="include/MRKElementField.hh" open="0" top="0" tabpos="12">
+		<Cursor position="5646" topLine="105" />
+	</File>
+	<File name="include/MRKField.hh" open="0" top="0" tabpos="2">
+		<Cursor position="2914" topLine="60" />
+	</File>
+	<File name="include/MRKFieldMessenger.hh" open="0" top="0" tabpos="3">
+		<Cursor position="3715" topLine="43" />
+	</File>
+	<File name="include/MRKGlobalField.hh" open="0" top="0" tabpos="1">
+		<Cursor position="4276" topLine="123" />
+	</File>
+	<File name="include/MRKHit.hh" open="0" top="0" tabpos="4">
+		<Cursor position="3773" topLine="97" />
+	</File>
+	<File name="include/MRKMaterials.hh" open="0" top="0" tabpos="3">
+		<Cursor position="2338" topLine="40" />
+	</File>
+	<File name="include/MRKPrimaryGeneratorAction.hh" open="0" top="0" tabpos="3">
+		<Cursor position="5311" topLine="118" />
+	</File>
+	<File name="include/MRKRun.hh" open="0" top="0" tabpos="3">
+		<Cursor position="2382" topLine="51" />
+	</File>
+	<File name="include/MRKRunAction.hh" open="0" top="0" tabpos="7">
+		<Cursor position="2665" topLine="17" />
+	</File>
+	<File name="include/MRKSteppingAction.hh" open="0" top="0" tabpos="8">
+		<Cursor position="2521" topLine="0" />
+	</File>
+	<File name="include/MRKSurfaceBarrierDetector.hh" open="0" top="0" tabpos="6">
+		<Cursor position="2044" topLine="25" />
+	</File>
+	<File name="include/PhysListEmStandard.hh" open="0" top="0" tabpos="10">
+		<Cursor position="2203" topLine="22" />
+	</File>
+	<File name="include/PhysListEmStandardSS.hh" open="0" top="0" tabpos="2">
+		<Cursor position="2397" topLine="0" />
+	</File>
+	<File name="include/PhysicsList.hh" open="0" top="0" tabpos="3">
+		<Cursor position="3175" topLine="24" />
+	</File>
+	<File name="include/PhysicsListMessenger.hh" open="0" top="0" tabpos="0">
+		<Cursor position="0" topLine="35" />
+	</File>
+	<File name="include/ROOTField.hh" open="0" top="0" tabpos="2">
+		<Cursor position="2130" topLine="29" />
+	</File>
+	<File name="include/RunActionMessenger.hh" open="0" top="0" tabpos="16">
+		<Cursor position="543" topLine="0" />
+	</File>
+	<File name="include/cEvents.hh" open="0" top="0" tabpos="4">
+		<Cursor position="3335" topLine="69" />
+	</File>
+	<File name="include/cMRKText.hh" open="0" top="0" tabpos="3">
+		<Cursor position="1314" topLine="11" />
+	</File>
+	<File name="include/cVField.hh" open="0" top="0" tabpos="7">
+		<Cursor position="3616" topLine="192" />
+	</File>
+	<File name="include/cVector.hh" open="0" top="0" tabpos="4">
+		<Cursor position="1689" topLine="29" />
+	</File>
+	<File name="include/constants.hh" open="0" top="0" tabpos="2">
+		<Cursor position="2439" topLine="32" />
+	</File>
+	<File name="include/mattphys.hh" open="0" top="0" tabpos="9">
+		<Cursor position="1720" topLine="21" />
+	</File>
+	<File name="mrkgeant.cc" open="0" top="0" tabpos="5">
+		<Cursor position="3153" topLine="80" />
+	</File>
+	<File name="src/GeneratorMessenger.cc" open="0" top="0" tabpos="6">
+		<Cursor position="2030" topLine="33" />
+	</File>
+	<File name="src/MRKBAPDDetector.cc" open="1" top="0" tabpos="2">
+		<Cursor position="4427" topLine="102" />
+	</File>
+	<File name="src/MRKBGODetector.cc" open="0" top="0" tabpos="2">
+		<Cursor position="8265" topLine="138" />
+	</File>
+	<File name="src/MRKDetectorConstruction.cc" open="1" top="1" tabpos="4">
+		<Cursor position="126453" topLine="1637" />
+	</File>
+	<File name="src/MRKDetectorMessenger.cc" open="0" top="0" tabpos="4">
+		<Cursor position="7202" topLine="113" />
+	</File>
+	<File name="src/MRKElementField.cc" open="0" top="0" tabpos="13">
+		<Cursor position="4791" topLine="83" />
+	</File>
+	<File name="src/MRKEventAction.cc" open="0" top="0" tabpos="0">
+		<Cursor position="3126" topLine="21" />
+	</File>
+	<File name="src/MRKField.cc" open="0" top="0" tabpos="4">
+		<Cursor position="3353" topLine="64" />
+	</File>
+	<File name="src/MRKFieldMessenger.cc" open="0" top="0" tabpos="6">
+		<Cursor position="6161" topLine="92" />
+	</File>
+	<File name="src/MRKGlobalField.cc" open="1" top="0" tabpos="1">
+		<Cursor position="10180" topLine="278" />
+	</File>
+	<File name="src/MRKHit.cc" open="0" top="0" tabpos="3">
+		<Cursor position="1944" topLine="36" />
+	</File>
+	<File name="src/MRKMaterials.cc" open="0" top="0" tabpos="2">
+		<Cursor position="2262" topLine="46" />
+	</File>
+	<File name="src/MRKPrimaryGeneratorAction.cc" open="0" top="0" tabpos="6">
+		<Cursor position="8477" topLine="256" />
+	</File>
+	<File name="src/MRKRun.cc" open="0" top="0" tabpos="1">
+		<Cursor position="14373" topLine="72" />
+	</File>
+	<File name="src/MRKRunAction.cc" open="0" top="0" tabpos="2">
+		<Cursor position="2185" topLine="52" />
+	</File>
+	<File name="src/MRKSteppingAction.cc" open="0" top="0" tabpos="7">
+		<Cursor position="2453" topLine="36" />
+	</File>
+	<File name="src/MRKSurfaceBarrierDetector.cc" open="0" top="0" tabpos="7">
+		<Cursor position="2122" topLine="107" />
+	</File>
+	<File name="src/PhysListEmStandard.cc" open="0" top="0" tabpos="2">
+		<Cursor position="2539" topLine="42" />
+	</File>
+	<File name="src/PhysListEmStandardSS.cc" open="0" top="0" tabpos="3">
+		<Cursor position="3104" topLine="81" />
+	</File>
+	<File name="src/PhysicsList.cc" open="0" top="0" tabpos="2">
+		<Cursor position="2589" topLine="48" />
+	</File>
+	<File name="src/PhysicsListMessenger.cc" open="0" top="0" tabpos="6">
+		<Cursor position="5272" topLine="73" />
+	</File>
+	<File name="src/ROOTField.cc" open="0" top="0" tabpos="1">
+		<Cursor position="17658" topLine="732" />
+	</File>
+	<File name="src/RunActionMessenger.cc" open="0" top="0" tabpos="10">
+		<Cursor position="351" topLine="0" />
+	</File>
+	<File name="src/StepMax.cc" open="0" top="0" tabpos="4">
+		<Cursor position="3231" topLine="0" />
+	</File>
+	<File name="src/StepMaxMessenger.cc" open="0" top="0" tabpos="11">
+		<Cursor position="2034" topLine="0" />
+	</File>
+	<File name="src/cEvents.cc" open="0" top="0" tabpos="3">
+		<Cursor position="1597" topLine="63" />
+	</File>
+	<File name="src/cMRKText.cc" open="0" top="0" tabpos="7">
+		<Cursor position="3166" topLine="155" />
+	</File>
+	<File name="src/cVField.cc" open="0" top="0" tabpos="6">
+		<Cursor position="25147" topLine="1056" />
+	</File>
+	<File name="src/cVector.cc" open="0" top="0" tabpos="5">
+		<Cursor position="3337" topLine="151" />
+	</File>
+	<File name="src/mattphys.cc" open="0" top="0" tabpos="7">
+		<Cursor position="7807" topLine="245" />
+	</File>
+</CodeBlocks_layout_file>

@@ -1,0 +1,222 @@
+//
+// ********************************************************************
+// * License and Disclaimer                                           *
+// *                                                                  *
+// * The  Geant4 software  is  copyright of the Copyright Holders  of *
+// * the Geant4 Collaboration.  It is provided  under  the terms  and *
+// * conditions of the Geant4 Software License,  included in the file *
+// * LICENSE and available at  http://cern.ch/geant4/license .  These *
+// * include a list of copyright holders.                             *
+// *                                                                  *
+// * Neither the authors of this software system, nor their employing *
+// * institutes,nor the agencies providing financial support for this *
+// * work  make  any representation or  warranty, express or implied, *
+// * regarding  this  software system or assume any liability for its *
+// * use.  Please see the license in the file  LICENSE  and URL above *
+// * for the full disclaimer and the limitation of liability.         *
+// *                                                                  *
+// * This  code  implementation is the result of  the  scientific and *
+// * technical work of the GEANT4 collaboration.                      *
+// * By using,  copying,  modifying or  distributing the software (or *
+// * any work based  on the software)  you  agree  to acknowledge its *
+// * use  in  resulting  scientific  publications,  and indicate your *
+// * acceptance of all terms of the Geant4 Software license.          *
+// ********************************************************************
+//
+//
+// $Id: MRKDetectorConstruction.hh,v 1.10 2008/09/22 16:41:20 maire Exp $
+// GEANT4 tag $Name: geant4-09-03-patch-01 $
+//
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+#ifndef MRKDetectorConstruction_h
+#define MRKDetectorConstruction_h 1
+
+#include "globals.hh"
+#include "G4VUserDetectorConstruction.hh"
+#include "RDKSolenoid.hh"
+#include "RDKMirror.hh"
+#include "RDKSBDField.hh"
+#include "SpectrometerMagnet.hh"
+#include "MRKMaterials.hh"
+#include "TRandom3.h"
+#include "mattphys.hh"
+
+#include "constants.hh"
+
+#include "G4Box.hh"
+#include "G4UserLimits.hh"
+class G4Tubs;
+class G4LogicalVolume;
+class G4VPhysicalVolume;
+class G4Material;
+class G4VPVParameterisation;
+class G4UserLimits;
+class MRKDetectorMessenger;
+
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+enum ExperimentModel{MODEL_RDK2,MODEL_SIMPLESBD,MODEL_BSEXP,MODEL_BGOSONLY,MODEL_RDK1,MODEL_SPECTROMETER,MODEL_BGODEWAR};
+
+
+class MRKDetectorConstruction : public G4VUserDetectorConstruction
+{
+  public:
+
+     MRKDetectorConstruction(TRandom3*);
+    ~MRKDetectorConstruction();
+
+  public:
+
+     G4VPhysicalVolume* Construct();
+     G4VPhysicalVolume* ConstructRDK2();
+     G4VPhysicalVolume* ConstructRDK1();
+
+    const G4VPhysicalVolume* GetWorld()      {return physiWorld;};
+    inline ExperimentModel getExperimentModel(){ return experimentModel;}
+    inline void setExperimentModel(ExperimentModel inpModel){ G4cout << "Setting experimental model for detector construction." << G4endl;experimentModel=inpModel;}
+    void setExperimentModel(string modelName);
+    inline void setFieldsOn(bool inp){fieldsOn=inp;}
+    inline void setUseSBDDetector(bool inp){useSBDDetector=inp;}
+    inline void setUseBGODetectors(bool inp){useBGODetectors=inp;}
+    inline void setUseBAPDDetectors(bool inp){useBAPDDetectors=inp;}
+    inline bool getUseSBDDetector(){return useSBDDetector;}
+    inline bool getUseBAPDDetectors(){return useBAPDDetectors;}
+    inline bool getUseBGODetectors(){return useBGODetectors;}
+    inline void setSBDSiliconLength(G4double inp){SBDSiliconLength=inp;}
+    inline void setBSExpSBDAngle(G4double inp){BSExpSBDAngle=inp;}
+    inline void setUsePositionalBGOLightOutput(bool inp){usePositionalBGOLightOutput=inp;}
+    inline void setSBDComplexityLevel(int inp){SBDComplexityLevel=inp;}
+    inline void setUseBAPDCollectionEfficiencyModel(bool inp){useBAPDCollectionEfficiencyModel=inp;}
+    inline void setUseBGOCalibrationWeakSource(bool inp){useBGOCalibrationWeakSource=inp;}
+    inline bool getUseBGOCalibrationWeakSource(){return useBGOCalibrationWeakSource;}
+    inline void setUseBGOWrappings(bool inp){useBGOWrappings=inp;}
+    inline void setNumBGOsUsed(int inp){numBGOsUsed=inp;}
+    inline int getNumBGOsUsed(){return numBGOsUsed;}
+    inline void setMirrorFieldScale(double inp){mirrorFieldScale=inp;}
+    inline void setAnnulusCladdingOn(bool inp){annulusCladdingOn=inp;}
+    inline void setAddRDK2AluminumPlug(bool inp){addRDK2AluminumPlug=inp;}
+    inline void setSpectrometerdM(double inp){SpectrometerdM=inp;}
+    inline void setSpectrometerFieldScale(double inp){spectrometerFieldScale=inp;}
+    inline void setUseDoubleMagnets(bool inp){useDoubleMagnets=inp;}
+    inline void setUseNormalizedBGOLightOutput(bool inp){useNormalizedBGOLightOutput=inp;}
+
+  private:
+    //Volume construction methods
+    void constructRDK2World();
+    void constructRDK2WorldSBDOptimized();
+    void constructRDK2MagneticCoils();
+    void constructRDK2Bore();
+    void constructRDK2LeadApertureWithCopper();
+    void constructRDK2PotentialMirror();
+    void constructSBD();
+    void constructSBDSilicon();
+    void constructSBDCoatings();
+    void constructSBDOuterCase();
+    void constructSBDInnerExtras();
+    void constructSBDEpoxy();
+    void constructBeOTube();
+    void constructBGOs(bool verbose=false);//Note that if numBGOs is 1 then it sets up a special simulation
+    void constructBGOAssembly();
+    void constructBAPDAssembly();
+    void constructBAPDs();
+    void constructWorldSimpleSBD();
+    void constructSBDSiliconSimple();
+    void constructSn113Source();
+    void constructCrudeBSExpStand();
+    void constructBrassSBDHolder();
+    void constructStainlessSteelVacuumChamber();
+    void constructBGOCalibrationItems();
+    void constructBGOWrappings();
+    void constructBGOWrappingsImproved();
+    void constructAluminumPlug();
+    void constructBeamCenterLine();
+    void constructOffAxisVaccuum();
+
+
+
+
+
+    G4VPhysicalVolume* ConstructSimpleSiliconDetector();
+    G4VPhysicalVolume* ConstructBSExp();
+    G4VPhysicalVolume* ConstructBGOsOnly();
+    G4VPhysicalVolume* ConstuctBGODewar();
+
+    MRKMaterials* materials;
+
+    G4Box*             solidWorld;    // pointer to the solid envelope
+    G4LogicalVolume*   logicWorld;    // pointer to the logical envelope
+    G4VPhysicalVolume* physiWorld;    // pointer to the physical envelope
+    G4LogicalVolume* logicSBDSilicon;
+    G4LogicalVolume* logicBGOs[NUM_BGOS];
+    G4LogicalVolume* logicBAPDs[NUM_BAPDS];
+    G4LogicalVolume* logicBeamCenterLine;
+    RDKSolenoid* magSolenoid;
+    RDKMirror* elecMirror;
+    RDKSBDField* elecSBD;
+
+
+    MRKGlobalField* theGlobalField;
+    MRKDetectorMessenger* detectorMessenger;  // pointer to the Messenger
+
+    G4double bendToMagnetZero;
+    G4RotationMatrix* bendRotation;
+
+
+    G4ThreeVector SBDDetectorLocation;
+    G4RotationMatrix* SBDRotation;
+    G4LogicalVolume* logicSBDDetector;
+
+    double RDK2SBDSiliconFrontZ;
+    double SBDSiliconInsetDistance;
+    double SBDDetectorLength;
+    double SBDSiliconLength;
+    double BSExpSBDAngle;
+
+    ExperimentModel experimentModel;
+    bool RDK1Model;
+
+    bool fieldsOn;
+    bool useSBDDetector,useBGODetectors,useBAPDDetectors;
+    bool useBAPDCollectionEfficiencyModel;
+    bool useBGOCalibrationWeakSource;
+    bool useBGOWrappings;
+    bool annulusCladdingOn;
+    bool centeredBGOModel;
+    bool addRDK2AluminumPlug;
+    double mirrorFieldScale;
+    G4double SpectrometerdM;
+    bool useDoubleMagnets;
+    bool usePositionalBGOLightOutput;
+    bool useNormalizedBGOLightOutput;
+
+    int SBDComplexityLevel;
+
+    int numBGOsUsed;
+
+    TRandom3* ranGen;
+    G4UserLimits* BAPDStepLimit;
+
+
+    G4VPhysicalVolume* ConstructSpectrometer();
+    void constructSpectrometerWorld();
+    SpectrometerMagnet* spectrometerMagnet;
+    G4LogicalVolume* constructSpecSilicon();
+    void constructSpectrometerMagnets();
+    void constructSpectrometerMagnetHolder();
+    void constructSpectrometerAngleCollimator();
+    void constructSpectrometerVacuumTube();
+    double spectrometerFieldScale;
+
+//
+//    G4VPhysicalVolume* ConstructSolenoidSpectrometer();
+//    void constructSolenoidSpectrometerWorld();
+//    SpectrometerMagnet* solenoidSpectrometerMagnet;
+//    G4LogicalVolume* constructSolenoidSpecSilicon();
+
+
+};
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+
+#endif
