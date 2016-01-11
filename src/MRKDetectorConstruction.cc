@@ -75,6 +75,8 @@
 #include "constants.hh"
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //Everything defaults to RDK2 model settings
+
+using namespace CLHEP;
 MRKDetectorConstruction::MRKDetectorConstruction()
 {
     detectorMessenger = new MRKDetectorMessenger(this);  //Sets up Geant4 commands for this class

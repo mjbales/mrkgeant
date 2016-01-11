@@ -36,6 +36,8 @@
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
+using namespace CLHEP;
+
 MRKSteppingAction::MRKSteppingAction()
 {
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
