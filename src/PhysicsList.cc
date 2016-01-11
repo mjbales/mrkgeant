@@ -33,12 +33,6 @@
 #include "PhysicsList.hh"
 #include "PhysicsListMessenger.hh"
 
-#include "PhysListEmStandard.hh"
-#include "PhysListEmStandardSS.hh"
-#include "PhysListEmStandardSSM.hh"
-#include "PhysListEmStandardGS.hh"
-#include "PhysListEmStandardWVI.hh"
-
 #include "G4EmStandardPhysics.hh"
 #include "G4EmStandardPhysics_option1.hh"
 #include "G4EmStandardPhysics_option2.hh"
@@ -58,6 +52,8 @@
 #include "G4LossTableManager.hh"
 #include "G4UnitsTable.hh"
 #include "StepMax.hh"
+
+using namespace CLHEP;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
@@ -162,14 +158,7 @@ void PhysicsList::AddPhysicsList(const G4String& name)
   G4double lowLimit = 250*eV;
   G4double highLimit = 1*MeV;
 
-  if (name == "local") {
-
-    emName = name;
-    delete emPhysicsList;
-    emPhysicsList = new PhysListEmStandard(name);
-    G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(lowLimit, highLimit);
-
-  } else if (name == "emstandard_opt0") {
+  if  (name == "emstandard_opt0") {
 
     emName = name;
     delete emPhysicsList;
@@ -206,35 +195,9 @@ void PhysicsList::AddPhysicsList(const G4String& name)
         emPhysicsList = new G4EmStandardPhysics_option4();
         G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(lowLimit, highLimit);
     }
-    else if (name == "standardSS") {
+    
 
-    emName = name;
-    delete emPhysicsList;
-    emPhysicsList = new PhysListEmStandardSS(name);
-    G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(lowLimit, highLimit);
-
-    } else if (name == "standardSSM") {
-
-    emName = name;
-    delete emPhysicsList;
-    emPhysicsList = new PhysListEmStandardSSM(name);
-    G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(lowLimit, highLimit);
-
-  } else if (name == "standardWVI") {
-
-    emName = name;
-    delete emPhysicsList;
-    emPhysicsList = new PhysListEmStandardWVI(name);
-    G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(lowLimit, highLimit);
-
-  } else if (name == "standardGS") {
-
-    emName = name;
-    delete emPhysicsList;
-    emPhysicsList = new PhysListEmStandardGS(name);
-    G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(lowLimit, highLimit);
-
-  } else if (name == "emlivermore") {
+  else if (name == "emlivermore") {
     emName = name;
     delete emPhysicsList;
     emPhysicsList = new G4EmLivermorePhysics();
