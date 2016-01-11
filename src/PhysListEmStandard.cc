@@ -60,6 +60,7 @@
 #include "G4EmProcessOptions.hh"
 #include "G4MscStepLimitType.hh"
 
+using namespace CLHEP;
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 PhysListEmStandard::PhysListEmStandard(const G4String& name)
