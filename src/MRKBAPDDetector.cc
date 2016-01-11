@@ -41,6 +41,8 @@
 #include "G4SDManager.hh"
 #include "mattphys.hh"
 
+using namespace CLHEP;
+
 
 //Detector numbers 0-11 BGO, 12-14 BAPDS
 MRKBAPDDetector::MRKBAPDDetector(G4String name,TH1D* inpSio2Hist, int inpDetNum, G4ThreeVector inpGammaDetOffset, bool inpUseCollectionEfficiencyModel):G4VSensitiveDetector(name)

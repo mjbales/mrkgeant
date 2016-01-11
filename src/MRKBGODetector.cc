@@ -41,6 +41,8 @@
 #include "G4SDManager.hh"
 #include "mattphys.hh"
 
+using namespace CLHEP;
+
 MRKBGODetector::MRKBGODetector(G4String name,int inpDetNum, G4ThreeVector inpGammaDetOffset,bool inpusePositionalLightOutput,bool inpuseNormalizedlightOutput):G4VSensitiveDetector(name)
 {
     HCID=-1;
