@@ -170,8 +170,8 @@ CMAKE_USE_RELATIVE_PATHS:BOOL=OFF
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
-//No help, variable specified on the command line.
-Geant4_DIR:UNINITIALIZED=/home/mjbales/work/software/geant4/geant4.9.6.p03.install/lib/Geant4-9.6.3
+//The directory containing a CMake configuration file for Geant4.
+Geant4_DIR:PATH=/home/mjbales/work/software/geant4/geant4.9.6.p03.install/lib/Geant4-9.6.3
 
 //Path to a program.
 ROOT_CINT_EXECUTABLE:FILEPATH=/home/mjbales/work/software/root/root_v5.34.21/bin/rootcint

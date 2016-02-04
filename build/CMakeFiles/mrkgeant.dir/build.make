@@ -141,32 +141,9 @@ CMakeFiles/mrkgeant.dir/src/MRKMaterials.cc.o.provides: CMakeFiles/mrkgeant.dir/
 
 CMakeFiles/mrkgeant.dir/src/MRKMaterials.cc.o.provides.build: CMakeFiles/mrkgeant.dir/src/MRKMaterials.cc.o
 
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o: CMakeFiles/mrkgeant.dir/flags.make
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o: ../src/PhysListEmStandardWVI.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_5)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o -c /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardWVI.cc
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardWVI.cc > CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.i
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardWVI.cc -o CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.s
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o.requires:
-.PHONY : CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o.requires
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o.provides: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o.requires
-	$(MAKE) -f CMakeFiles/mrkgeant.dir/build.make CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o.provides.build
-.PHONY : CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o.provides
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o.provides.build: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o
-
 CMakeFiles/mrkgeant.dir/src/MRKHit.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKHit.cc.o: ../src/MRKHit.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_5)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKHit.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKHit.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKHit.cc
 
@@ -189,7 +166,7 @@ CMakeFiles/mrkgeant.dir/src/MRKHit.cc.o.provides.build: CMakeFiles/mrkgeant.dir/
 
 CMakeFiles/mrkgeant.dir/src/cMRKText.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/cMRKText.cc.o: ../src/cMRKText.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/cMRKText.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/cMRKText.cc.o -c /home/mjbales/work/code/mrkgeant/src/cMRKText.cc
 
@@ -210,32 +187,9 @@ CMakeFiles/mrkgeant.dir/src/cMRKText.cc.o.provides: CMakeFiles/mrkgeant.dir/src/
 
 CMakeFiles/mrkgeant.dir/src/cMRKText.cc.o.provides.build: CMakeFiles/mrkgeant.dir/src/cMRKText.cc.o
 
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o: CMakeFiles/mrkgeant.dir/flags.make
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o: ../src/PhysListEmStandardSS.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_8)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o -c /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardSS.cc
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardSS.cc > CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.i
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardSS.cc -o CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.s
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o.requires:
-.PHONY : CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o.requires
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o.provides: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o.requires
-	$(MAKE) -f CMakeFiles/mrkgeant.dir/build.make CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o.provides.build
-.PHONY : CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o.provides
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o.provides.build: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o
-
 CMakeFiles/mrkgeant.dir/src/ROOTField.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/ROOTField.cc.o: ../src/ROOTField.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/ROOTField.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/ROOTField.cc.o -c /home/mjbales/work/code/mrkgeant/src/ROOTField.cc
 
@@ -258,7 +212,7 @@ CMakeFiles/mrkgeant.dir/src/ROOTField.cc.o.provides.build: CMakeFiles/mrkgeant.d
 
 CMakeFiles/mrkgeant.dir/src/MRKElementField.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKElementField.cc.o: ../src/MRKElementField.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKElementField.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKElementField.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKElementField.cc
 
@@ -281,7 +235,7 @@ CMakeFiles/mrkgeant.dir/src/MRKElementField.cc.o.provides.build: CMakeFiles/mrkg
 
 CMakeFiles/mrkgeant.dir/src/cVField.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/cVField.cc.o: ../src/cVField.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/cVField.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/cVField.cc.o -c /home/mjbales/work/code/mrkgeant/src/cVField.cc
 
@@ -304,7 +258,7 @@ CMakeFiles/mrkgeant.dir/src/cVField.cc.o.provides.build: CMakeFiles/mrkgeant.dir
 
 CMakeFiles/mrkgeant.dir/src/cVector.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/cVector.cc.o: ../src/cVector.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/cVector.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/cVector.cc.o -c /home/mjbales/work/code/mrkgeant/src/cVector.cc
 
@@ -327,7 +281,7 @@ CMakeFiles/mrkgeant.dir/src/cVector.cc.o.provides.build: CMakeFiles/mrkgeant.dir
 
 CMakeFiles/mrkgeant.dir/src/RDKMirror.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/RDKMirror.cc.o: ../src/RDKMirror.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/RDKMirror.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/RDKMirror.cc.o -c /home/mjbales/work/code/mrkgeant/src/RDKMirror.cc
 
@@ -350,7 +304,7 @@ CMakeFiles/mrkgeant.dir/src/RDKMirror.cc.o.provides.build: CMakeFiles/mrkgeant.d
 
 CMakeFiles/mrkgeant.dir/src/PhysicsListMessenger.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/PhysicsListMessenger.cc.o: ../src/PhysicsListMessenger.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/PhysicsListMessenger.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/PhysicsListMessenger.cc.o -c /home/mjbales/work/code/mrkgeant/src/PhysicsListMessenger.cc
 
@@ -373,7 +327,7 @@ CMakeFiles/mrkgeant.dir/src/PhysicsListMessenger.cc.o.provides.build: CMakeFiles
 
 CMakeFiles/mrkgeant.dir/src/GeneratorMessenger.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/GeneratorMessenger.cc.o: ../src/GeneratorMessenger.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/GeneratorMessenger.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/GeneratorMessenger.cc.o -c /home/mjbales/work/code/mrkgeant/src/GeneratorMessenger.cc
 
@@ -396,7 +350,7 @@ CMakeFiles/mrkgeant.dir/src/GeneratorMessenger.cc.o.provides.build: CMakeFiles/m
 
 CMakeFiles/mrkgeant.dir/src/MRKDetectorMessenger.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKDetectorMessenger.cc.o: ../src/MRKDetectorMessenger.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKDetectorMessenger.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKDetectorMessenger.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKDetectorMessenger.cc
 
@@ -419,7 +373,7 @@ CMakeFiles/mrkgeant.dir/src/MRKDetectorMessenger.cc.o.provides.build: CMakeFiles
 
 CMakeFiles/mrkgeant.dir/src/MRKRun.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKRun.cc.o: ../src/MRKRun.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKRun.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKRun.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKRun.cc
 
@@ -442,7 +396,7 @@ CMakeFiles/mrkgeant.dir/src/MRKRun.cc.o.provides.build: CMakeFiles/mrkgeant.dir/
 
 CMakeFiles/mrkgeant.dir/src/MRKRunAction.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKRunAction.cc.o: ../src/MRKRunAction.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKRunAction.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKRunAction.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKRunAction.cc
 
@@ -465,7 +419,7 @@ CMakeFiles/mrkgeant.dir/src/MRKRunAction.cc.o.provides.build: CMakeFiles/mrkgean
 
 CMakeFiles/mrkgeant.dir/src/MRKFieldMessenger.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKFieldMessenger.cc.o: ../src/MRKFieldMessenger.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_19)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKFieldMessenger.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKFieldMessenger.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKFieldMessenger.cc
 
@@ -488,7 +442,7 @@ CMakeFiles/mrkgeant.dir/src/MRKFieldMessenger.cc.o.provides.build: CMakeFiles/mr
 
 CMakeFiles/mrkgeant.dir/src/StepMax.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/StepMax.cc.o: ../src/StepMax.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_20)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/StepMax.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/StepMax.cc.o -c /home/mjbales/work/code/mrkgeant/src/StepMax.cc
 
@@ -511,7 +465,7 @@ CMakeFiles/mrkgeant.dir/src/StepMax.cc.o.provides.build: CMakeFiles/mrkgeant.dir
 
 CMakeFiles/mrkgeant.dir/src/MRKEField.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKEField.cc.o: ../src/MRKEField.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_21)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKEField.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKEField.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKEField.cc
 
@@ -534,7 +488,7 @@ CMakeFiles/mrkgeant.dir/src/MRKEField.cc.o.provides.build: CMakeFiles/mrkgeant.d
 
 CMakeFiles/mrkgeant.dir/src/MRKBAPDDetector.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKBAPDDetector.cc.o: ../src/MRKBAPDDetector.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_22)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_20)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKBAPDDetector.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKBAPDDetector.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKBAPDDetector.cc
 
@@ -557,7 +511,7 @@ CMakeFiles/mrkgeant.dir/src/MRKBAPDDetector.cc.o.provides.build: CMakeFiles/mrkg
 
 CMakeFiles/mrkgeant.dir/src/MRKEventAction.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKEventAction.cc.o: ../src/MRKEventAction.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_23)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKEventAction.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKEventAction.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKEventAction.cc
 
@@ -580,7 +534,7 @@ CMakeFiles/mrkgeant.dir/src/MRKEventAction.cc.o.provides.build: CMakeFiles/mrkge
 
 CMakeFiles/mrkgeant.dir/src/MRKSteppingVerbose.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKSteppingVerbose.cc.o: ../src/MRKSteppingVerbose.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_24)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_22)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKSteppingVerbose.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKSteppingVerbose.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKSteppingVerbose.cc
 
@@ -603,7 +557,7 @@ CMakeFiles/mrkgeant.dir/src/MRKSteppingVerbose.cc.o.provides.build: CMakeFiles/m
 
 CMakeFiles/mrkgeant.dir/src/RDKSBDField.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/RDKSBDField.cc.o: ../src/RDKSBDField.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_25)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_23)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/RDKSBDField.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/RDKSBDField.cc.o -c /home/mjbales/work/code/mrkgeant/src/RDKSBDField.cc
 
@@ -626,7 +580,7 @@ CMakeFiles/mrkgeant.dir/src/RDKSBDField.cc.o.provides.build: CMakeFiles/mrkgeant
 
 CMakeFiles/mrkgeant.dir/src/StepMaxMessenger.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/StepMaxMessenger.cc.o: ../src/StepMaxMessenger.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_26)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_24)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/StepMaxMessenger.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/StepMaxMessenger.cc.o -c /home/mjbales/work/code/mrkgeant/src/StepMaxMessenger.cc
 
@@ -649,7 +603,7 @@ CMakeFiles/mrkgeant.dir/src/StepMaxMessenger.cc.o.provides.build: CMakeFiles/mrk
 
 CMakeFiles/mrkgeant.dir/src/RunActionMessenger.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/RunActionMessenger.cc.o: ../src/RunActionMessenger.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_27)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_25)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/RunActionMessenger.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/RunActionMessenger.cc.o -c /home/mjbales/work/code/mrkgeant/src/RunActionMessenger.cc
 
@@ -670,32 +624,9 @@ CMakeFiles/mrkgeant.dir/src/RunActionMessenger.cc.o.provides: CMakeFiles/mrkgean
 
 CMakeFiles/mrkgeant.dir/src/RunActionMessenger.cc.o.provides.build: CMakeFiles/mrkgeant.dir/src/RunActionMessenger.cc.o
 
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o: CMakeFiles/mrkgeant.dir/flags.make
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o: ../src/PhysListEmStandardSSM.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_28)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o -c /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardSSM.cc
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardSSM.cc > CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.i
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardSSM.cc -o CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.s
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o.requires:
-.PHONY : CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o.requires
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o.provides: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o.requires
-	$(MAKE) -f CMakeFiles/mrkgeant.dir/build.make CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o.provides.build
-.PHONY : CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o.provides
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o.provides.build: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o
-
 CMakeFiles/mrkgeant.dir/src/MRKBGODetector.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKBGODetector.cc.o: ../src/MRKBGODetector.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_29)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_26)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKBGODetector.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKBGODetector.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKBGODetector.cc
 
@@ -718,7 +649,7 @@ CMakeFiles/mrkgeant.dir/src/MRKBGODetector.cc.o.provides.build: CMakeFiles/mrkge
 
 CMakeFiles/mrkgeant.dir/src/MRKGlobalField.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKGlobalField.cc.o: ../src/MRKGlobalField.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_30)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_27)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKGlobalField.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKGlobalField.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKGlobalField.cc
 
@@ -741,7 +672,7 @@ CMakeFiles/mrkgeant.dir/src/MRKGlobalField.cc.o.provides.build: CMakeFiles/mrkge
 
 CMakeFiles/mrkgeant.dir/src/MRKField.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKField.cc.o: ../src/MRKField.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_31)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_28)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKField.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKField.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKField.cc
 
@@ -764,7 +695,7 @@ CMakeFiles/mrkgeant.dir/src/MRKField.cc.o.provides.build: CMakeFiles/mrkgeant.di
 
 CMakeFiles/mrkgeant.dir/src/RDKSolenoid.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/RDKSolenoid.cc.o: ../src/RDKSolenoid.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_32)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_29)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/RDKSolenoid.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/RDKSolenoid.cc.o -c /home/mjbales/work/code/mrkgeant/src/RDKSolenoid.cc
 
@@ -787,7 +718,7 @@ CMakeFiles/mrkgeant.dir/src/RDKSolenoid.cc.o.provides.build: CMakeFiles/mrkgeant
 
 CMakeFiles/mrkgeant.dir/src/PhysicsList.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/PhysicsList.cc.o: ../src/PhysicsList.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_33)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_30)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/PhysicsList.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/PhysicsList.cc.o -c /home/mjbales/work/code/mrkgeant/src/PhysicsList.cc
 
@@ -810,7 +741,7 @@ CMakeFiles/mrkgeant.dir/src/PhysicsList.cc.o.provides.build: CMakeFiles/mrkgeant
 
 CMakeFiles/mrkgeant.dir/src/MRKPrimaryGeneratorAction.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKPrimaryGeneratorAction.cc.o: ../src/MRKPrimaryGeneratorAction.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_34)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_31)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKPrimaryGeneratorAction.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKPrimaryGeneratorAction.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKPrimaryGeneratorAction.cc
 
@@ -833,7 +764,7 @@ CMakeFiles/mrkgeant.dir/src/MRKPrimaryGeneratorAction.cc.o.provides.build: CMake
 
 CMakeFiles/mrkgeant.dir/src/cEvents.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/cEvents.cc.o: ../src/cEvents.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_35)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_32)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/cEvents.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/cEvents.cc.o -c /home/mjbales/work/code/mrkgeant/src/cEvents.cc
 
@@ -856,7 +787,7 @@ CMakeFiles/mrkgeant.dir/src/cEvents.cc.o.provides.build: CMakeFiles/mrkgeant.dir
 
 CMakeFiles/mrkgeant.dir/src/MRKDetectorConstruction.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKDetectorConstruction.cc.o: ../src/MRKDetectorConstruction.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_36)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_33)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKDetectorConstruction.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKDetectorConstruction.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKDetectorConstruction.cc
 
@@ -877,32 +808,9 @@ CMakeFiles/mrkgeant.dir/src/MRKDetectorConstruction.cc.o.provides: CMakeFiles/mr
 
 CMakeFiles/mrkgeant.dir/src/MRKDetectorConstruction.cc.o.provides.build: CMakeFiles/mrkgeant.dir/src/MRKDetectorConstruction.cc.o
 
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o: CMakeFiles/mrkgeant.dir/flags.make
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o: ../src/PhysListEmStandard.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_37)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o -c /home/mjbales/work/code/mrkgeant/src/PhysListEmStandard.cc
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mjbales/work/code/mrkgeant/src/PhysListEmStandard.cc > CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.i
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mjbales/work/code/mrkgeant/src/PhysListEmStandard.cc -o CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.s
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o.requires:
-.PHONY : CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o.requires
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o.provides: CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o.requires
-	$(MAKE) -f CMakeFiles/mrkgeant.dir/build.make CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o.provides.build
-.PHONY : CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o.provides
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o.provides.build: CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o
-
 CMakeFiles/mrkgeant.dir/src/MRKSteppingAction.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKSteppingAction.cc.o: ../src/MRKSteppingAction.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_38)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_34)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKSteppingAction.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKSteppingAction.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKSteppingAction.cc
 
@@ -923,32 +831,9 @@ CMakeFiles/mrkgeant.dir/src/MRKSteppingAction.cc.o.provides: CMakeFiles/mrkgeant
 
 CMakeFiles/mrkgeant.dir/src/MRKSteppingAction.cc.o.provides.build: CMakeFiles/mrkgeant.dir/src/MRKSteppingAction.cc.o
 
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o: CMakeFiles/mrkgeant.dir/flags.make
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o: ../src/PhysListEmStandardGS.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_39)
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o -c /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardGS.cc
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardGS.cc > CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.i
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/mjbales/work/code/mrkgeant/src/PhysListEmStandardGS.cc -o CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.s
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o.requires:
-.PHONY : CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o.requires
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o.provides: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o.requires
-	$(MAKE) -f CMakeFiles/mrkgeant.dir/build.make CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o.provides.build
-.PHONY : CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o.provides
-
-CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o.provides.build: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o
-
 CMakeFiles/mrkgeant.dir/src/MRKSurfaceBarrierDetector.cc.o: CMakeFiles/mrkgeant.dir/flags.make
 CMakeFiles/mrkgeant.dir/src/MRKSurfaceBarrierDetector.cc.o: ../src/MRKSurfaceBarrierDetector.cc
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_40)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/mjbales/work/code/mrkgeant/build/CMakeFiles $(CMAKE_PROGRESS_35)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/mrkgeant.dir/src/MRKSurfaceBarrierDetector.cc.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/mrkgeant.dir/src/MRKSurfaceBarrierDetector.cc.o -c /home/mjbales/work/code/mrkgeant/src/MRKSurfaceBarrierDetector.cc
 
@@ -975,10 +860,8 @@ mrkgeant_OBJECTS = \
 "CMakeFiles/mrkgeant.dir/src/MRKBField.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/mattphys.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/MRKMaterials.cc.o" \
-"CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/MRKHit.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/cMRKText.cc.o" \
-"CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/ROOTField.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/MRKElementField.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/cVField.cc.o" \
@@ -998,7 +881,6 @@ mrkgeant_OBJECTS = \
 "CMakeFiles/mrkgeant.dir/src/RDKSBDField.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/StepMaxMessenger.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/RunActionMessenger.cc.o" \
-"CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/MRKBGODetector.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/MRKGlobalField.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/MRKField.cc.o" \
@@ -1007,9 +889,7 @@ mrkgeant_OBJECTS = \
 "CMakeFiles/mrkgeant.dir/src/MRKPrimaryGeneratorAction.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/cEvents.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/MRKDetectorConstruction.cc.o" \
-"CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/MRKSteppingAction.cc.o" \
-"CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o" \
 "CMakeFiles/mrkgeant.dir/src/MRKSurfaceBarrierDetector.cc.o"
 
 # External object files for target mrkgeant
@@ -1019,10 +899,8 @@ mrkgeant: CMakeFiles/mrkgeant.dir/mrkgeant.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKBField.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/mattphys.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKMaterials.cc.o
-mrkgeant: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKHit.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/cMRKText.cc.o
-mrkgeant: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/ROOTField.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKElementField.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/cVField.cc.o
@@ -1042,7 +920,6 @@ mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKSteppingVerbose.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/RDKSBDField.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/StepMaxMessenger.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/RunActionMessenger.cc.o
-mrkgeant: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKBGODetector.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKGlobalField.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKField.cc.o
@@ -1051,9 +928,7 @@ mrkgeant: CMakeFiles/mrkgeant.dir/src/PhysicsList.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKPrimaryGeneratorAction.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/cEvents.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKDetectorConstruction.cc.o
-mrkgeant: CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKSteppingAction.cc.o
-mrkgeant: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/src/MRKSurfaceBarrierDetector.cc.o
 mrkgeant: CMakeFiles/mrkgeant.dir/build.make
 mrkgeant: /home/mjbales/work/software/geant4/geant4.9.6.p03.install/lib/libG4Tree.so
@@ -1128,10 +1003,8 @@ CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/mrkgeant.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKBField.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/mattphys.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKMaterials.cc.o.requires
-CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardWVI.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKHit.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/cMRKText.cc.o.requires
-CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSS.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/ROOTField.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKElementField.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/cVField.cc.o.requires
@@ -1151,7 +1024,6 @@ CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKSteppingVerbose
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/RDKSBDField.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/StepMaxMessenger.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/RunActionMessenger.cc.o.requires
-CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardSSM.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKBGODetector.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKGlobalField.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKField.cc.o.requires
@@ -1160,9 +1032,7 @@ CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/PhysicsList.cc.o.r
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKPrimaryGeneratorAction.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/cEvents.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKDetectorConstruction.cc.o.requires
-CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/PhysListEmStandard.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKSteppingAction.cc.o.requires
-CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/PhysListEmStandardGS.cc.o.requires
 CMakeFiles/mrkgeant.dir/requires: CMakeFiles/mrkgeant.dir/src/MRKSurfaceBarrierDetector.cc.o.requires
 .PHONY : CMakeFiles/mrkgeant.dir/requires
 

@@ -494,6 +494,7 @@ void cEvents::genPos()
         mapPos.z=fluxMap.getZStart()+fluxMap.getZSpacing()*fluxMap.getColumns()*ranGen->Rndm();
 
         //Determine probability of event at determined position
+        fluxVal=0;
         fluxMap.linearInterp(mapPos,fluxVal);
         //Throw a random number to determine if event occured there
         //repeat process if random is higher than the probability
