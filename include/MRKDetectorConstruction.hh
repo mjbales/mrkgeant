@@ -343,6 +343,7 @@ class MRKDetectorConstruction : public G4VUserDetectorConstruction
     bool useAluminumPlug;
     bool use1_5mmSBD; //true =1.5 mm det    false = 1.0 mm det
     bool SBDGoldLayerOff;
+    bool SBDCanOff;
 
     G4ThreeVector sbdDetectorBendOffset;
     G4ThreeVector sbdDetectorOffset;

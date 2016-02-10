@@ -77,6 +77,9 @@ PhysicsList::PhysicsList(MRKDetectorConstruction* p)
   emName = G4String("emlivermore");
   emPhysicsList = new G4EmLivermorePhysics();
 
+  // G4EmParameters* param = G4EmParameters::Instance();
+  // param->SetMinEnergy(100*eV);  
+
   // Decay physics and all particles
   decPhysicsList = new G4DecayPhysics();
 
@@ -133,6 +136,9 @@ void PhysicsList::ConstructProcess()
   //
   AddStepMax();
 
+  // G4EmParameters* param = G4EmParameters::Instance();
+  // param->SetMinEnergy(100*eV);  
+
 
   //Add electron max flight time
  // G4ProcessManager* pmanager = G4Electron::ElectronDefinition()->GetProcessManager();
@@ -148,6 +154,7 @@ void PhysicsList::ConstructParticle()
 
 void PhysicsList::AddPhysicsList(const G4String& name)
 {
+  
  // if (verboseLevel>1) {
     G4cout << "PhysicsList::AddPhysicsList: <" << name << ">" << G4endl;
  // }
@@ -202,6 +209,7 @@ void PhysicsList::AddPhysicsList(const G4String& name)
     delete emPhysicsList;
     emPhysicsList = new G4EmLivermorePhysics();
     G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(lowLimit, highLimit);
+
 
   } else if (name == "empenelope") {
     emName = name;

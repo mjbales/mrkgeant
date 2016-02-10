@@ -98,6 +98,7 @@ MRKDetectorConstruction::MRKDetectorConstruction()
     useAluminumPlug=true;
     use1_5mmSBD=true;
     SBDGoldLayerOff=false;
+    SBDCanOff=false;
 
     useSBDDetector=true;useBGODetectors=true;useBAPDDetectors=true;
     BAPDStepLimit=NULL;
@@ -310,6 +311,7 @@ G4VPhysicalVolume* MRKDetectorConstruction::ConstructRDK2()
     constructRDK2MagnetCoil10();
     constructRDK2MagnetCoil11();
     logicSBDDetectionVolume=constructRDK2SBD1mm5Silicon();
+
     constructRDK2SBD1mm5SiliconHolder();
     if(SiDeadLayerLength > 0)
     {
@@ -319,15 +321,19 @@ G4VPhysicalVolume* MRKDetectorConstruction::ConstructRDK2()
     {
         constructRDK2SBD1mm5GoldCoating();
     }
-    constructRDK2SBD1mm5AluminumCoating();
-    constructRDK2SBD1mm5PlasticLining();
-    constructRDK2SBD1mm5BackBrassRings();
-    constructRDK2SBD1mm5InternalBrassDisc();
-    constructRDK2SBD1mm5Spring();
-    constructRDK2SBD1mm5HexScrew();
-    constructRDK2SBD1mm5FrontCase();
-    constructRDK2SBD1mm5MidCase();
-    constructRDK2SBD1mm5BackCase();
+    if(!SBDCanOff)
+    {
+        constructRDK2SBD1mm5AluminumCoating();
+        constructRDK2SBD1mm5PlasticLining();
+        constructRDK2SBD1mm5BackBrassRings();
+        constructRDK2SBD1mm5InternalBrassDisc();
+        constructRDK2SBD1mm5Spring();
+        constructRDK2SBD1mm5HexScrew();
+        constructRDK2SBD1mm5FrontCase();
+        constructRDK2SBD1mm5MidCase();
+        constructRDK2SBD1mm5BackCase();
+        constructSBDEpoxy();
+    }
     constructRDK2BeOTube();
     constructRDK2SBD1mm5StainlessSteelTube();
     constructRDK2CoilTray2PartA();
@@ -391,7 +397,7 @@ G4VPhysicalVolume* MRKDetectorConstruction::ConstructRDK2()
     logicBGODetectionVolumes[9]=constructRDK2BGOCrystal10();
     logicBGODetectionVolumes[10]=constructRDK2BGOCrystal11();
     logicBGODetectionVolumes[11]=constructRDK2BGOCrystal12();
-    constructSBDEpoxy();
+    
 
     if(useBGOWrappings)
     {
@@ -1468,7 +1474,7 @@ G4LogicalVolume* MRKDetectorConstruction::constructRDK2SBD1mm5Silicon()
 
 G4LogicalVolume* MRKDetectorConstruction::constructRDK2SBDDeadLayer()
 {
-    G4ThreeVector position=G4ThreeVector(-4.58832179245078*cm,0*cm,-27.418729859879*cm)+sbdDetectorOffset; //Get to center of gold layer
+    G4ThreeVector position=G4ThreeVector(-4.5883232779*cm,0*cm,-27.4187387364*cm)+sbdDetectorOffset; //Get to center of gold layer
     position+=G4ThreeVector(-0.1650476059*10*nm,0,-0.9862856015*10*nm); //shift from gold layer position
     position+=G4ThreeVector(-0.1650476059*SiDeadLayerLength*.5,0,-0.9862856015*SiDeadLayerLength*.5); //shift based on deadlayer thickness
 	G4Tubs* solidSBDDeadLayer =  new G4Tubs("solidSBDDeadLayer",0*cm,1.382*cm,0.5*SiDeadLayerLength,0., twopi);
@@ -1482,7 +1488,7 @@ G4LogicalVolume* MRKDetectorConstruction::constructRDK2SBDDeadLayer()
 
 G4LogicalVolume* MRKDetectorConstruction::constructRDK2SBD1mm5GoldCoating()
 {
-    G4ThreeVector position=G4ThreeVector(-4.58832179245078*cm,0*cm,-27.418729859879*cm)+sbdDetectorOffset;
+    G4ThreeVector position=G4ThreeVector(-4.5883232779*cm,0*cm,-27.4187387364*cm)+sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5GoldCoating =  new G4Tubs("solidSBD1mm5GoldCoating",0*cm,1.382*cm,0.000001*cm,0., twopi);
 	G4LogicalVolume* logicSBD1mm5GoldCoating = new G4LogicalVolume(solidSBD1mm5GoldCoating,materials->GetMaterial("G4_Au"),"logicSBD1mm5GoldCoating",0,0,0);
 	new G4PVPlacement(rdk2RotationMatrices[1], position,logicSBD1mm5GoldCoating,"physiSBD1mm5GoldCoating",logicWorld,false,0);
@@ -1626,7 +1632,7 @@ G4LogicalVolume* MRKDetectorConstruction::constructRDK2SBD1mm5BackCase()
 void MRKDetectorConstruction::constructSBDEpoxy()
 {
     G4double SBDEpoxyLength=.16*cm;
-    G4double SBDEpoxyTopCenterZ=-27.79998*cm+SBDEpoxyLength*.5;
+    G4double SBDEpoxyTopCenterZ=-27.799998*cm+SBDEpoxyLength*.5;
     G4double SBDEpoxyBottomCenterZ=-27.9502*cm-SBDEpoxyLength*.5;
     G4double SBDEpoxyInnerRadius2=1.372*cm;
     G4double SBDEpoxyOuterRadius2=1.38*cm;

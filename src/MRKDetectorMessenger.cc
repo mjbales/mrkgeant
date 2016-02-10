@@ -147,6 +147,11 @@ MRKDetectorMessenger::MRKDetectorMessenger(MRKDetectorConstruction* myDet)
   SBDGoldLayerOffCmd->SetParameterName("SBDGoldLayerOff",false);
   SBDGoldLayerOffCmd->AvailableForStates(G4State_PreInit);
 
+  SBDCanOffCmd = new G4UIcmdWithABool("/MRK/det/SBDCanOff",this);
+  SBDCanOffCmd->SetGuidance("Sets true/false to turn the can and other SBD components off");
+  SBDCanOffCmd->SetParameterName("SBDCanOff",false);
+  SBDCanOffCmd->AvailableForStates(G4State_PreInit);
+
   setSiDeadLayerLengthCmd= new G4UIcmdWithADoubleAndUnit("/MRK/det/setSiDeadLayerLengthCmd",this);
   setSiDeadLayerLengthCmd->SetGuidance("Sets length Si dead layer on SBD");
   setSiDeadLayerLengthCmd->SetParameterName("SiDeadLayerLength",false);
@@ -193,6 +198,7 @@ MRKDetectorMessenger::~MRKDetectorMessenger()
     delete setAlLengthContractionFactorCmd;
     delete setBGOLengthContractionFactorCmd;
     delete SBDGoldLayerOffCmd;
+    delete SBDCanOffCmd;
 
     delete setSiDeadLayerLengthCmd;
 
@@ -256,6 +262,8 @@ void MRKDetectorMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
         myDetector->setSBDGoldLayerOff(SBDGoldLayerOffCmd->GetNewBoolValue(newValue));
     else if( command == setSiDeadLayerLengthCmd)
         myDetector->setSiDeadLayerLength(setSiDeadLayerLengthCmd->GetNewDoubleValue(newValue));
+    else if( command == SBDGoldLayerOffCmd)
+        myDetector->setSBDGoldLayerOff(SBDGoldLayerOffCmd->GetNewBoolValue(newValue));
 
 
 

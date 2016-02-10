@@ -84,6 +84,7 @@ class MRKDetectorMessenger: public G4UImessenger
     G4UIcmdWithADouble* setAlLengthContractionFactorCmd;
     G4UIcmdWithADouble* setBGOLengthContractionFactorCmd;
     G4UIcmdWithABool* SBDGoldLayerOffCmd;
+    G4UIcmdWithABool* SBDCanOffCmd;
     G4UIcmdWithADoubleAndUnit* setSiDeadLayerLengthCmd;
     G4UIcmdWith3VectorAndUnit* setGammaDetOffsetCmd;
 
