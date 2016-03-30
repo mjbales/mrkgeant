@@ -607,6 +607,7 @@ int cEvents::makeEventFile(string fileName, string fluxFileName,int inpNumEvents
 
 	for(n=0; n < numEvents; n++)
 	{
+		Prob=0;
 	    if(fourBody)
 	    {
 	        if(gen4BMom()>=1)
