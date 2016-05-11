@@ -45,11 +45,12 @@
 #include <string>
 
 #include "MRKDetectorConstruction.hh"
-#include "cEvents.hh"
 #include "G4ParticleGun.hh"
 #include "G4GeneralParticleSource.hh"
 #include "Randomize.hh"
 #include <time.h>
+
+#include "MRKEvents.hh"
 using namespace std;
 using std::string;
 
@@ -156,7 +157,7 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
         G4GeneralParticleSource* particleSource;
         MRKDetectorConstruction* myDetector;
         GeneratorMessenger* genMess;
-        cEvents* theEvents;
+        MRKEvents* theEvents;
 
         int eventStartClock;
         int eventSetNumber;

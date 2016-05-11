@@ -244,7 +244,7 @@ void MRKPrimaryGeneratorAction::makeAndLoadRDKEventFile(string inputFileName)
         delete theEvents;
         theEvents=NULL;
     }
-    theEvents=new cEvents(); //initial seed does not matter, it will be changed soon from the file.
+    theEvents=new MRKEvents(); //initial seed does not matter, it will be changed soon from the file.
 //    theEvents->loadFluxFileMap(fluxMapFileName);
     string currentParticleName=particleGun->GetParticleDefinition()->GetParticleName();
 
