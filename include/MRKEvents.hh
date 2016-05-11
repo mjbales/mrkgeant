@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////
-//cEvents - by Matthew Bales
+//MRKEvents - by Matthew Bales
 //Event Generator code based on code by Robert Cooper
 //
 //Creates and stores neutron decay events
@@ -15,7 +15,7 @@
 
 
 #ifndef CEVENTS_H_INCLUDED
-#define CEVENTS_H_INCLUDED
+#define MRKEVENTS_H_INCLUDED
 #pragma once
 
 //Standard Libraries
@@ -44,7 +44,7 @@ using namespace std;
 using std::string;
 
 
-class cEvents
+class MRKEvents
 {
 protected:
     TRandom3* ranGen;                   //Random number generator
@@ -91,9 +91,9 @@ protected:
 
 
 public:
-	cEvents();                                          //Constructor
-	cEvents(UInt_t inpSeed);                               //Constructor
-	~cEvents();                                         //Destructor
+	MRKEvents();                                          //Constructor
+	MRKEvents(UInt_t inpSeed);                               //Constructor
+	~MRKEvents();                                         //Destructor
 	void reset();                                       //Resets events to baseline (destructor calls this)
 	int loadEvents(string fileName,string treeName);    //Designates root file where decay events are located
     int makeDerivedEvents();                            //Creates a secondary file from an already "loaded" event file that contains other simply calculated parameters

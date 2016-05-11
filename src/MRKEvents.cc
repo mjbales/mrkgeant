@@ -1,7 +1,7 @@
-#include "cEvents.hh"
+#include "../include/MRKEvents.hh"
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-cEvents::cEvents(void)
+MRKEvents::MRKEvents(void)
 {
 
     eventFile=NULL;
@@ -19,7 +19,7 @@ cEvents::cEvents(void)
 }
 
 
-cEvents::~cEvents(void)
+MRKEvents::~MRKEvents(void)
 {
 	reset();
 	if(ranGen!=NULL)
@@ -28,7 +28,7 @@ cEvents::~cEvents(void)
 	}
 }
 
-void cEvents::reset()  //Doesn't delete ranGen but destructor does
+void MRKEvents::reset()  //Doesn't delete ranGen but destructor does
 {
     if(eventFile!=NULL)
     {
@@ -45,7 +45,7 @@ void cEvents::reset()  //Doesn't delete ranGen but destructor does
 	numEvents=0;
 }
 
-int cEvents::loadEvents(string fileName,string treeName)
+int MRKEvents::loadEvents(string fileName,string treeName)
 {
     if(eventFile!=NULL){
         eventFile->Close();
@@ -107,14 +107,14 @@ int cEvents::loadEvents(string fileName,string treeName)
 }
 
 
-void cEvents::getPosVel(ParType parType,cVector3D& rOut,cVector3D& vOut,int eventPos)
+void MRKEvents::getPosVel(ParType parType,cVector3D& rOut,cVector3D& vOut,int eventPos)
 {
     eventTree->GetEntry(eventPos);
 
     getPosVel(parType, rOut, vOut);
 }
 
-void cEvents::getPosVel(ParType parType,cVector3D& rOut,cVector3D& vOut)
+void MRKEvents::getPosVel(ParType parType,cVector3D& rOut,cVector3D& vOut)
 {
     //Presumes event is currently loaded in the variables.
     if(parType==PROTON){
@@ -138,14 +138,14 @@ void cEvents::getPosVel(ParType parType,cVector3D& rOut,cVector3D& vOut)
     rOut.setVal(x0*.01,y0*.01,z0*.01); //For cm to meter conversion
 }
 
-void cEvents::getPosDirKE(ParType parType, cVector3D& rOut, cVector3D& dOut,double& keOut,int eventPos)
+void MRKEvents::getPosDirKE(ParType parType, cVector3D& rOut, cVector3D& dOut,double& keOut,int eventPos)
 {
     eventTree->GetEntry(eventPos);
 
    getPosDirKE( parType, rOut,  dOut, keOut);
 }
 
-void cEvents::getPosDirKE(ParType parType, cVector3D& rOut, cVector3D& dOut,double& keOut)
+void MRKEvents::getPosDirKE(ParType parType, cVector3D& rOut, cVector3D& dOut,double& keOut)
 {
 
     if(parType==PROTON){
@@ -167,19 +167,19 @@ void cEvents::getPosDirKE(ParType parType, cVector3D& rOut, cVector3D& dOut,doub
     rOut.setVal(x0*.01,y0*.01,z0*.01); //For cm to meter conversion
 }
 
-int cEvents::getEventStart(){
+int MRKEvents::getEventStart(){
     return eventStart;
 }
-int cEvents::getNumEvents(){
+int MRKEvents::getNumEvents(){
     return numEvents;
 }
-int cEvents::getEventEnd(){
+int MRKEvents::getEventEnd(){
     return eventEnd;
 }
 
 
 
-int cEvents::makeDerivedEvents(){
+int MRKEvents::makeDerivedEvents(){
 	Double_t vxp0,vyp0,vzp0;
 	Double_t vxe0,vye0,vze0;
 	Double_t vxg0,vyg0,vzg0;
@@ -283,7 +283,7 @@ int cEvents::makeDerivedEvents(){
     return 0;
 }
 
- bool cEvents::createRandomParameters(bool useEarlyRejector)
+ bool MRKEvents::createRandomParameters(bool useEarlyRejector)
  {
      ranProb=ranGen->Rndm();
 
@@ -365,13 +365,13 @@ int cEvents::makeDerivedEvents(){
     return true;
  }
 
- double cEvents::getJTWProb()
+ double MRKEvents::getJTWProb()
  {
 //     return (eE/eP)*FSCONST/(1.-exp(-eE/eP*FSCONST))*eP*eE*pow(ETEMAX-eE,2)*(1.+LITTLEA*eP/eE*cos_en+littleb*EMASSE/eE);
      return (eE/eP)*2*PI*FSCONST/(1.-exp(-eE/eP*FSCONST*2*PI))*eP*eE*pow(ETEMAX-eE,2)*(1.+LITTLEA*eP/eE*cos_en+littleb*EMASSE/eE);  //Fermi function corrected 4/25/13
  }
 
- double cEvents::getGapanovProb()
+ double MRKEvents::getGapanovProb()
  {
         // (1+lambda^2) term
         Prob=2.*(1.+(RADDECAY_LAMBDA*RADDECAY_LAMBDA))*(nE/(edg*edg)*((EMASSE*EMASSE)*(eE+gE)-edg*gE)+nE*(PMASSE*PMASSE)*eE/(pdg*pdg)-nE/edg/pdg*(eE*pdg-(pKE+PMASSE)*edg+(2.*eE+gE)*pde));
@@ -391,7 +391,7 @@ int cEvents::makeDerivedEvents(){
  }
 
 //Generates a 3 body decay momentums
-double cEvents::gen3BMom()
+double MRKEvents::gen3BMom()
 {
 
 	//Von Neuman rejection loop
@@ -436,7 +436,7 @@ double cEvents::gen3BMom()
 
 
 //Generates a 3 body decay momentums
-double cEvents::gen4BMom()
+double MRKEvents::gen4BMom()
  {
 	//Von Neuman rejection loop
 	for(;;)
@@ -477,7 +477,7 @@ double cEvents::gen4BMom()
 	return Prob;
 
 }
-void cEvents::genPos()
+void MRKEvents::genPos()
 {
     //Assumes fluxmap is already loaded
     cVector2D mapPos;
@@ -511,7 +511,7 @@ void cEvents::genPos()
 	y0=mapPos.z*(1-(FLUXMAP_POS_Z-z0)*sin(BEAM_DIVERGENCE));
 }
 
-void cEvents::loadFluxFileMap(string fluxFileName)
+void MRKEvents::loadFluxFileMap(string fluxFileName)
 {
     if(fluxMap.loadField(fluxFileName.data(),1))
     {
@@ -522,9 +522,9 @@ void cEvents::loadFluxFileMap(string fluxFileName)
     fluxFileLoaded=true;
 }
 
-int cEvents::makeEventFile(string fileName, string fluxFileName, int inpNumEvents,EveType evetype, double inpLittleb, bool inpHomogeneous,double inpGEMin, double inpGEMax, bool inpFermiOn)
+int MRKEvents::makeEventFile(string fileName, string fluxFileName, int inpNumEvents,EveType evetype, double inpLittleb, bool inpHomogeneous,double inpGEMin, double inpGEMax, bool inpFermiOn)
 {
-     if(ranGen==NULL)
+    if(ranGen==NULL)
     {
         ranGen=new TRandom3();
     }
@@ -547,13 +547,13 @@ int cEvents::makeEventFile(string fileName, string fluxFileName, int inpNumEvent
 
 }
 
-void cEvents::loadEventSettingsAndMakeFile(string eventSettingsFilePath, int eventSet,string fileName, string fluxFileName,int inpNumEvents)
+void MRKEvents::loadEventSettingsAndMakeFile(string eventSettingsFilePath, int eventSet,string fileName, string fluxFileName,int inpNumEvents)
 {
     loadEventSettings( eventSettingsFilePath,  eventSet);
     makeEventFile(fileName,fluxFileName,inpNumEvents);
 }
 
-int cEvents::makeEventFile(string fileName, string fluxFileName,int inpNumEvents)
+int MRKEvents::makeEventFile(string fileName, string fluxFileName,int inpNumEvents)
 {
     if(ranGen==NULL)
     {
@@ -654,7 +654,7 @@ int cEvents::makeEventFile(string fileName, string fluxFileName,int inpNumEvents
 
 
 
-int cEvents::makeEventFiles(string firstFileName, string fluxFileName, int numFiles,int numEventsPer,EveType evetype, double littleb, bool homogeneous,double gEmin,double gEmax,bool inpFermiOn)
+int MRKEvents::makeEventFiles(string firstFileName, string fluxFileName, int numFiles,int numEventsPer,EveType evetype, double littleb, bool homogeneous,double gEmin,double gEmax,bool inpFermiOn)
 {
     fermiOn=inpFermiOn;
     if(ranGen==NULL)
@@ -683,7 +683,7 @@ int cEvents::makeEventFiles(string firstFileName, string fluxFileName, int numFi
 }
 
 
-int cEvents::makeDecayWidthCutMultiple(double littlebStart, double littlebIncrement,const int littlebNum)
+int MRKEvents::makeDecayWidthCutMultiple(double littlebStart, double littlebIncrement,const int littlebNum)
 {
     if(ranGen==NULL)
     {
@@ -757,7 +757,7 @@ int cEvents::makeDecayWidthCutMultiple(double littlebStart, double littlebIncrem
     return 0;
 }
 
-double cEvents::getFitNormConstant(EveType evetype,double inpGEMin)
+double MRKEvents::getFitNormConstant(EveType evetype,double inpGEMin)
 {
     double out=0;
     if(evetype==FOURBODY)
@@ -772,7 +772,7 @@ double cEvents::getFitNormConstant(EveType evetype,double inpGEMin)
     return out;
 }
 
-void cEvents::setGoodNormConstant(EveType evetype,double littleb, double inpGEMin)
+void MRKEvents::setGoodNormConstant(EveType evetype,double littleb, double inpGEMin)
 {
     if(littleb ==0)
     {
@@ -784,7 +784,7 @@ void cEvents::setGoodNormConstant(EveType evetype,double littleb, double inpGEMi
     }
 }
 
-double cEvents::calcNormConstant(EveType evetype,double littleb, double inpGEMin)
+double MRKEvents::calcNormConstant(EveType evetype,double littleb, double inpGEMin)
 {
     fourBody= (evetype == FOURBODY);
 
@@ -824,7 +824,7 @@ double cEvents::calcNormConstant(EveType evetype,double littleb, double inpGEMin
     return normConstant;
 }
 
-void cEvents::runEventGen(string runFileName)
+void MRKEvents::runEventGen(string runFileName)
 {
     ifstream runFile;
 
@@ -886,7 +886,7 @@ void cEvents::runEventGen(string runFileName)
 }
 
 
-void cEvents::generateEvent()
+void MRKEvents::generateEvent()
 {
     if(fourBody)
     {
@@ -914,7 +914,7 @@ void cEvents::generateEvent()
     genPos();
 }
 
-void cEvents::loadEventSettings(string eventSettingsFilePath, int eventSet)
+void MRKEvents::loadEventSettings(string eventSettingsFilePath, int eventSet)
 {
     if(ranGen != NULL)
         delete ranGen;
@@ -959,14 +959,14 @@ void cEvents::loadEventSettings(string eventSettingsFilePath, int eventSet)
 }
 
 
-double cEvents::calcBR(double inpGEMin,double inpGEMax,double inpEEMin, int numRadEvents,bool inpFermiOn, double neutronLifetime)
+double MRKEvents::calcBR(double inpGEMin,double inpGEMax,double inpEEMin, int numRadEvents,bool inpFermiOn, double neutronLifetime)
 {
     double rate = calcFourBodyRate( inpGEMin, inpGEMax, inpEEMin,  numRadEvents, inpFermiOn);
     double br =neutronLifetime*rate;
     return br;
 }
 
-double cEvents::calcFourBodyRate(double inpGEMin,double inpGEMax,double inpEEMin, int numRadEvents,bool inpFermiOn)
+double MRKEvents::calcFourBodyRate(double inpGEMin,double inpGEMax,double inpEEMin, int numRadEvents,bool inpFermiOn)
 {
     gEMin=inpGEMin;
     gEMax=inpGEMax;
@@ -1049,7 +1049,7 @@ TH1D* calcBRHist(int numPerBin,int numBins,double gEStart,double gEEnd, double i
     brHist->GetYaxis()->SetTitle("Branching Ratio");
 
 
-    cEvents theEvents;
+    MRKEvents theEvents;
 
 
     for(int i=0;i<numBins;i++)
