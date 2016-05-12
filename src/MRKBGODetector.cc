@@ -39,7 +39,8 @@
 #include "G4UnitsTable.hh"
 #include "G4GeometryTolerance.hh"
 #include "G4SDManager.hh"
-#include "mattphys.hh"
+
+#include "../include/MRKPhys.hh"
 
 using namespace CLHEP;
 

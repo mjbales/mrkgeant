@@ -30,11 +30,11 @@
 
 #include "G4GeometryManager.hh"
 
+#include "../include/MRKMirror.hh"
 #include "MRKGlobalField.hh"
 
-#include "RDKMirror.hh"
 
-RDKMirror::RDKMirror(G4LogicalVolume* lv,G4ThreeVector c,string fieldFilePath,double fieldScale, G4ThreeVector inpFieldOffset) : MRKElementField(c,lv)
+MRKMirror::MRKMirror(G4LogicalVolume* lv,G4ThreeVector c,string fieldFilePath,double fieldScale, G4ThreeVector inpFieldOffset) : MRKElementField(c,lv)
 {
 
     G4cout << "Loading mirror E field:" << G4endl;
@@ -47,13 +47,13 @@ RDKMirror::RDKMirror(G4LogicalVolume* lv,G4ThreeVector c,string fieldFilePath,do
 
 }
 
-RDKMirror::~RDKMirror()
+MRKMirror::~MRKMirror()
 {
     eField.reset();
 }
 
 //Method that we need to get the B field in
-void RDKMirror::addFieldValue(const G4double point[4],
+void MRKMirror::addFieldValue(const G4double point[4],
                                          G4double field[6])
 {
 

@@ -31,8 +31,8 @@
 #include "G4THitsCollection.hh"
 #include "G4Allocator.hh"
 #include "G4ThreeVector.hh"
-#include "constants.hh"
 #include "TObject.h"
+#include "MRKConstants.hh"
 
 #define MRKHITCODE_NOTHING 0
 #define MRKHITCODE_DETIN 1

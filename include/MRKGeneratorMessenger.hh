@@ -1,5 +1,5 @@
-#ifndef GeneratorMessenger_h
-#define GeneratorMessenger_h 1
+#ifndef MRKGeneratorMessenger_h
+#define MRKGeneratorMessenger_h 1
 
 #include "globals.hh"
 #include "G4UImessenger.hh"
@@ -15,11 +15,11 @@ class G4UIcmdWith3VectorAndUnit;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class GeneratorMessenger: public G4UImessenger
+class MRKGeneratorMessenger: public G4UImessenger
 {
   public:
-    GeneratorMessenger(MRKPrimaryGeneratorAction*);
-   ~GeneratorMessenger();
+    MRKGeneratorMessenger(MRKPrimaryGeneratorAction*);
+   ~MRKGeneratorMessenger();
 
     void SetNewValue(G4UIcommand*, G4String);
 

@@ -29,7 +29,7 @@
 
 using namespace std;
 
-class ROOTField{
+class MRKROOTField{
 private:
     int numBins[3];
     TVector3 startCorner;
@@ -62,9 +62,9 @@ private:
 
 
 public:
-    ROOTField();
-    ROOTField(string filePath, string histName, double scalingValue,int inpSpaceDim,int inpFieldDim);
-    ~ROOTField();
+    MRKROOTField();
+    MRKROOTField(string filePath, string histName, double scalingValue,int inpSpaceDim,int inpFieldDim);
+    ~MRKROOTField();
     void reset();
     void linearInterp3D(TVector3 pos,TVector3& vecOut);
     void cubicInterp3D(TVector3 pos,TVector3& vecOut);

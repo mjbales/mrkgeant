@@ -15,11 +15,11 @@ class G4UIcmdWithABool;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class RunActionMessenger: public G4UImessenger
+class MRKRunActionMessenger: public G4UImessenger
 {
   public:
-    RunActionMessenger(MRKRunAction*);
-   ~RunActionMessenger();
+    MRKRunActionMessenger(MRKRunAction*);
+   ~MRKRunActionMessenger();
 
     void SetNewValue(G4UIcommand*, G4String);
 

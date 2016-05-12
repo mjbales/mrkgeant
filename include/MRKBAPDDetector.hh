@@ -31,8 +31,10 @@
 #include "MRKHit.hh"
 #include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
-#include "cMRKText.hh"
 #include "Randomize.hh"
+
+#include "TH1.h"
+#include "MRKText.hh"
 
 class G4Step;
 class G4HCofThisEvent;
@@ -57,6 +59,8 @@ class MRKBAPDDetector : public G4VSensitiveDetector
       double BAPDCollectionEfficiencyModel(double inpEnergy, double depth);
 
   private:
+
+
       MRKHitsCollection* mrkCollection;
       G4ParticleDefinition* protonParDef;
       G4ParticleDefinition* electronParDef;
@@ -77,6 +81,7 @@ class MRKBAPDDetector : public G4VSensitiveDetector
   public:
 };
 
+TH1D* getSiO2Hist();
 
 
 

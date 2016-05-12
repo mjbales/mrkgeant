@@ -40,9 +40,10 @@
 #include "G4ParticleDefinition.hh"
 #include "G4UnitsTable.hh"
 #include "globals.hh"
-#include "constants.hh"
-#include "mattphys.hh"
-#include "cMRKText.hh"
+
+#include "../include/MRKConstants.hh"
+#include "../include/MRKPhys.hh"
+#include "../include/MRKText.hh"
 
 
 
@@ -88,7 +89,7 @@ MRKPrimaryGeneratorAction::MRKPrimaryGeneratorAction(MRKDetectorConstruction* my
 
 
 
-    genMess=new GeneratorMessenger(this);
+    genMess=new MRKGeneratorMessenger(this);
     inputFileName="";
     beamOffset=G4ThreeVector(0,0,0);
 
@@ -121,7 +122,7 @@ MRKPrimaryGeneratorAction::~MRKPrimaryGeneratorAction()
 
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
-void MRKPrimaryGeneratorAction::loadInputFile(string inputFileName)
+void MRKPrimaryGeneratorAction::loadInputFile(TString inputFileName)
 {
 
     fileLoaded=false;
@@ -180,7 +181,7 @@ void MRKPrimaryGeneratorAction::createParticleSourceEventFile()
 
 }
 
-void MRKPrimaryGeneratorAction::loadRDKEventFile(string inputFileName)
+void MRKPrimaryGeneratorAction::loadRDKEventFile(TString inputFileName)
 {
     if(inpFile != NULL)
     {
@@ -188,14 +189,14 @@ void MRKPrimaryGeneratorAction::loadRDKEventFile(string inputFileName)
         inpFile=NULL;
         fileLoaded=false;
     }
-    inpFile = new TFile(inputFileName.data(),"READ");
+    inpFile = new TFile(inputFileName,"READ");
     if(inpFile->IsZombie()){
         cout << "Error in input file:"<< inputFileName << endl;
         delete inpFile;
         inpFile=NULL;
         return;
     }
-    string currentParticleName=particleGun->GetParticleDefinition()->GetParticleName();
+    TString currentParticleName=particleGun->GetParticleDefinition()->GetParticleName();
 
     G4cout << "Loading " << currentParticleName << " data from event file:  " << inputFileName << endl;
     inpTree=(TTree*) inpFile->Get(DEFAULT_EVENTS_TREENAME);
@@ -236,7 +237,7 @@ void MRKPrimaryGeneratorAction::loadRDKEventFile(string inputFileName)
     gROOT->cd();
 }
 
-void MRKPrimaryGeneratorAction::makeAndLoadRDKEventFile(string inputFileName)
+void MRKPrimaryGeneratorAction::makeAndLoadRDKEventFile(TString inputFileName)
 {
 
     if(theEvents != NULL)
@@ -248,8 +249,8 @@ void MRKPrimaryGeneratorAction::makeAndLoadRDKEventFile(string inputFileName)
 //    theEvents->loadFluxFileMap(fluxMapFileName);
     string currentParticleName=particleGun->GetParticleDefinition()->GetParticleName();
 
-    G4cout << "Generating events from event settings file:  " << inputFileName << endl;
-    string eventFileName=filePathFromFullPath(inputFileName)+"Events"+addBeforeExtension(fileNameFromFullPath(inputFileName),"_Set"+int2str(eventSetNumber)).substr(13);
+    G4cout << "Generating events from event settings file:  " << inputFileName << G4endl;
+    TString eventFileName=filePathFromFullPath(inputFileName)+"Events"+addBeforeExtension(fileNameFromFullPath(inputFileName),"_Set"+int2str(eventSetNumber))(13,999);
     theEvents->loadEventSettingsAndMakeFile(inputFileName,eventSetNumber,eventFileName,fluxMapFileName,numberOfEventsToMake);
     delete theEvents;
     theEvents=NULL;

@@ -42,7 +42,7 @@
 MRKRunAction::MRKRunAction(MRKPrimaryGeneratorAction* generator)
 {
     outputFileName="";
-    rAMess=new RunActionMessenger(this);
+    rAMess=new MRKRunActionMessenger(this);
     theGenerator=generator;
     macroFileName="";
     useFluxTree=false;

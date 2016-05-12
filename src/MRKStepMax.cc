@@ -29,35 +29,35 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include "StepMax.hh"
-#include "StepMaxMessenger.hh"
+#include "../include/MRKStepMax.hh"
+#include "../include/MRKStepMaxMessenger.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-StepMax::StepMax(const G4String& processName)
+MRKStepMax::MRKStepMax(const G4String& processName)
  : G4VDiscreteProcess(processName),MaxChargedStep(DBL_MAX)
 {
-  pMess = new StepMaxMessenger(this);
+  pMess = new MRKStepMaxMessenger(this);
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-StepMax::~StepMax() { delete pMess; }
+MRKStepMax::~MRKStepMax() { delete pMess; }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-G4bool StepMax::IsApplicable(const G4ParticleDefinition& particle)
+G4bool MRKStepMax::IsApplicable(const G4ParticleDefinition& particle)
 {
   return (particle.GetPDGCharge() != 0. && !particle.IsShortLived());
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void StepMax::SetMaxStep(G4double step) {MaxChargedStep = step;}
+void MRKStepMax::SetMaxStep(G4double step) {MaxChargedStep = step;}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-G4double StepMax::PostStepGetPhysicalInteractionLength( const G4Track&,
+G4double MRKStepMax::PostStepGetPhysicalInteractionLength( const G4Track&,
                                                    G4double,
                                                    G4ForceCondition* condition )
 {
@@ -69,7 +69,7 @@ G4double StepMax::PostStepGetPhysicalInteractionLength( const G4Track&,
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-G4VParticleChange* StepMax::PostStepDoIt(const G4Track& aTrack, const G4Step&)
+G4VParticleChange* MRKStepMax::PostStepDoIt(const G4Track& aTrack, const G4Step&)
 {
    // do nothing
    aParticleChange.Initialize(aTrack);

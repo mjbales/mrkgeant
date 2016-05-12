@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////
-//MRKEvents - by Matthew Bales
+//cEvents - by Matthew Bales
 //Event Generator code based on code by Robert Cooper
 //
 //Creates and stores neutron decay events
@@ -14,44 +14,32 @@
 ///////////////////////////////////////////////////
 
 
-#ifndef CEVENTS_H_INCLUDED
+#ifndef RDK2_H_INCLUDED
 #define MRKEVENTS_H_INCLUDED
+
 #pragma once
 
-//Standard Libraries
-#include <iostream>
-#include <cmath>
-#include <string>
-#include <math.h>
-#include <sys/stat.h>
-#include <vector>
-
-//MJB libraries
-#include "cVector.hh" //Math/Physics vectors
-#include "constants.hh"
-#include "cMRKText.hh"
-#include "mattphys.hh"
-#include "cVField.hh"
-
-//Root Libraries
+#include "TRandom3.h"
+#include "TString.h"
 #include "TFile.h"
 #include "TTree.h"
-#include "TRandom3.h"
 #include "TH1.h"
-#include "TVectorT.h"
 
-using namespace std;
-using std::string;
+#include "MRKConstants.hh"
+
+#include "MRKVector.hh" //NEED TO REPLACE WITH ROOT 3Vector
+#include "MRKVField.hh" //NEED TO REPLACE WITH MRFIELD
+
 
 
 class MRKEvents
 {
 protected:
     TRandom3* ranGen;                   //Random number generator
-	string eventFileName;               //Event File name to load
+	TString eventFileName;               //Event File name to load
     TFile* eventFile;                   //ROOT File holding events
     TTree* eventTree;                   //ROOT Tree holding events
-    cVector3D p0;
+    MRKVector3D p0;
     double x0,y0,z0;                  //Position Variables used to fill tree
     double ep0, mxp0,myp0, mzp0;      //Proton energy and momentum directions used to fill tree
     double ee0, mxe0, mye0, mze0;     //Electron energy and momentum directions used to fill tree
@@ -65,6 +53,7 @@ protected:
     double gEMin,gEMax;                  //Gamma Energy Range for generation
     double eEMin;                       //Electron energy minimum
     cSField2D fluxMap;                  //The 2D probability flux map used to create veriticies is stored as a 2D Field
+    double zStart, zEnd;               //Creating the beam between these two points
 
     //Various variables used by event generator.  Stored in object for sharing and speed
     //Naming nomenclature derivives from Rob's Igor Event generator
@@ -87,7 +76,7 @@ protected:
 
     double getJTWProb();                                          //Calculates the decay width for 3-body decay with arbitrary units from the JTW formula (does not include normConstant)
     double getGapanovProb();                                                    //Calculates the decay width for 4-body decay with arbitrary units from Gapanov's formula (does not include normConstant)
-    int makeEventFile(string fileName, string fluxFileName,int inpNumEvents);                    //Makes an event file given the input requirements
+    int makeEventFile(TString fileName, TString fluxFileName,int inpNumEvents);                    //Makes an event file given the input requirements
 
 
 public:
@@ -95,13 +84,13 @@ public:
 	MRKEvents(UInt_t inpSeed);                               //Constructor
 	~MRKEvents();                                         //Destructor
 	void reset();                                       //Resets events to baseline (destructor calls this)
-	int loadEvents(string fileName,string treeName);    //Designates root file where decay events are located
+	int loadEvents(TString fileName,TString treeName);    //Designates root file where decay events are located
     int makeDerivedEvents();                            //Creates a secondary file from an already "loaded" event file that contains other simply calculated parameters
-	void genPos();                                      //Generates a vertex in space.  Stores results in variables assigned to tree.
-	void getPosVel(ParType parType, cVector3D& rOut,cVector3D& vOut,int eventPos);  //Returns the position (m) and velocity (m/s) of a chosen particle and event number
-	void getPosVel(ParType parType, cVector3D& rOut,cVector3D& vOut); //Returns the position (m) and velocity (m/s) of a chosen particle presuming event is currently loaded in memory
-    void getPosDirKE(ParType parType, cVector3D& rOut,cVector3D& dOut,double& keOut,int eventPos); //Returns the position (m), direction of momentum, and kinetic energy (keV) of a chosen particle and event number
-    void getPosDirKE(ParType parType, cVector3D& rOut,cVector3D& dOut,double& keOut); //Returns the position (m), direction of momentum, and kinetic energy (keV) of a chosen particle and event number
+	void genPos();           //Generates a vertex in space.  Stores results in variables assigned to tree.
+	void getPosVel(ParType parType, MRKVector3D& rOut,MRKVector3D& vOut,int eventPos);  //Returns the position (m) and velocity (m/s) of a chosen particle and event number
+	void getPosVel(ParType parType, MRKVector3D& rOut,MRKVector3D& vOut); //Returns the position (m) and velocity (m/s) of a chosen particle presuming event is currently loaded in memory
+    void getPosDirKE(ParType parType, MRKVector3D& rOut,MRKVector3D& dOut,double& keOut,int eventPos); //Returns the position (m), direction of momentum, and kinetic energy (keV) of a chosen particle and event number
+    void getPosDirKE(ParType parType, MRKVector3D& rOut,MRKVector3D& dOut,double& keOut); //Returns the position (m), direction of momentum, and kinetic energy (keV) of a chosen particle and event number
 	int getEventStart();                                //Returns the starting event
 	int getNumEvents();                                 //Returns the number of events
 	int getEventEnd();                                  //Returns the final event
@@ -138,34 +127,34 @@ public:
 	double calcBR(double inpGEMin,double inpGEMax,double inpEEMin, int numRadEvents,bool inpFermiOn=true, double neutronLifetime=NLIFE);           //Calculates the branching ratio
 	double calcFourBodyRate(double inpGEMin,double inpGEMax,double inpEEMin, int numRadEvents,bool inpFermiOn=true);
 
-	void loadFluxFileMap(string fluxFileName);
+	void loadFluxFileMap(TString fluxFileName);
 
-	int makeEventFile(string fileName, string fluxFileName, int inpNumEvents,                     //Makes an event file given the input requirements
-                        EveType evetype, double inpLittleb, bool inpHomogeneous,
-                        double inpGEMin, double inpGEMax,bool inpFermiOn=true);
+	int makeEventFile(TString fileName, TString fluxFileName, int inpNumEvents,                     //Makes an event file given the input requirements
+                        EveType evetype, double inpLittleb=0, bool inpHomogeneous=false,
+                        double inpGEMin=0, double inpGEMax=0,bool inpFermiOn=true, double inpZStart=EVENTGEN_Z_MIN, double inpZEnd=EVENTGEN_Z_MAX);
 
 
 
-	int makeEventFiles(string firstFileName,  string fluxFileName, int numFiles,int numEventsPer,   //Makes multiple event files
+	int makeEventFiles(TString firstFileName,  TString fluxFileName, int numFiles,int numEventsPer,   //Makes multiple event files
                         EveType evetype, double littleb, bool inphomogeneous,
-                        double gEmin,double gEmax,bool inpFermiOn=true);
+                        double gEmin,double gEmax,bool inpFermiOn=true, double inpZStart=EVENTGEN_Z_MIN, double inpZEnd=EVENTGEN_Z_MAX);
 
 	int makeDecayWidthCutMultiple(double littlebStart,    //For homogneous events, make multiple decay width cuts
                                 double littlebIncrement,const int littlebNum);        //based on a range of little b
 
-	void runEventGen(string runFileName);               //Takes a input filename (which it looks for in the current directory) which contains settings used to generate event files
+	void runEventGen(TString runFileName);               //Takes a input filename (which it looks for in the current directory) which contains settings used to generate event files
 
 	void generateEvent();
 
-	void loadEventSettings(string eventSettingsFilePath, int eventSet);  //Includes 500 random seeds for each 1 million event file
+	void loadEventSettings(TString eventSettingsFilePath, int eventSet);  //Includes 500 random seeds for each 1 million event file
 
-	void loadEventSettingsAndMakeFile(string eventSettingsFilePath, int eventSet,string fileName, string fluxFileName,int inpNumEvents);  //Includes 500 random seeds for each 1 million event file
+	void loadEventSettingsAndMakeFile(TString eventSettingsFilePath, int eventSet,TString fileName, TString fluxFileName,int inpNumEvents);  //Includes 500 random seeds for each 1 million event file
 
 	inline double getRandomNumber(){return ranGen->Rndm();}
 
 
 };
 
-TH1D* calcBRHist(int numPerBin,int numBins,double gEStart,double gEEnd,double inpEEMin,bool inpFermiOn);
+TH1D* calcBRHist(int numPerBin,int numBins,double gEStart,double gEEnd,double inpEEMin,bool inpFermiOn,bool cumulative);
 
-#endif // CEVENTS_H_INCLUDED
+#endif // RDK2_H_INCLUDED

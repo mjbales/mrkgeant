@@ -31,8 +31,9 @@
 #include "MRKHit.hh"
 #include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
-#include "cMRKText.hh"
 #include "TRandom3.h"
+
+#include "MRKText.hh"
 class G4Step;
 class G4HCofThisEvent;
 class G4TouchableHistory;

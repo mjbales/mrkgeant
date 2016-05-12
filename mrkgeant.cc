@@ -33,16 +33,16 @@
 //Standard Libraries
 #include <string>
 #include <fstream>
-#include <iostream>
 
 #include <sys/time.h>
 #include <stdio.h>
 #include <unistd.h>
 
 //Geant4 Libraries
-#include "PhysicsList.hh"
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
+
+#include "include/MRKPhysicsList.hh"
 #ifdef G4VIS_USE
 #include "G4VisExecutive.hh"
 #endif
@@ -61,7 +61,7 @@
 
 
 //Matt Libraries
-#include "cMRKText.hh"
+#include "include/MRKText.hh"
 
 using namespace std;
 using std::string;
@@ -117,7 +117,7 @@ int main(int argc,char** argv)
 
 
     G4cout << "Creating physics lists object: ";
-    runManager->SetUserInitialization(new PhysicsList(detector));
+    runManager->SetUserInitialization(new MRKPhysicsList(detector));
     G4cout << "completed!"<<G4endl;
 
     // User Action classes

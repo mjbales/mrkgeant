@@ -34,7 +34,7 @@
 
 #include "MRKField.hh"
 
-#include "constants.hh"
+#include "../include/MRKConstants.hh"
 
 MRKField::MRKField(G4LogicalVolume* lv,FieldSettings inpFS): MRKElementField(inpFS.centerPos,lv)
 {

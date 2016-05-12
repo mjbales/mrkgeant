@@ -21,10 +21,9 @@
 #include <cmath>
 #include <vector>
 
-//Matt Libraries
-#include "cVector.hh" //Math/Physics vectors
-#include "constants.hh"
-#include "cMRKText.hh"
+#include "MRKConstants.hh"
+#include "MRKText.hh"
+#include "MRKVector.hh" //Math/Physics vectors
 using namespace std;
 
 //File should be called cField.h  but I haven't renamed it yet
@@ -33,15 +32,15 @@ using namespace std;
 //Structure that contains/calculates vectors and derivatives at point (for cubic interpolation)
 struct sVandD3D
 {
-	cVector3D val;
-	cVector3D dx,dy,dz,dxy,dxz,dyz,dxyz;
+	MRKVector3D val;
+	MRKVector3D dx,dy,dz,dxy,dxz,dyz,dxyz;
 
 };
 
 struct sVandD2D
 {
-	cVector2D val;
-	cVector2D dr,dz,drz;
+	MRKVector2D val;
+	MRKVector2D dr,dz,drz;
 };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,7 +67,7 @@ public:
     virtual ~cField3D(){};
     virtual void reset(){};
     void calcPositionLimits();
-    bool isPositionOutsideField(cVector3D pos);
+    bool isPositionOutsideField(MRKVector3D pos);
    // virtual int loadField(const char*,double scalingValue){return 0;};
 };
 
@@ -90,8 +89,8 @@ public:
 	void reset();
 	int loadField(const char*,double scalingValue);
 	double getValue( int, int, int);
-	void linearInterp(const cVector3D& pos,double& valOut);
-	void cubicInterp(const cVector3D& pos,double& valOut){linearInterp(pos,valOut);}//Currently just wrapping linear till I update it
+	void linearInterp(const MRKVector3D& pos,double& valOut);
+	void cubicInterp(const MRKVector3D& pos,double& valOut){linearInterp(pos,valOut);}//Currently just wrapping linear till I update it
 	void setSize( int, int, int); //Clears values and then resizes
 	void setValue( int inpRow, int inpColumn, int inpLayer,double inpVal);
 };
@@ -115,7 +114,7 @@ protected:
     bool symmetryInY;  //is the y dimension mirrored
 
 	//Cubic Interpolation
-	cVector3D a0,a1,a2,a3,df1D2,df2D2; //Variables used in cubic interpolation. Global in class for speed.
+	MRKVector3D a0,a1,a2,a3,df1D2,df2D2; //Variables used in cubic interpolation. Global in class for speed.
 	double mu2, mu3; //Variables used in cubic interpolation.  Global in class for speed.
 	sVandD3D vAndD[14];  //Variable for cubic interpolation. Global in class for speed.
 
@@ -124,21 +123,21 @@ public:
 	~cVField3D();
 	void reset();
 	int loadField(const char*,double scalingValue);
-	const cVector3D getVector( int, int, int);
-	void linearInterp(const cVector3D& pos,cVector3D& vecOut);
-	void linearInterp2(const cVector3D& pos,cVector3D& vecOut);
-	void cubicInterp(const cVector3D& pos,cVector3D& vecOut);
+	const MRKVector3D getVector( int, int, int);
+	void linearInterp(const MRKVector3D& pos,MRKVector3D& vecOut);
+	void linearInterp2(const MRKVector3D& pos,MRKVector3D& vecOut);
+	void cubicInterp(const MRKVector3D& pos,MRKVector3D& vecOut);
 	void setSize( int, int, int); //Clears values and then resizes
-	void setVector( int inpRow, int inpColumn, int inpLayer,cVector3D inpVec);
+	void setVector( int inpRow, int inpColumn, int inpLayer,MRKVector3D inpVec);
 	inline void setSymmetryInY(bool inp){symmetryInY=inp;};
 	void convertToROOTFile(string rootPathOut);
 
 
 private:
     //cubic interpolation
-    void derivatives(int i, int j, int k, cVector3D& dx, cVector3D& dy, cVector3D& dz, cVector3D& dxy, cVector3D& dxz, cVector3D& dyz, cVector3D& dxyz);
-    cVector3D derivative(cVector3D start, cVector3D finish);
-    cVector3D cubicInterpolate1DVec(double mu,const cVector3D& f1,const cVector3D& f2,const cVector3D& df1,const cVector3D& df2);
+    void derivatives(int i, int j, int k, MRKVector3D& dx, MRKVector3D& dy, MRKVector3D& dz, MRKVector3D& dxy, MRKVector3D& dxz, MRKVector3D& dyz, MRKVector3D& dxyz);
+    MRKVector3D derivative(MRKVector3D start, MRKVector3D finish);
+    MRKVector3D cubicInterpolate1DVec(double mu,const MRKVector3D& f1,const MRKVector3D& f2,const MRKVector3D& df1,const MRKVector3D& df2);
 
 
 
@@ -163,7 +162,7 @@ protected:
 
 	//RDK only varialbes
 	bool transposedField;  //For RDK since the SBD is at an angle
-	cVector3D posInField;  //For storing tranposed vector..stored here for speed
+	MRKVector3D posInField;  //For storing tranposed vector..stored here for speed
 public:
     cField2D();
     virtual ~cField2D(){};
@@ -202,9 +201,9 @@ public:
 	void reset();
 	int loadField(const char*,double scalingValue);
 	double getValue( int, int);
-	void linearInterpAs3D(const cVector3D& pos,double& valOut);
-	void linearInterp(const cVector2D& pos, double& valOut);
-	void cubicInterpAs3D(const cVector3D& pos,double& valOut){linearInterpAs3D(pos,valOut);}//Currently just wrapping linear till I update it
+	void linearInterpAs3D(const MRKVector3D& pos,double& valOut);
+	void linearInterp(const MRKVector2D& pos, double& valOut);
+	void cubicInterpAs3D(const MRKVector3D& pos,double& valOut){linearInterpAs3D(pos,valOut);}//Currently just wrapping linear till I update it
 	void setValue( int inpRow, int inpColumn, double inpVal);
     void setSize( int, int); //Clears values and then resizes
 
@@ -233,13 +232,13 @@ public:
 	~cVField2D();
 	void reset();
 	int loadField(const char*,double);
-	cVector2D getVector( int, int);
-	void linearInterpAs3D(const cVector3D& pos,cVector3D& vecOut);
-	void linearInterpAs3D2(const cVector3D& pos,cVector3D& vecOut);
-	void linearInterpAs3DTransposed2(const cVector3D& pos,cVector3D& vecOut);
-	void cubicInterpAs3D(const cVector3D& pos,cVector3D& vecOut){linearInterpAs3D(pos,vecOut);}//Currently just wrapping linear till I update it
+	MRKVector2D getVector( int, int);
+	void linearInterpAs3D(const MRKVector3D& pos,MRKVector3D& vecOut);
+	void linearInterpAs3D2(const MRKVector3D& pos,MRKVector3D& vecOut);
+	void linearInterpAs3DTransposed2(const MRKVector3D& pos,MRKVector3D& vecOut);
+	void cubicInterpAs3D(const MRKVector3D& pos,MRKVector3D& vecOut){linearInterpAs3D(pos,vecOut);}//Currently just wrapping linear till I update it
 	void changeScalingPotential(double inpPotential);
-	void setVector( int inpRow, int inpColumn,cVector2D inpVec);
+	void setVector( int inpRow, int inpColumn,MRKVector2D inpVec);
     void setSize( int, int); //Clears values and then resizes
 
 };

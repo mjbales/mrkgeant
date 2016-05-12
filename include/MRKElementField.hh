@@ -41,7 +41,7 @@
 #include "G4UserLimits.hh"
 #include "G4VisAttributes.hh"
 
-#include "constants.hh"
+#include "MRKConstants.hh"
 
 //  class MRKElementField - interface for the EM field of one element
 

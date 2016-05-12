@@ -1,4 +1,4 @@
-#include "cVField.hh"
+#include "../include/MRKVField.hh"
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //cField3D
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -16,7 +16,7 @@ void cField3D::calcPositionLimits()
     zFinal=zStart+(layers-1)*zSpacing;
 }
 
-bool cField3D::isPositionOutsideField(cVector3D pos) // Assumes Y field is mirrored
+bool cField3D::isPositionOutsideField(MRKVector3D pos) // Assumes Y field is mirrored
 {
     if(pos.z > zStart && pos.z < zFinal)
     {
@@ -171,7 +171,7 @@ void cSField3D::setValue( int inpRow, int inpColumn, int inpLayer,double inpVal)
 
 //Assumes Y field is mirrored!!!!!!!!!!!!
 //Adds interpolated field to vecOut
-void cSField3D::linearInterp(const cVector3D& pos,double& valOut){
+void cSField3D::linearInterp(const MRKVector3D& pos,double& valOut){
 
 	xMod = modf((pos.x-xStart)/xSpacing,&xFloor);
 	yMod = modf((abs(pos.y)-yStart)/ySpacing,&yFloor);
@@ -350,9 +350,9 @@ int cVField3D::loadField(const char* inpFileName, double scalingValue){ //Assume
 }
 
 
-const cVector3D cVField3D::getVector( int xIn, int yIn, int zIn){
+const MRKVector3D cVField3D::getVector( int xIn, int yIn, int zIn){
 
-	cVector3D outVec;
+	MRKVector3D outVec;
 	//if(xIn >= rows || yIn >= columns || zIn >= layers || !fileLoaded){
 	//	return outVec;
 	//}
@@ -360,7 +360,7 @@ const cVector3D cVField3D::getVector( int xIn, int yIn, int zIn){
 	return outVec;
 }
 
-void cVField3D::setVector( int inpRow, int inpColumn, int inpLayer,cVector3D inpVec)
+void cVField3D::setVector( int inpRow, int inpColumn, int inpLayer,MRKVector3D inpVec)
 {
     xArray[inpRow][inpColumn][inpLayer]=inpVec.x;
     yArray[inpRow][inpColumn][inpLayer]=inpVec.y;
@@ -370,7 +370,7 @@ void cVField3D::setVector( int inpRow, int inpColumn, int inpLayer,cVector3D inp
 
 
 //Adds interpolated field to vecOut
-void cVField3D::linearInterp(const cVector3D& pos,cVector3D& vecOut)
+void cVField3D::linearInterp(const MRKVector3D& pos,MRKVector3D& vecOut)
 {
 	xMod = modf((pos.x-xStart)/xSpacing,&xFloor);
 
@@ -430,7 +430,7 @@ void cVField3D::linearInterp(const cVector3D& pos,cVector3D& vecOut)
 
 //Assumes Y field is mirrored!!!!!!!!!!!!
 //Adds interpolated field to vecOut
-void cVField3D::linearInterp2(const cVector3D& pos,cVector3D& vecOut)
+void cVField3D::linearInterp2(const MRKVector3D& pos,MRKVector3D& vecOut)
 {
     if(isPositionOutsideField(pos))
     {
@@ -685,7 +685,7 @@ void cSField2D::setValue( int inpRow, int inpColumn,double inpVal)
 }
 
 
-void cSField2D::linearInterpAs3D(const cVector3D& pos,double& valOut){
+void cSField2D::linearInterpAs3D(const MRKVector3D& pos,double& valOut){
 	if(!fileLoaded)
 		return;
 	if(transposedField)
@@ -713,7 +713,7 @@ void cSField2D::linearInterpAs3D(const cVector3D& pos,double& valOut){
 }
 
 //Still use r and z because I'm copy an paste lazy
-void cSField2D::linearInterp(const cVector2D& pos,double& valOut){
+void cSField2D::linearInterp(const MRKVector2D& pos,double& valOut){
 	if(!fileLoaded)
 		return;
 	rMod = modf((pos.r-rStart)/rSpacing,&rFloor);
@@ -846,9 +846,9 @@ int cVField2D::loadField(const char* inpFileName, double scalingValue){ //Assume
 
 
 
-cVector2D cVField2D::getVector( int rIn, int zIn){
+MRKVector2D cVField2D::getVector( int rIn, int zIn){
 
-    cVector2D outVec;
+    MRKVector2D outVec;
 	if(rIn >= rows || zIn >= columns || !fileLoaded){
 		return outVec;
 	}
@@ -856,14 +856,14 @@ cVector2D cVField2D::getVector( int rIn, int zIn){
 	return outVec;
 }
 
-void cVField2D::setVector( int inpRow, int inpColumn,cVector2D inpVec)
+void cVField2D::setVector( int inpRow, int inpColumn,MRKVector2D inpVec)
 {
     rArray[inpRow][inpColumn]=inpVec.r;
     zArray[inpRow][inpColumn]=inpVec.z;
 }
 
 
-void cVField2D::linearInterpAs3D(const cVector3D& pos,cVector3D& vecOut){
+void cVField2D::linearInterpAs3D(const MRKVector3D& pos,MRKVector3D& vecOut){
 	if(!fileLoaded)
 		return;
 	if(transposedField)
@@ -906,7 +906,7 @@ void cVField2D::linearInterpAs3D(const cVector3D& pos,cVector3D& vecOut){
 	return;
 }
 
-void cVField2D::linearInterpAs3D2(const cVector3D& pos,cVector3D& vecOut)
+void cVField2D::linearInterpAs3D2(const MRKVector3D& pos,MRKVector3D& vecOut)
 {
 	radius = sqrt(pow(pos.x,2)+pow(pos.y,2));
 	if(isPositionOutsideField(pos.z,radius))
@@ -937,7 +937,7 @@ void cVField2D::linearInterpAs3D2(const cVector3D& pos,cVector3D& vecOut)
 	return;
 }
 
-void cVField2D::linearInterpAs3DTransposed2(const cVector3D& pos,cVector3D& vecOut)
+void cVField2D::linearInterpAs3DTransposed2(const MRKVector3D& pos,MRKVector3D& vecOut)
 {
 
     posInField = pos.returnTransCoords();
@@ -952,8 +952,8 @@ void cVField2D::linearInterpAs3DTransposed2(const cVector3D& pos,cVector3D& vecO
 
 
 //Interpolates over distance D where mu varies from 0 to 1, 0 being at f1, 1 being at f2 and 1st derivatives df1 and df2
-cVector3D cVField3D::cubicInterpolate1DVec(double mu,
-		const cVector3D& f1,const cVector3D& f2,const cVector3D& df1,const cVector3D& df2)
+MRKVector3D cVField3D::cubicInterpolate1DVec(double mu,
+		const MRKVector3D& f1,const MRKVector3D& f2,const MRKVector3D& df1,const MRKVector3D& df2)
 {
 	//All variable are declared in the field as they will be used often!
 
@@ -972,17 +972,17 @@ cVector3D cVField3D::cubicInterpolate1DVec(double mu,
 
 //Calculates derivative based on centered differencing...inputs are one increment less then point and one increment greater than point and the spacing
 //This is a derivative with respect to mu.
-cVector3D cVField3D::derivative(cVector3D start, cVector3D finish)
+MRKVector3D cVField3D::derivative(MRKVector3D start, MRKVector3D finish)
 {
 	return (finish - start)/(2.);
 }
 
 
 //Calculates derivatives based on centered differencing
-void cVField3D::derivatives(int i, int j, int k, cVector3D& dx, cVector3D& dy, cVector3D& dz, cVector3D& dxy, cVector3D& dxz, cVector3D& dyz, cVector3D& dxyz)
+void cVField3D::derivatives(int i, int j, int k, MRKVector3D& dx, MRKVector3D& dy, MRKVector3D& dz, MRKVector3D& dxy, MRKVector3D& dxz, MRKVector3D& dyz, MRKVector3D& dxyz)
 {
 	int im=i,ip=i,jm=j,jp=j,km=k,kp=k;
-	cVector3D temp1, temp2,temp3, temp4;
+	MRKVector3D temp1, temp2,temp3, temp4;
 
 	//Check to see if we're not at the borders of the array.  If we are then assume values are the same.  IE 1st derivative doesn't change
 	if(i > 0) im--;
@@ -1027,10 +1027,10 @@ void cVField3D::derivatives(int i, int j, int k, cVector3D& dx, cVector3D& dy, c
 
 
 //Assumes field is mirrored in the y direction
-void cVField3D::cubicInterp(const cVector3D& pos,cVector3D& vecOut)
+void cVField3D::cubicInterp(const MRKVector3D& pos,MRKVector3D& vecOut)
 {
 	double xFloor,yFloor,zFloor;
-	cVector3D mu, temp;
+	MRKVector3D mu, temp;
 	int xF,yF,zF;
 	if(!fileLoaded)
 		return;

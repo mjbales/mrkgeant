@@ -30,9 +30,6 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include "PhysicsList.hh"
-#include "PhysicsListMessenger.hh"
-
 #include "G4EmStandardPhysics.hh"
 #include "G4EmStandardPhysics_option1.hh"
 #include "G4EmStandardPhysics_option2.hh"
@@ -51,13 +48,16 @@
 
 #include "G4LossTableManager.hh"
 #include "G4UnitsTable.hh"
-#include "StepMax.hh"
+
+#include "../include/MRKPhysicsList.hh"
+#include "../include/MRKPhysicsListMessenger.hh"
+#include "../include/MRKStepMax.hh"
 
 using namespace CLHEP;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-PhysicsList::PhysicsList(MRKDetectorConstruction* p)
+MRKPhysicsList::MRKPhysicsList(MRKDetectorConstruction* p)
 : G4VModularPhysicsList()
 {
   G4LossTableManager::Instance();
@@ -69,7 +69,7 @@ PhysicsList::PhysicsList(MRKDetectorConstruction* p)
   cutForPositron      = currentDefaultCut;
   cutForProton        = currentDefaultCut;
 
-  pMessenger = new PhysicsListMessenger(this);
+  pMessenger = new MRKPhysicsListMessenger(this);
 
   SetVerboseLevel(1);
 
@@ -89,7 +89,7 @@ PhysicsList::PhysicsList(MRKDetectorConstruction* p)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-PhysicsList::~PhysicsList()
+MRKPhysicsList::~MRKPhysicsList()
 {
   delete pMessenger;
   delete emPhysicsList;
@@ -105,7 +105,7 @@ PhysicsList::~PhysicsList()
 #include "G4Decay.hh"
 #include "G4ProcessManager.hh"
 
-void PhysicsList::ConstructProcess()
+void MRKPhysicsList::ConstructProcess()
 {
   // Transportation
   //
@@ -145,14 +145,14 @@ void PhysicsList::ConstructProcess()
   //pmanager->AddProcess(new G4UserSpecialCuts(),-1,-1,1);
 }
 
-void PhysicsList::ConstructParticle()
+void MRKPhysicsList::ConstructParticle()
 {
     decPhysicsList->ConstructParticle();
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void PhysicsList::AddPhysicsList(const G4String& name)
+void MRKPhysicsList::AddPhysicsList(const G4String& name)
 {
   
  // if (verboseLevel>1) {
@@ -233,7 +233,7 @@ void PhysicsList::AddPhysicsList(const G4String& name)
 
 #include "G4Decay.hh"
 
-void PhysicsList::AddDecay()
+void MRKPhysicsList::AddDecay()
 {
   // Decay Process
   //
@@ -260,10 +260,10 @@ void PhysicsList::AddDecay()
 
 
 
-void PhysicsList::AddStepMax()
+void MRKPhysicsList::AddStepMax()
 {
   // Step limitation seen as a process
-  stepMaxProcess = new StepMax();
+  stepMaxProcess = new MRKStepMax();
 
   theParticleIterator->reset();
   while ((*theParticleIterator)()){
@@ -284,7 +284,7 @@ void PhysicsList::AddStepMax()
 #include "G4Positron.hh"
 #include "G4Proton.hh"
 
-void PhysicsList::SetCuts()
+void MRKPhysicsList::SetCuts()
 {
   // set cut values for gamma at first and for e- second and next for e+,
   // because some processes for e+/e- need cut values for gamma
@@ -303,13 +303,13 @@ void PhysicsList::SetCuts()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void PhysicsList::SetCutForGamma(G4double cut)
+void MRKPhysicsList::SetCutForGamma(G4double cut)
 {
   cutForGamma = cut;
   SetParticleCuts(cutForGamma, G4Gamma::Gamma());
 }
 
-void PhysicsList::SetCutForProton(G4double cut)
+void MRKPhysicsList::SetCutForProton(G4double cut)
 {
   cutForProton = cut;
   SetParticleCuts(cutForProton, G4Proton::Proton());
@@ -317,7 +317,7 @@ void PhysicsList::SetCutForProton(G4double cut)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void PhysicsList::SetCutForElectron(G4double cut)
+void MRKPhysicsList::SetCutForElectron(G4double cut)
 {
   cutForElectron = cut;
   SetParticleCuts(cutForElectron, G4Electron::Electron());
@@ -325,7 +325,7 @@ void PhysicsList::SetCutForElectron(G4double cut)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void PhysicsList::SetCutForPositron(G4double cut)
+void MRKPhysicsList::SetCutForPositron(G4double cut)
 {
   cutForPositron = cut;
   SetParticleCuts(cutForPositron, G4Positron::Positron());

@@ -40,20 +40,19 @@
 #include "MRKGlobalField.hh"
 #include "globals.hh"
 
-#include "cVField.hh"
+#include "MRKVector.hh"
+#include "MRKVField.hh"
 
-#include "cVector.hh"
 
-
-class RDKSolenoid : public MRKElementField
+class MRKSolenoid : public MRKElementField
 {
   public:
 
     ///  Default constructor.
-    RDKSolenoid(G4LogicalVolume*, G4ThreeVector,string fieldFilePath,double fieldScale,G4ThreeVector inpFieldOffset);
+    MRKSolenoid(G4LogicalVolume*, G4ThreeVector,string fieldFilePath,double fieldScale,G4ThreeVector inpFieldOffset);
 
     ///  Destructor.
-    ~RDKSolenoid();
+    ~MRKSolenoid();
 
     ///  getLength() returns the length of the solenoid
     virtual G4double getLength() { return 17.6*cm; }
@@ -73,8 +72,8 @@ class RDKSolenoid : public MRKElementField
 
     cVField3D bField;
     bool bFieldPrinted;
-    cVector3D vecOut,posIn;
-    cVector3D fieldOffset;
+    MRKVector3D vecOut,posIn;
+    MRKVector3D fieldOffset;
     //G4ThreeVector globalPos;
 
 

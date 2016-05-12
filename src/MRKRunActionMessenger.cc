@@ -1,15 +1,14 @@
-#include "RunActionMessenger.hh"
-
 #include "MRKRunAction.hh"
 #include "G4UIdirectory.hh"
 #include "G4UIcmdWithAString.hh"
 #include "G4UIcmdWithADoubleAndUnit.hh"
 #include "G4UIcmdWithABool.hh"
 #include "globals.hh"
+#include "../include/MRKRunActionMessenger.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-RunActionMessenger::RunActionMessenger(MRKRunAction* myRunA)
+MRKRunActionMessenger::MRKRunActionMessenger(MRKRunAction* myRunA)
 :myRunAction(myRunA)
 {
 
@@ -28,7 +27,7 @@ RunActionMessenger::RunActionMessenger(MRKRunAction* myRunA)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-RunActionMessenger::~RunActionMessenger()
+MRKRunActionMessenger::~MRKRunActionMessenger()
 {
 
   delete rootoutCmd;
@@ -38,7 +37,7 @@ RunActionMessenger::~RunActionMessenger()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void RunActionMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
+void MRKRunActionMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
 {
   if( command == rootoutCmd )
    { myRunAction->setOutputFile(newValue);}

@@ -29,16 +29,16 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#include "PhysicsListMessenger.hh"
-
-#include "PhysicsList.hh"
 #include "G4UIdirectory.hh"
 #include "G4UIcmdWithADoubleAndUnit.hh"
 #include "G4UIcmdWithAString.hh"
 
+#include "../include/MRKPhysicsList.hh"
+#include "../include/MRKPhysicsListMessenger.hh"
+
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-PhysicsListMessenger::PhysicsListMessenger(PhysicsList* pPhys)
+MRKPhysicsListMessenger::MRKPhysicsListMessenger(MRKPhysicsList* pPhys)
 :pPhysicsList(pPhys)
 {
   physDir = new G4UIdirectory("/MRK/phys/");
@@ -87,7 +87,7 @@ PhysicsListMessenger::PhysicsListMessenger(PhysicsList* pPhys)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-PhysicsListMessenger::~PhysicsListMessenger()
+MRKPhysicsListMessenger::~MRKPhysicsListMessenger()
 {
   delete gammaCutCmd;
   delete electCutCmd;
@@ -100,7 +100,7 @@ PhysicsListMessenger::~PhysicsListMessenger()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void PhysicsListMessenger::SetNewValue(G4UIcommand* command,
+void MRKPhysicsListMessenger::SetNewValue(G4UIcommand* command,
                                           G4String newValue)
 {
   if( command == gammaCutCmd )

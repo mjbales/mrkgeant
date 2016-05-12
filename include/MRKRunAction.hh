@@ -34,11 +34,12 @@
 #define MRKRunAction_h 1
 
 #include "G4UserRunAction.hh"
-#include "RunActionMessenger.hh"
 #include "globals.hh"
 #include <string>
 #include "MRKPrimaryGeneratorAction.hh"
 #include <time.h>
+
+#include "MRKRunActionMessenger.hh"
 using namespace std;
 using std::string;
 
@@ -61,7 +62,7 @@ class MRKRunAction : public G4UserRunAction
     private:
         MRKPrimaryGeneratorAction* theGenerator;
 		string outputFileName;
-		RunActionMessenger* rAMess;
+		MRKRunActionMessenger* rAMess;
 		time_t startTime, endTime;
 		string macroFileName;
 		bool useFluxTree;

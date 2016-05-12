@@ -1,5 +1,3 @@
-#include "GeneratorMessenger.hh"
-
 #include "MRKPrimaryGeneratorAction.hh"
 #include "G4UIdirectory.hh"
 #include "G4UIcmdWithAString.hh"
@@ -8,11 +6,12 @@
 #include "G4UIcmdWithAnInteger.hh"
 #include "G4UIcmdWith3VectorAndUnit.hh"
 #include "globals.hh"
+#include "../include/MRKGeneratorMessenger.hh"
 
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-GeneratorMessenger::GeneratorMessenger(MRKPrimaryGeneratorAction* myGen)
+MRKGeneratorMessenger::MRKGeneratorMessenger(MRKPrimaryGeneratorAction* myGen)
 :myGenerator(myGen)
 {
 
@@ -86,7 +85,7 @@ GeneratorMessenger::GeneratorMessenger(MRKPrimaryGeneratorAction* myGen)
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-GeneratorMessenger::~GeneratorMessenger()
+MRKGeneratorMessenger::~MRKGeneratorMessenger()
 {
     delete genInpCmd;
     delete fluxMapCmd;
@@ -105,7 +104,7 @@ GeneratorMessenger::~GeneratorMessenger()
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-void GeneratorMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
+void MRKGeneratorMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
 {
     if( command == genInpCmd )
         { myGenerator->loadInputFile(newValue);}

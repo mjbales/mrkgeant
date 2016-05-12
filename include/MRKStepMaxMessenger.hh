@@ -35,21 +35,21 @@
 #include "globals.hh"
 #include "G4UImessenger.hh"
 
-class StepMax;
+class MRKStepMax;
 class G4UIcmdWithADoubleAndUnit;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class StepMaxMessenger: public G4UImessenger
+class MRKStepMaxMessenger: public G4UImessenger
 {
   public:
-    StepMaxMessenger(StepMax*);
-   ~StepMaxMessenger();
+    MRKStepMaxMessenger(MRKStepMax*);
+   ~MRKStepMaxMessenger();
     
     void SetNewValue(G4UIcommand*, G4String);
     
   private:
-    StepMax* stepMax;
+    MRKStepMax* stepMax;
     G4UIcmdWithADoubleAndUnit* StepMaxCmd;
 };
 

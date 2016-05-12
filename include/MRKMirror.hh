@@ -30,8 +30,8 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
 
-#ifndef RDKMirror_h
-#define RDKMirror_h 1
+#ifndef MRKMirror_h
+#define MRKMirror_h 1
 
 #include "G4LogicalVolume.hh"
 #include "G4Tubs.hh"
@@ -40,22 +40,20 @@
 #include "MRKGlobalField.hh"
 #include "globals.hh"
 
-#include "cVField.hh"
-
-#include "cVector.hh"
-
 #include <string.h>
+#include "MRKVector.hh"
+#include "MRKVField.hh"
 
 
-class RDKMirror : public MRKElementField
+class MRKMirror : public MRKElementField
 {
   public:
 
     ///  Default constructor.
-    RDKMirror(G4LogicalVolume*, G4ThreeVector,string fieldFilePath,double fieldScale,G4ThreeVector inpFieldOffset);
+    MRKMirror(G4LogicalVolume*, G4ThreeVector,string fieldFilePath,double fieldScale,G4ThreeVector inpFieldOffset);
 
     ///  Destructor.
-    ~RDKMirror();
+    ~MRKMirror();
 
     ///  getLength() returns the length of the solenoid
     virtual G4double getLength() { return 17.6*cm; }
@@ -75,8 +73,8 @@ class RDKMirror : public MRKElementField
 
     cVField2D eField;
     bool eFieldPrinted;
-    cVector3D posIn,vecOut;
-    cVector3D fieldOffset;
+    MRKVector3D posIn,vecOut;
+    MRKVector3D fieldOffset;
     //G4ThreeVector globalPos;
 
 

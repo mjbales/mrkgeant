@@ -40,10 +40,10 @@
 #include "globals.hh"
 #include "G4SystemOfUnits.hh"
 
-#include "ROOTField.hh"
 #include "TVector3.h"
 
 #include <string>
+#include "MRKROOTField.hh"
 
 class FieldSettings
 {
@@ -103,7 +103,7 @@ class MRKField : public MRKElementField
 
   private:
 
-    ROOTField theField;
+    MRKROOTField theField;
 
     TVector3 posIn,vecOut,offset;
 

@@ -40,12 +40,13 @@
 #include "TTree.h"
 #include "TFile.h"
 #include "TMacro.h"
-#include "constants.hh"
 #include "MRKHit.hh"
 #include "G4UnitsTable.hh"
 
 #include <string>
 #include <time.h>
+
+#include "MRKConstants.hh"
 using namespace std;
 using std::string;
 

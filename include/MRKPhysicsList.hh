@@ -34,24 +34,24 @@
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-#ifndef PhysicsList_h
-#define PhysicsList_h 1
+#ifndef MRKPHYSICSLIST_H_INCLUDED
+#define MRKPHYSICSLIST_H_INCLUDED 1
 
 #include "G4VModularPhysicsList.hh"
 #include "globals.hh"
 
 class MRKDetectorConstruction;
-class PhysicsListMessenger;
+class MRKPhysicsListMessenger;
 class G4VPhysicsConstructor;
-class StepMax;
+class MRKStepMax;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class PhysicsList: public G4VModularPhysicsList
+class MRKPhysicsList: public G4VModularPhysicsList
 {
   public:
-    PhysicsList(MRKDetectorConstruction*);
-   ~PhysicsList();
+    MRKPhysicsList(MRKDetectorConstruction*);
+   ~MRKPhysicsList();
 
     void ConstructProcess();
     void ConstructParticle();
@@ -59,7 +59,7 @@ class PhysicsList: public G4VModularPhysicsList
 
     void AddDecay();
     void AddStepMax();
-    StepMax* GetStepMaxProcess() {return stepMaxProcess;};
+    MRKStepMax* GetStepMaxProcess() {return stepMaxProcess;};
 
     void SetCuts();
     void SetCutForGamma(G4double);
@@ -79,10 +79,10 @@ class PhysicsList: public G4VModularPhysicsList
     G4VPhysicsConstructor* raddecayList;
     G4String emName;
 
-    StepMax* stepMaxProcess;
+    MRKStepMax* stepMaxProcess;
 
     MRKDetectorConstruction* pDet;
-    PhysicsListMessenger* pMessenger;
+    MRKPhysicsListMessenger* pMessenger;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

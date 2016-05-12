@@ -32,7 +32,8 @@
 
 #include "MRKSteppingAction.hh"
 #include "G4SteppingManager.hh"
-#include "constants.hh"
+
+#include "../include/MRKConstants.hh"
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 

@@ -37,16 +37,16 @@
 #include "G4ParticleDefinition.hh"
 #include "G4Step.hh"
 
-class StepMaxMessenger;
+class MRKStepMaxMessenger;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class StepMax : public G4VDiscreteProcess
+class MRKStepMax : public G4VDiscreteProcess
 {
   public:
 
-     StepMax(const G4String& processName = "UserMaxStep");
-    ~StepMax();
+     MRKStepMax(const G4String& processName = "UserMaxStep");
+    ~MRKStepMax();
 
      G4bool IsApplicable(const G4ParticleDefinition&);
 
@@ -67,7 +67,7 @@ class StepMax : public G4VDiscreteProcess
 
      G4double MaxChargedStep;
      
-     StepMaxMessenger* pMess;
+     MRKStepMaxMessenger* pMess;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -35,14 +35,12 @@
 
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "G4ParticleDefinition.hh"
-#include "GeneratorMessenger.hh"
 #include "G4ThreeVector.hh"
 
-#include "cVector.hh"
 #include "globals.hh"
 #include "TFile.h"
 #include "TTree.h"
-#include <string>
+#include "TString.h"
 
 #include "MRKDetectorConstruction.hh"
 #include "G4ParticleGun.hh"
@@ -51,8 +49,9 @@
 #include <time.h>
 
 #include "MRKEvents.hh"
+#include "MRKGeneratorMessenger.hh"
+#include "MRKVector.hh"
 using namespace std;
-using std::string;
 
 
 class G4Event;
@@ -69,11 +68,11 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
   public:
     void GeneratePrimaries(G4Event*);
-    void loadInputFile(string inputFileName);
+    void loadInputFile(TString inputFileName);
     void createParticleSourceEventFile();
-    void loadRDKEventFile(string inputFileName);
-    void makeAndLoadRDKEventFile(string inputFileName);  //also loads flux map
-    void setFluxMapFileName(string inpFluxMapFileName){fluxMapFileName=inpFluxMapFileName;}
+    void loadRDKEventFile(TString inputFileName);
+    void makeAndLoadRDKEventFile(TString inputFileName);  //also loads flux map
+    void setFluxMapFileName(TString inpFluxMapFileName){fluxMapFileName=inpFluxMapFileName;}
 
     inline GeneratorMode getGeneratorMode(){return generatorMode;}
 
@@ -126,7 +125,7 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
 		G4double sourceToDetectorDistance;
 
-		cVector3D r,dirE,dirP,dirG;
+		MRKVector3D r,dirE,dirP,dirG;
 		G4ThreeVector pos,momDir;
 		int currentEventNumber;
 
@@ -156,7 +155,7 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
         G4ParticleGun* particleGun;
         G4GeneralParticleSource* particleSource;
         MRKDetectorConstruction* myDetector;
-        GeneratorMessenger* genMess;
+        MRKGeneratorMessenger* genMess;
         MRKEvents* theEvents;
 
         int eventStartClock;

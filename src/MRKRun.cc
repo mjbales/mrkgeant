@@ -32,9 +32,10 @@
 #include "G4Event.hh"
 #include "G4HCofThisEvent.hh"
 #include "G4SDManager.hh"
+
+#include "../include/MRKText.hh"
 #include "MRKDetectorConstruction.hh"
 
-#include "cMRKText.hh"
 
 MRKRun::MRKRun(MRKPrimaryGeneratorAction* generator)
 {

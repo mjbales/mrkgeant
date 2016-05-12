@@ -37,14 +37,12 @@
 #include "G4VUserDetectorConstruction.hh"
 #include "MRKGlobalField.hh"
 #include "MRKMaterials.hh"
-#include "mattphys.hh"
-
-#include "constants.hh"
-
 #include "G4Box.hh"
 #include "G4UserLimits.hh"
 #include "G4VisAttributes.hh"
 #include <vector>
+#include "MRKConstants.hh"
+#include "MRKPhys.hh"
 
 class G4Tubs;
 class G4LogicalVolume;

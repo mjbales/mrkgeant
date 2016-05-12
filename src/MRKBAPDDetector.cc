@@ -39,7 +39,11 @@
 #include "G4UnitsTable.hh"
 #include "G4GeometryTolerance.hh"
 #include "G4SDManager.hh"
-#include "mattphys.hh"
+#include <string>
+#include <fstream>
+#include "../include/MRKPhys.hh"
+
+using namespace std;
 
 using namespace CLHEP;
 
@@ -324,4 +328,47 @@ double MRKBAPDDetector::BAPDCollectionEfficiencyModel(double inpEnergy, double d
    // G4cout << inpEnergy << " " << depth << " " << outputEnergy << " " << G4endl;
 
     return outputEnergy;
+}
+
+TH1D* getSiO2Hist()
+{
+
+    string fileName="SiO2_Absorbtion.dat";
+
+	if(!FileExists(fileName))
+	{
+	    cout << fileName << " not found!" << endl;
+	   // typeAnythingToContinue("");
+        return NULL;
+	}
+    //SIO2 Absorbtion
+    TString tempString;
+    double temp,transCoeff;
+
+    double bottomOfHist=ABSORB_DATA_START-.5*ABSORB_DATA_SPACING;
+    double topOfHist=bottomOfHist+ABSORB_DATA_NUM*ABSORB_DATA_SPACING;
+
+    TH1D* sio2Hist = new TH1D("SiO2Hist","SiO2 Tranmission Hist for 100 nm",ABSORB_DATA_NUM,bottomOfHist,topOfHist);
+
+
+	ifstream sio2File;
+
+
+
+    sio2File.open(fileName.data());
+
+    //Skipping past first two lines of dat file
+    getNonCommentLine(sio2File,tempString);
+    getNonCommentLine(sio2File,tempString);
+
+
+    for(int i=0;i<ABSORB_DATA_NUM;i++)
+    {
+        sio2File >> temp >> transCoeff;
+        sio2Hist->SetBinContent(i+1,transCoeff);
+
+    }
+    sio2File.close();
+
+    return sio2Hist;
 }

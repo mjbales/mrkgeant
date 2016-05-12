@@ -32,11 +32,10 @@
 
 #include "MRKGlobalField.hh"
 
-#include "RDKSBDField.hh"
+#include "../include/MRKConstants.hh"
+#include "../include/MRKSBDField.hh"
 
-#include "constants.hh"
-
-RDKSBDField::RDKSBDField(G4LogicalVolume* lv,G4ThreeVector c,string fieldFileName,double inpPotential, G4ThreeVector inpFieldOffset) : MRKElementField(c,lv)
+MRKSBDField::MRKSBDField(G4LogicalVolume* lv,G4ThreeVector c,string fieldFileName,double inpPotential, G4ThreeVector inpFieldOffset) : MRKElementField(c,lv)
 {
     potential=inpPotential;
     G4cout << "Loading SBD E field:" << G4endl;
@@ -50,13 +49,13 @@ RDKSBDField::RDKSBDField(G4LogicalVolume* lv,G4ThreeVector c,string fieldFileNam
     this->lvolume->SetVisAttributes(G4VisAttributes::Invisible);
 }
 
-RDKSBDField::~RDKSBDField()
+MRKSBDField::~MRKSBDField()
 {
     eField.reset();
 }
 
 //Method that we need to get the B field in
-void RDKSBDField::addFieldValue(const G4double point[4],
+void MRKSBDField::addFieldValue(const G4double point[4],
                                          G4double field[6])
 {
 

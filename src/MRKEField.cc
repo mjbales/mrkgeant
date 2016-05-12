@@ -34,7 +34,7 @@
 
 #include "MRKEField.hh"
 
-#include "constants.hh"
+#include "../include/MRKConstants.hh"
 
 MRKEField::MRKEField(G4LogicalVolume* lv,G4ThreeVector centerPos,string fieldFileName,string inpHistName,double scalingValue,int inpSpaceDim, int inpFieldDim,double angleX, double angleY, double angleZ,G4ThreeVector inpFieldOffset) : MRKElementField(centerPos,lv)
 {

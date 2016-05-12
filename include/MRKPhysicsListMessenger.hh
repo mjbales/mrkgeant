@@ -35,25 +35,25 @@
 #include "G4UImessenger.hh"
 #include "globals.hh"
 
-class PhysicsList;
+class MRKPhysicsList;
 class G4UIdirectory;
 class G4UIcmdWithADoubleAndUnit;
 class G4UIcmdWithAString;
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-class PhysicsListMessenger: public G4UImessenger
+class MRKPhysicsListMessenger: public G4UImessenger
 {
   public:
   
-    PhysicsListMessenger(PhysicsList* );
-   ~PhysicsListMessenger();
+    MRKPhysicsListMessenger(MRKPhysicsList* );
+   ~MRKPhysicsListMessenger();
     
     void SetNewValue(G4UIcommand*, G4String);
     
   private:
   
-    PhysicsList*               pPhysicsList;
+    MRKPhysicsList*               pPhysicsList;
     
     G4UIdirectory*             physDir;
     G4UIcmdWithADoubleAndUnit* gammaCutCmd;

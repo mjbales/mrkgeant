@@ -71,8 +71,9 @@
 #include "G4ios.hh"
 
 #include "math.h"
-#include "cMRKText.hh"
-#include "constants.hh"
+
+#include "../include/MRKConstants.hh"
+#include "../include/MRKText.hh"
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 //Everything defaults to RDK2 model settings
 

@@ -40,8 +40,8 @@
 #include "MRKGlobalField.hh"
 #include "globals.hh"
 
-#include "ROOTField.hh"
 #include "TVector3.h"
+#include "MRKROOTField.hh"
 
 
 
@@ -73,7 +73,7 @@ class MRKEField : public MRKElementField
 
   private:
 
-    ROOTField eField;
+    MRKROOTField eField;
 
     TVector3 posIn,vecOut;
     TVector3 fieldOffset;

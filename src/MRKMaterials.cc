@@ -27,7 +27,8 @@
 //
 
 #include "MRKMaterials.hh"
-#include "cMRKText.hh"
+
+#include "../include/MRKText.hh"
 
 
 MRKMaterials::MRKMaterials()

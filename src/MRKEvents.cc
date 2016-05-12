@@ -1,9 +1,31 @@
-#include "../include/MRKEvents.hh"
+#include "MRKEvents.hh"
+
+//Standard Libraries
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <math.h>
+#include <sys/stat.h>
+#include <vector>
+
+//MJB libraries
+#include "TFile.h"
+#include "TTree.h"
+#include "TRandom3.h"
+#include "TH1.h"
+#include "TVectorT.h"
+#include "TVector3.h"
+
+#include "../include/MRKConstants.hh"
+#include "../include/MRKPhys.hh"
+#include "../include/MRKText.hh"
+
+using namespace std;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 MRKEvents::MRKEvents(void)
 {
-
+	gE=0;
     eventFile=NULL;
     eventTree=NULL;
     numEvents=0;
@@ -16,6 +38,12 @@ MRKEvents::MRKEvents(void)
     eEMin=0;
     gEMin=0;
     gEMax=0;
+    zStart=EVENTGEN_Z_MIN;
+    zEnd=EVENTGEN_Z_MAX;
+    littleb=0;
+    eE=ePhi=eCTheta=nPhi=nCTheta=gCTheta=gSTheta=eSTheta=nSTheta=cos_en=cos_eg=cos_ng=pP=pCTheta=pSTheta=eP=nE=pCPhi=pSPhi=Prob=pdn=pde=pdg=edg=edn=ndg=gE=gPhi=0.;
+    pKE=mxp0=eg0=mzp0=z0=ee0=mxg0=mze0=mxe0=myg0=ep0=fraction=x0=y0=ranProb=mye0=pPhi=mzg0=avg_integrand=myp0=0.;
+    eventStart=eventEnd=0;
 }
 
 
@@ -45,7 +73,7 @@ void MRKEvents::reset()  //Doesn't delete ranGen but destructor does
 	numEvents=0;
 }
 
-int MRKEvents::loadEvents(string fileName,string treeName)
+int MRKEvents::loadEvents(TString fileName,TString treeName)
 {
     if(eventFile!=NULL){
         eventFile->Close();
@@ -57,7 +85,7 @@ int MRKEvents::loadEvents(string fileName,string treeName)
         ranGen=new TRandom3();
     }
 	eventFileName = fileName;
-	eventFile = new TFile(fileName.data(),"READ");
+	eventFile = new TFile(fileName,"READ");
 
 	//Check to see if file was succesfully opened
 	if(eventFile->IsZombie()){
@@ -66,7 +94,7 @@ int MRKEvents::loadEvents(string fileName,string treeName)
     }
 
     //Get Tree from file
-	eventTree=(TTree*) eventFile->Get(treeName.data());
+	eventTree=(TTree*) eventFile->Get(treeName);
 
 	TBranch* n = eventTree->GetBranch("n");
 
@@ -107,26 +135,30 @@ int MRKEvents::loadEvents(string fileName,string treeName)
 }
 
 
-void MRKEvents::getPosVel(ParType parType,cVector3D& rOut,cVector3D& vOut,int eventPos)
+void MRKEvents::getPosVel(ParType parType,MRKVector3D& rOut,MRKVector3D& vOut,int eventPos)
 {
     eventTree->GetEntry(eventPos);
 
     getPosVel(parType, rOut, vOut);
 }
 
-void MRKEvents::getPosVel(ParType parType,cVector3D& rOut,cVector3D& vOut)
+void MRKEvents::getPosVel(ParType parType,MRKVector3D& rOut,MRKVector3D& vOut)
 {
     //Presumes event is currently loaded in the variables.
     if(parType==PROTON){
         p0.setVal(mxp0,myp0,mzp0);
         p0=convertKEToMomentum(ep0,PMASSE)*p0;
-        vOut=convertMomentumToVelocity(p0,PMASSE);
+        TVector3 p03(p0.x,p0.y,p0.z);
+        TVector3 vOut3=convertMomentumToVelocity(p03,PMASSE);
+        vOut.setVal(vOut3.X(),vOut3.Y(),vOut3.Z());
     }
 
     else if(parType==ELECTRON){
         p0.setVal(mxe0,mye0,mze0);
         p0=convertKEToMomentum(ee0,EMASSE)*p0;
-        vOut=convertMomentumToVelocity(p0,EMASSE);
+        TVector3 p03(p0.x,p0.y,p0.z);
+        TVector3 vOut3=convertMomentumToVelocity(p03,EMASSE);
+        vOut.setVal(vOut3.X(),vOut3.Y(),vOut3.Z());
 
     }
 
@@ -138,14 +170,14 @@ void MRKEvents::getPosVel(ParType parType,cVector3D& rOut,cVector3D& vOut)
     rOut.setVal(x0*.01,y0*.01,z0*.01); //For cm to meter conversion
 }
 
-void MRKEvents::getPosDirKE(ParType parType, cVector3D& rOut, cVector3D& dOut,double& keOut,int eventPos)
+void MRKEvents::getPosDirKE(ParType parType, MRKVector3D& rOut, MRKVector3D& dOut,double& keOut,int eventPos)
 {
     eventTree->GetEntry(eventPos);
 
    getPosDirKE( parType, rOut,  dOut, keOut);
 }
 
-void MRKEvents::getPosDirKE(ParType parType, cVector3D& rOut, cVector3D& dOut,double& keOut)
+void MRKEvents::getPosDirKE(ParType parType, MRKVector3D& rOut, MRKVector3D& dOut,double& keOut)
 {
 
     if(parType==PROTON){
@@ -197,10 +229,10 @@ int MRKEvents::makeDerivedEvents(){
 	double momentum,velocity;
 
 
-	string derivedFileName=addBeforeExtension(eventFileName,"_Derv"); //Adds Derv suffix before extention (typically .root)
+	TString derivedFileName=addBeforeExtension(eventFileName,"_Derv"); //Adds Derv suffix before extention (typically .root)
 
     //Open new file
-	TFile derivedFile(derivedFileName.data(),"NEW");
+	TFile derivedFile(derivedFileName,"NEW");
 	derivedFile.cd();
 
 	//Confirm file opened
@@ -291,7 +323,7 @@ int MRKEvents::makeDerivedEvents(){
      //Generate Random parameters
     if(fourBody)
     {
-        gE=(gEMax-gEMin)*ranGen->Rndm()+gEMin;
+        gE=(gEMax-gEMin)*ranGen->Rndm()+gEMin;  //Photon Energy
         if(useEarlyRejector && ranProb>normConstant/getFitNormConstant(FOURBODY,gE))//We're going to check ahead and see if this gamma energy will be obviously rejected
         {
             return false;
@@ -303,61 +335,62 @@ int MRKEvents::makeDerivedEvents(){
     }
 
 
-    eE=(ETEMAX-EMASSE-eEMin)*ranGen->Rndm()+EMASSE+eEMin; //eKE>inpEEMin
-    ePhi=ranGen->Rndm()*PI*2.-PI;
+    eE=(ETEMAX-EMASSE-eEMin)*ranGen->Rndm()+EMASSE+eEMin; //Electron Energy
+    ePhi=ranGen->Rndm()*PI*2.-PI;  //Electron phi angle
 
-    eCTheta=ranGen->Rndm()*2.-1.;
+    eCTheta=ranGen->Rndm()*2.-1.;  //Electron cos theta angle
 
-    nPhi=ranGen->Rndm()*PI*2.-PI;
+    nPhi=ranGen->Rndm()*PI*2.-PI; //Neutrino phi angle
 
-    nCTheta=ranGen->Rndm()*2.-1.;
+    nCTheta=ranGen->Rndm()*2.-1.;  //Neutrino cos theta angle
 
 
-    eSTheta=sqrt(1-eCTheta*eCTheta);
-    nSTheta=sqrt(1-nCTheta*nCTheta);
+    eSTheta=sqrt(1-eCTheta*eCTheta);  //Electron sin theta
+    nSTheta=sqrt(1-nCTheta*nCTheta);  //Neutrino sin theta
 
     cos_en=eSTheta*nSTheta*cos(ePhi-nPhi)+eCTheta*nCTheta;
 
     //Generate parameters that relate to four body events alone
     if(fourBody)
     {
-        gPhi=ranGen->Rndm()*PI*2.-PI;
+        gPhi=ranGen->Rndm()*PI*2.-PI; //Photon phi angle
 //        thrown++;
-        gCTheta=ranGen->Rndm()*2.-1.;
+        gCTheta=ranGen->Rndm()*2.-1.;  //Photon cos theta angle
 //        thrown++;
-        gSTheta=sqrt(1-gCTheta*gCTheta);
-        cos_eg=eSTheta*gSTheta*cos(ePhi-gPhi)+eCTheta*gCTheta;
-        cos_ng=nSTheta*gSTheta*cos(nPhi-gPhi)+nCTheta*gCTheta;
+        gSTheta=sqrt(1-gCTheta*gCTheta); //Photon sin theta angle
+        cos_eg=eSTheta*gSTheta*cos(ePhi-gPhi)+eCTheta*gCTheta; //cos opening angle between electron and photon
+        cos_ng=nSTheta*gSTheta*cos(nPhi-gPhi)+nCTheta*gCTheta; //cos opening angle between neutrino and photon
     }
     else
     {
         gE=gPhi=gCTheta=gSTheta=cos_eg=cos_ng=0;
     }
 
-    //Calculate remaining paramaters
-    eP=sqrt(SQ(eE)-SQ(EMASSE));
-    nE=(SQ(NMASSE)-SQ(PMASSE)+SQ(EMASSE)-2.*NMASSE*(eE+gE)+2.*eE*gE-2.*eP*gE*cos_eg)/2./(NMASSE-(eE+gE)+gE*cos_ng+eP*cos_en);
+    //Calculate remaining parameters
+    eP=sqrt(eE*eE-EMASSE*EMASSE); //Proton energy
+    nE=NMASSE-PMASSE-eE-gE; //Changed 151207 to be leading order in recoil
+//    nE=(SQ(NMASSE)-SQ(PMASSE)+SQ(EMASSE)-2.*NMASSE*(eE+gE)+2.*eE*gE-2.*eP*gE*cos_eg)/2./(NMASSE-(eE+gE)+gE*cos_ng+eP*cos_en); //Neutrino energy
 
     //If it is not kinematically allowed do not calculate any addition parameters
-    //If this occurs this funciton will typically be called again until the neutrino energy is positive
+    //If this occurs this function will typically be called again until the neutrino energy is positive
     if(nE<=0)
         return false;
 
-    pKE=NMASSE-PMASSE-eE-gE-nE;
-    pP=sqrt(SQ(pKE)+2.*pKE*PMASSE);
-    pCTheta=-(eP*eCTheta+nE*nCTheta+gE*gCTheta)/pP;
-	pSTheta=sqrt(1.-SQ(pCTheta));
-    pCPhi=-(eP*eSTheta*cos(ePhi)+nE*nSTheta*cos(nPhi)+gE*gSTheta*cos(gPhi))/pP/pSTheta;
-	pSPhi=-(eP*eSTheta*sin(ePhi)+nE*nSTheta*sin(nPhi)+gE*gSTheta*sin(gPhi))/pP/pSTheta;
+    pKE=NMASSE-PMASSE-eE-gE-nE;  //proton kinetic energy
+    pP=sqrt(pKE*pKE+2.*pKE*PMASSE); //proton momentum
+    pCTheta=-(eP*eCTheta+nE*nCTheta+gE*gCTheta)/pP; //proton cos theta
+	pSTheta=sqrt(1.-pCTheta*pCTheta); //proton sin theta
+    pCPhi=-(eP*eSTheta*cos(ePhi)+nE*nSTheta*cos(nPhi)+gE*gSTheta*cos(gPhi))/pP/pSTheta; //proton cos phi
+	pSPhi=-(eP*eSTheta*sin(ePhi)+nE*nSTheta*sin(nPhi)+gE*gSTheta*sin(gPhi))/pP/pSTheta; //proton sin phi
 
     if(fourBody)
     {
-        pde=NMASSE*eE-(EMASSE*EMASSE)-nE*(eE-eP*cos_en) - gE*(eE-eP*cos_eg);
-        pdn=nE*(NMASSE-(eE-eP*cos_en)-gE*(1.-cos_ng));
-        pdg=gE*(NMASSE-(eE-eP*cos_eg)-nE*(1.-cos_ng));
-        edn=nE*(eE-eP*cos_en);
-        edg=gE*(eE-eP*cos_eg);
-        ndg=nE*gE*(1.-cos_ng);
+        pde=NMASSE*eE-(EMASSE*EMASSE)-nE*(eE-eP*cos_en) - gE*(eE-eP*cos_eg); //proton momentum dot e momentum
+        pdn=nE*(NMASSE-(eE-eP*cos_en)-gE*(1.-cos_ng)); //proton momentum dot neutrino momentum
+        pdg=gE*(NMASSE-(eE-eP*cos_eg)-nE*(1.-cos_ng)); //proton momentum dot photon momentum
+        edn=nE*(eE-eP*cos_en); //electron momentum dot neutrino momentum
+        edg=gE*(eE-eP*cos_eg); //electron momentum dot photon momentum
+        ndg=nE*gE*(1.-cos_ng); //neutrino momentum dot photon momentum
     }
     //No need for else as these dot products won't be used by JTW formula
 
@@ -477,10 +510,11 @@ double MRKEvents::gen4BMom()
 	return Prob;
 
 }
+
 void MRKEvents::genPos()
 {
     //Assumes fluxmap is already loaded
-    cVector2D mapPos;
+    MRKVector2D mapPos;
     double fluxVal;
     if(!fluxFileLoaded)
     {
@@ -498,12 +532,12 @@ void MRKEvents::genPos()
         fluxMap.linearInterp(mapPos,fluxVal);
         //Throw a random number to determine if event occured there
         //repeat process if random is higher than the probability
-        if(ranGen->Rndm()<=fluxVal)
+        if(ranGen->Rndm() <= fluxVal)
             break;
     }
 
     //Z position is randomly determined in set range independently
-    z0=ranGen->Rndm()*(EVENTGEN_Z_MAX-EVENTGEN_Z_MIN)+EVENTGEN_Z_MIN;
+    z0=ranGen->Rndm()*(zEnd-zStart)+zStart;
 
     //Once z position is known, the x and y position are expanded by appropriate
     //divergence angle
@@ -511,9 +545,13 @@ void MRKEvents::genPos()
 	y0=mapPos.z*(1-(FLUXMAP_POS_Z-z0)*sin(BEAM_DIVERGENCE));
 }
 
-void MRKEvents::loadFluxFileMap(string fluxFileName)
+void MRKEvents::loadFluxFileMap(TString fluxFileName)
 {
-    if(fluxMap.loadField(fluxFileName.data(),1))
+	if(ranGen==NULL)
+	{
+		ranGen=new TRandom3();
+	}
+    if(fluxMap.loadField(fluxFileName,1))
     {
         cout << "Error finding flux map: " << fluxFileName << endl;
         return;
@@ -522,9 +560,9 @@ void MRKEvents::loadFluxFileMap(string fluxFileName)
     fluxFileLoaded=true;
 }
 
-int MRKEvents::makeEventFile(string fileName, string fluxFileName, int inpNumEvents,EveType evetype, double inpLittleb, bool inpHomogeneous,double inpGEMin, double inpGEMax, bool inpFermiOn)
+int MRKEvents::makeEventFile(TString fileName, TString fluxFileName, int inpNumEvents,EveType evetype, double inpLittleb, bool inpHomogeneous,double inpGEMin, double inpGEMax, bool inpFermiOn,double inpZStart, double inpZEnd)
 {
-    if(ranGen==NULL)
+     if(ranGen==NULL)
     {
         ranGen=new TRandom3();
     }
@@ -537,23 +575,28 @@ int MRKEvents::makeEventFile(string fileName, string fluxFileName, int inpNumEve
         cout << "Unrecognized evetype. Exiting." << endl;
         return -1;
     }
+
+
     fermiOn=inpFermiOn;
     littleb=inpLittleb;
+    zStart=inpZStart;
+    zEnd=inpZEnd;
     homogeneous=inpHomogeneous;
     gEMin=inpGEMin;
     gEMax=inpGEMax;
-
+    if(normConstant <= 0)
+    	setGoodNormConstant(evetype,littleb,gEMin);
     return makeEventFile(fileName,fluxFileName,inpNumEvents);
 
 }
 
-void MRKEvents::loadEventSettingsAndMakeFile(string eventSettingsFilePath, int eventSet,string fileName, string fluxFileName,int inpNumEvents)
+void MRKEvents::loadEventSettingsAndMakeFile(TString eventSettingsFilePath, int eventSet,TString fileName, TString fluxFileName,int inpNumEvents)
 {
     loadEventSettings( eventSettingsFilePath,  eventSet);
     makeEventFile(fileName,fluxFileName,inpNumEvents);
 }
 
-int MRKEvents::makeEventFile(string fileName, string fluxFileName,int inpNumEvents)
+int MRKEvents::makeEventFile(TString fileName, TString fluxFileName,int inpNumEvents)
 {
     if(ranGen==NULL)
     {
@@ -568,7 +611,7 @@ int MRKEvents::makeEventFile(string fileName, string fluxFileName,int inpNumEven
 
     cout << "Making " << numEvents << " events in " << fileName << "." << endl;
 
-    eventFile=new TFile(fileName.data(),"RECREATE");
+    eventFile=new TFile(fileName,"RECREATE");
     eventFileName=fileName;
     int n;
 	if(eventFile->IsZombie()) {
@@ -637,7 +680,7 @@ int MRKEvents::makeEventFile(string fileName, string fluxFileName,int inpNumEven
 
 	    eventTree->Fill();
 
-	    if((n+1) % 1000 == 0)
+	    if((n+1) % 100000 == 0)
 	    {
             cout << "Events created: " << n+1 << endl;//" Thrown: " << thrown << endl;
 	    }
@@ -654,12 +697,14 @@ int MRKEvents::makeEventFile(string fileName, string fluxFileName,int inpNumEven
 
 
 
-int MRKEvents::makeEventFiles(string firstFileName, string fluxFileName, int numFiles,int numEventsPer,EveType evetype, double littleb, bool homogeneous,double gEmin,double gEmax,bool inpFermiOn)
+int MRKEvents::makeEventFiles(TString firstFileName, TString fluxFileName, int numFiles,int numEventsPer,EveType evetype, double littleb, bool homogeneous,double gEmin,double gEmax,bool inpFermiOn, double inpZStart, double inpZEnd)
 {
     fermiOn=inpFermiOn;
+    zStart=inpZStart;
+    zEnd=inpZEnd;
     if(ranGen==NULL)
     {
-        ranGen=new TRandom3();
+        ranGen=new TRandom3(5211447);
     }
     if(evetype == FOURBODY)
         fourBody=true;
@@ -670,7 +715,7 @@ int MRKEvents::makeEventFiles(string firstFileName, string fluxFileName, int num
         cout << "Unrecognized evetype. Exiting." << endl;
         return -1;
     }
-    string currentFileName=firstFileName;
+    TString currentFileName=firstFileName;
     setGoodNormConstant(evetype,littleb,gEmin);
     for(int i=0; i < numFiles; i++)
     {
@@ -691,12 +736,12 @@ int MRKEvents::makeDecayWidthCutMultiple(double littlebStart, double littlebIncr
     }
     vector<Int_t> dwcut;
     dwcut.resize(littlebNum);
-    string lilbFileName=addBeforeExtension(eventFileName,"_lilb2");
+    TString lilbFileName=addBeforeExtension(eventFileName,"_lilb2");
     cout << "Making: " << lilbFileName << endl;
     //1 = cut 0 = keep
-    string branchName,leafName;
+    TString branchName,leafName;
 
-    TFile lilbFile(lilbFileName.data(),"recreate");
+    TFile lilbFile(lilbFileName,"recreate");
 
     TTree* lilbTree=new TTree("lilbTree","lilb tree");
 
@@ -706,10 +751,10 @@ int MRKEvents::makeDecayWidthCutMultiple(double littlebStart, double littlebIncr
 
         leafName = branchName+"/I";
 
-        lilbTree->Branch(branchName.data(),&dwcut[j],leafName.data());
+        lilbTree->Branch(branchName,&dwcut[j],leafName);
     }
 
-    cVector3D ePVec,pPVec,nPVec;
+    MRKVector3D ePVec,pPVec,nPVec;
 
     Int_t nentries = 1000000;
 
@@ -786,6 +831,7 @@ void MRKEvents::setGoodNormConstant(EveType evetype,double littleb, double inpGE
 
 double MRKEvents::calcNormConstant(EveType evetype,double littleb, double inpGEMin)
 {
+	(void) littleb; //Unused for now...
     fourBody= (evetype == FOURBODY);
 
     gEMin=inpGEMin;
@@ -824,13 +870,13 @@ double MRKEvents::calcNormConstant(EveType evetype,double littleb, double inpGEM
     return normConstant;
 }
 
-void MRKEvents::runEventGen(string runFileName)
+void MRKEvents::runEventGen(TString runFileName)
 {
     ifstream runFile;
 
-    runFile.open(runFileName.data());
+    runFile.open(runFileName);
 
-    string fluxFileName, firstFileName;
+    TString fluxFileName, firstFileName;
     int numFiles,numEvents;
     EveType evetype;
 
@@ -864,12 +910,12 @@ void MRKEvents::runEventGen(string runFileName)
     runFile >> gEMax;
     runFile.close();
 
-    string eveString;
-    string homoString="";
+    TString eveString;
+    TString homoString="";
     if(fourBody)
     {
         evetype=FOURBODY;
-        eveString = "Four Body Neutron Decays in the range of " +double2str(gEMin)+" keV to "+double2str(gEMax)+" keV";
+        eveString = "Four Body Neutron Decays in the range of " +d2str(gEMin)+" keV to "+d2str(gEMax)+" keV";
     }
     else
     {
@@ -914,7 +960,7 @@ void MRKEvents::generateEvent()
     genPos();
 }
 
-void MRKEvents::loadEventSettings(string eventSettingsFilePath, int eventSet)
+void MRKEvents::loadEventSettings(TString eventSettingsFilePath, int eventSet)
 {
     if(ranGen != NULL)
         delete ranGen;
@@ -923,15 +969,15 @@ void MRKEvents::loadEventSettings(string eventSettingsFilePath, int eventSet)
         cout << "Event Set must be greater than or equal to 0" << endl;
         return;
     }
-    TFile ranGenFile(eventSettingsFilePath.data());
+    TFile ranGenFile(eventSettingsFilePath);
     TVectorD* fourBodyVector=(TVectorD*) ranGenFile.Get("fourBody");
     TVectorD* homogeneousEventsVector=(TVectorD*) ranGenFile.Get("homogeneousEvents");
     TVectorD* littlebVector=(TVectorD*) ranGenFile.Get("littleb");
     TVectorD* normalizationConstantVector=(TVectorD*) ranGenFile.Get("normalizationConstant");
     TVectorD* minimumGammaEnergyVector=(TVectorD*) ranGenFile.Get("minimumGammaEnergy");
     TVectorD* maximumGammaEnergyVector=(TVectorD*) ranGenFile.Get("maximumGammaEnergy");
-    string ranGenName="ranGen"+int2str(eventSet);
-    ranGen=(TRandom3*) ranGenFile.Get(ranGenName.data());
+    TString ranGenName="ranGen"+int2str(eventSet);
+    ranGen=(TRandom3*) ranGenFile.Get(ranGenName);
     ranGenFile.Close();
 
     fourBody=(*fourBodyVector)[0];
@@ -1039,10 +1085,11 @@ double MRKEvents::calcFourBodyRate(double inpGEMin,double inpGEMax,double inpEEM
 //	return tau;
 //}
 
-TH1D* calcBRHist(int numPerBin,int numBins,double gEStart,double gEEnd, double inpEEMin, bool inpFermiOn)
+TH1D* calcBRHist(int numPerBin,int numBins,double gEStart,double gEEnd, double inpEEMin, bool inpFermiOn, bool cumulative)
 {
 
     double gEMin,gEMax,increment;
+
 
     TH1D* brHist=new TH1D("br_hist","Branching Ratio Histogram",numBins,gEStart,gEEnd);
     brHist->GetXaxis()->SetTitle("Gamma Energy (keV)");
@@ -1051,15 +1098,19 @@ TH1D* calcBRHist(int numPerBin,int numBins,double gEStart,double gEEnd, double i
 
     MRKEvents theEvents;
 
-
+    increment=(gEEnd-gEStart)/((double) numBins);
     for(int i=0;i<numBins;i++)
     {
-        increment=(gEEnd-gEStart)/((double) numBins);
+
         gEMin=gEStart+i*increment;
         gEMax=gEStart+(i+1)*increment;
+        if(cumulative)
+        {
+            gEMax=gEEnd;
+        }
 
         cout << "Calculating BR for " << gEMin <<" keV to "  << gEMax << " keV with electron <" << inpEEMin << " keV" << endl;
-        brHist->SetBinContent(i,theEvents.calcBR(gEMin,gEMax,inpEEMin,numPerBin,inpFermiOn));
+        brHist->SetBinContent(i,theEvents.calcBR(gEMin,gEMax,inpEEMin,numPerBin,inpFermiOn,880.0));
     }
 
     return brHist;

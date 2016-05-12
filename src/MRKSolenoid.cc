@@ -30,11 +30,11 @@
 
 #include "G4GeometryManager.hh"
 
+#include "../include/MRKSolenoid.hh"
 #include "MRKGlobalField.hh"
 
-#include "RDKSolenoid.hh"
 
-RDKSolenoid::RDKSolenoid(G4LogicalVolume* lv,G4ThreeVector c,string fieldFilePath,double fieldScale,G4ThreeVector inpFieldOffset) : MRKElementField(c,lv)
+MRKSolenoid::MRKSolenoid(G4LogicalVolume* lv,G4ThreeVector c,string fieldFilePath,double fieldScale,G4ThreeVector inpFieldOffset) : MRKElementField(c,lv)
 {
 
     G4cout << "Loading B field:" << G4endl;
@@ -47,13 +47,13 @@ RDKSolenoid::RDKSolenoid(G4LogicalVolume* lv,G4ThreeVector c,string fieldFilePat
 
 }
 
-RDKSolenoid::~RDKSolenoid()
+MRKSolenoid::~MRKSolenoid()
 {
     bField.reset();
 }
 
 //Method that we need to get the B field in
-void RDKSolenoid::addFieldValue(const G4double point[4],
+void MRKSolenoid::addFieldValue(const G4double point[4],
                                          G4double field[6])
 {
 
