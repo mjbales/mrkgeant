@@ -82,7 +82,14 @@ MRKDetectorConstruction::MRKDetectorConstruction()
 {
     detectorMessenger = new MRKDetectorMessenger(this);  //Sets up Geant4 commands for this class
 
+    bendToMagnetZero = 42.4*cm;
 
+    logicWorld=NULL;
+    logicSBDDetectionVolume=NULL;
+    numBGOsUsed=12;
+    physiWorld=NULL;
+    solidWorld=NULL;
+    materials=NULL;
 
     // ensure the global field is initialized
     theGlobalField=MRKGlobalField::getObject();

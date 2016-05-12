@@ -368,8 +368,7 @@ int MRKEvents::makeDerivedEvents(){
 
     //Calculate remaining parameters
     eP=sqrt(eE*eE-EMASSE*EMASSE); //Proton energy
-    nE=NMASSE-PMASSE-eE-gE; //Changed 151207 to be leading order in recoil
-//    nE=(SQ(NMASSE)-SQ(PMASSE)+SQ(EMASSE)-2.*NMASSE*(eE+gE)+2.*eE*gE-2.*eP*gE*cos_eg)/2./(NMASSE-(eE+gE)+gE*cos_ng+eP*cos_en); //Neutrino energy
+    nE=(NMASSE*NMASSE-PMASSE*PMASSE+(EMASSE*EMASSE)-2.*NMASSE*(eE+gE)+2.*eE*gE-2.*eP*gE*cos_eg)/2./(NMASSE-(eE+gE)+gE*cos_ng+eP*cos_en); //Neutrino energy
 
     //If it is not kinematically allowed do not calculate any addition parameters
     //If this occurs this function will typically be called again until the neutrino energy is positive
