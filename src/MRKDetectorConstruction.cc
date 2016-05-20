@@ -136,7 +136,7 @@ MRKDetectorConstruction::MRKDetectorConstruction()
     AlLengthContractionFactor=.9963;
     SiDeadLayerLength=22*nm;
     gammaDetOffset=G4ThreeVector(0,0,0);
-    sbdDetectorBendOffset=G4ThreeVector(0,0,-1.9*mm);
+    sbdDetectorBendOffset=G4ThreeVector(0,0,-1.9*mm); //Due to thermal contraction of SBD away from bend
 
 
 
@@ -199,7 +199,6 @@ G4VPhysicalVolume* MRKDetectorConstruction::Construct()
 
 void MRKDetectorConstruction::defineDistancesAndRotationsRDK2()
 {
-    bendToMagnetZero = 42.4*cm;
     for (int i = 0;i< 3;i++)
     {
         rdk2RotationMatrices[i]=new G4RotationMatrix();
@@ -207,7 +206,7 @@ void MRKDetectorConstruction::defineDistancesAndRotationsRDK2()
     rdk2RotationMatrices[1]->rotateY(-BEND_ANGLE*deg);
     rdk2RotationMatrices[2]->rotateY(-WELD_ANGLE*deg);
 
-    sbdDetectorOffset=sbdDetectorBendOffset.rotateY(WELD_ANGLE*deg);
+    sbdDetectorOffset=sbdDetectorBendOffset.rotateY(BEND_ANGLE*deg);
     G4cout << "SBD offset: " << sbdDetectorOffset << endl;
 
     for (int i = 0;i< 3;i++)
@@ -1470,7 +1469,7 @@ G4LogicalVolume* MRKDetectorConstruction::constructRDK2SBD1mm5Silicon()
     }
 
 
-    G4ThreeVector position=G4ThreeVector(-4.60070201336639*cm,0*cm,-27.4927111428503*cm)+sbdDetectorOffset+G4ThreeVector(-0.1650476059*shrink*.5,0,-0.9862856015*shrink*.5);
+    G4ThreeVector position=G4ThreeVector(-4.60070201336639*cm,0*cm,-27.4927111428503*cm)+sbdDetectorOffset+G4ThreeVector(-SIN_BEND*shrink*.5,0,-COS_BEND*shrink*.5);
 	G4Tubs* solidSBD1mm5Silicon =  new G4Tubs("solidSBD1mm5Silicon",0*cm,1.382*cm,0.0749999999999993*cm - 0.5*shrink,0., twopi);
 	G4LogicalVolume* logicSBD1mm5Silicon = new G4LogicalVolume(solidSBD1mm5Silicon,materials->GetMaterial("G4_Si"),"logicSBD1mm5Silicon",0,0,0);
 	new G4PVPlacement(rdk2RotationMatrices[1], position,logicSBD1mm5Silicon,"physiSBD1mm5Silicon",logicWorld,false,0);
