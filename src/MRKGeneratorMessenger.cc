@@ -79,6 +79,11 @@ MRKGeneratorMessenger::MRKGeneratorMessenger(MRKPrimaryGeneratorAction* myGen)
     useManualEnergyCmd->SetParameterName("bool",false);
     useManualEnergyCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
 
+    useRDKIIQuickStopsCmd= new G4UIcmdWithABool("/MRK/useRDKIIQuickStops",this);
+    useRDKIIQuickStopsCmd->SetGuidance("Sets whether to skip events based on RDKII coincidence and detection");
+    useRDKIIQuickStopsCmd->SetParameterName("bool",false);
+    useRDKIIQuickStopsCmd->AvailableForStates(G4State_PreInit,G4State_Idle);
+
 
 
 }
@@ -100,6 +105,7 @@ MRKGeneratorMessenger::~MRKGeneratorMessenger()
     delete useManualDirCmd;
     delete useManualEnergyCmd;
     delete useManualPosCmd;
+    delete useRDKIIQuickStopsCmd;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
@@ -130,6 +136,8 @@ void MRKGeneratorMessenger::SetNewValue(G4UIcommand* command,G4String newValue)
         { myGenerator->setUseManualPos(useManualPosCmd->GetNewBoolValue(newValue));}
     else if( command == useManualEnergyCmd )
         { myGenerator->setUseManualEnergy(useManualEnergyCmd->GetNewBoolValue(newValue));}
+    else if( command == useRDKIIQuickStopsCmd )
+            { myGenerator->setUseRDKIIQuickStops(useRDKIIQuickStopsCmd->GetNewBoolValue(newValue));}
 
 
 }

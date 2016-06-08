@@ -41,7 +41,6 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     void setFluxMapFileName(TString inpFluxMapFileName){fluxMapFileName=inpFluxMapFileName;}
 
     inline GeneratorMode getGeneratorMode(){return generatorMode;}
-
     inline bool getVerbose() { return eventByEventVerbose; }
     inline G4ThreeVector getMomDir() { return momDir;}
     inline double getE0() { return e0;}
@@ -58,7 +57,7 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     inline bool getUseBAPDDetectors(){return myDetector->getUseBAPDDetectors();};
     inline bool getUseBGODetectors(){return myDetector->getUseBGODetectors();};
     inline int getNumBGOsUsed(){return myDetector->getNumBGOsUsed();}
-    inline double getEventStartClock(){return eventStartClock;}
+    inline int getEventStartClock(){return eventStartClock;}
     inline void setEventSetNumber(int inpEventSetNumber){eventSetNumber=inpEventSetNumber;}
     inline void printRandomNumbers(const int numRandomNumbers){for (int i = 0;i< numRandomNumbers;i++) G4cout << theEvents->getRandomNumber() << G4endl;}
     inline void setNumberOfEventsToMake( int inp){numberOfEventsToMake=inp;}
@@ -66,6 +65,7 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     inline void setUseManualPos(bool inp){useManualPos=inp;}
     inline void setUseManualDir(bool inp){useManualDir=inp;}
     inline void setUseManualEnergy(bool inp){useManualEnergy=inp;}
+    inline void setUseRDKIIQuickStops(bool inp){useRDKIIQuickStops=inp;}
 
     void writeEventsToFile(){inpFile->cd(); inpTree->Write("", TObject::kOverwrite); inpFile->Close();}
 
@@ -74,7 +74,7 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
         MRKDetectorConstruction* theDC;
         GeneratorMode generatorMode;
         bool eventByEventVerbose;
-        string inputFileName;
+        string generatorFileName;
         string fluxMapFileName;
 		bool fileLoaded;
 
@@ -90,6 +90,7 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 		bool useManualPos;
 		bool useManualDir;
 		bool useManualEnergy;
+		bool useRDKIIQuickStops; //Sets whether to simulate event based on RDKII parameters
 
 		Double_t vx0,vy0,vz0,x0,y0,z0,e0,mx0,my0,mz0,tofp;
 
@@ -97,11 +98,11 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
 		Double_t Theta,Phi,FloatEnergy;
 		Double_t sinTheta,cosTheta,cosPhi,sinPhi;
-		Int_t DecayNum;
+//		Int_t DecayNum;
 
-		Int_t hitcodee, hitcodep;
+//		Int_t hitcodee, hitcodep;
 		Int_t dwcutb[41];
-		Int_t dummy;
+//		Int_t dummy;
         G4ParticleTable* particleTable;
 		G4ParticleDefinition* electronParDef;
 		G4ParticleDefinition* protonParDef;

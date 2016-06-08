@@ -7,6 +7,7 @@ cField3D::cField3D()
 	rows=columns=layers=arraySize=0;
 	xStart=yStart=zStart=xSpacing=ySpacing=zSpacing=0.0;
 	fileLoaded = false;
+	xFinal=yFinal=zFinal=0.;
 }
 
 void cField3D::calcPositionLimits()
@@ -26,7 +27,6 @@ bool cField3D::isPositionOutsideField(MRKVector3D pos) // Assumes Y field is mir
             {
                 return false;
             }
-
         }
     }
     return true;
@@ -37,6 +37,10 @@ bool cField3D::isPositionOutsideField(MRKVector3D pos) // Assumes Y field is mir
 //cSField3D
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 cSField3D::cSField3D(){
+	xFloor=yFloor=zFloor=0.;
+	xMod=yMod=zMod=0.;
+	result=0.;
+	xF=yF=zF=0;
 }
 
 cSField3D::~cSField3D()
@@ -204,6 +208,14 @@ void cSField3D::linearInterp(const MRKVector3D& pos,double& valOut){
 cVField3D::cVField3D()
 {
     xF=yF=zF=-999999;
+    xMod=yMod=zMod=0.;
+    xModInv=yModInv=zModInv=0.;
+
+    xFloor=yFloor=zFloor=0.;
+	xResult=yResult=zResult=0.;
+	xF2=yF2=zF2=0;
+	mu2=0, mu3=0;
+
     symmetryInY=false;
 }
 
@@ -528,6 +540,8 @@ cField2D::cField2D()
 	rows=columns=arraySize=0;
 	rStart=zStart=rSpacing=zSpacing=0.0;
 	fileLoaded=false;
+	transposedField=false;
+	rFinal=zFinal=0.;
 }
 
 void cField2D::calcPositionLimits()
@@ -556,6 +570,14 @@ bool cField2D::isPositionOutsideField(double zPosition, double radius)
 
 
 cSField2D::cSField2D(){
+	result=0.;
+	zMod=rMod=0.;
+	rFloor=zFloor=0.;
+	rMod=zMod=0.;
+	rResult=zResult=0.;
+	rF=zF=0;
+	radius=0;
+
 }
 
 cSField2D::~cSField2D()
@@ -739,6 +761,11 @@ void cSField2D::linearInterp(const MRKVector2D& pos,double& valOut){
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 cVField2D::cVField2D()
 {
+    rFloor=zFloor=0.;
+	rMod=zMod=0.;
+	rResult=zResult=0.;
+    rF=zF=0;
+	radius=0.;
 }
 
 cVField2D::~cVField2D()

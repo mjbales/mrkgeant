@@ -113,7 +113,7 @@ G4bool MRKBAPDDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 
 //            G4cout << "Photon hit BAPD" << G4endl;
 
-            if(sio2Hist!=NULL)
+            if(sio2Hist!=nullptr)
             {
 
                 gKE=preStep->GetKineticEnergy()/keV;
@@ -339,7 +339,7 @@ TH1D* getSiO2Hist()
 	{
 	    cout << fileName << " not found!" << endl;
 	   // typeAnythingToContinue("");
-        return NULL;
+        return nullptr;
 	}
     //SIO2 Absorbtion
     TString tempString;

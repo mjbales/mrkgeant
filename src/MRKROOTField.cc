@@ -348,7 +348,7 @@ int MRKROOTField::loadFieldTXTFile(string fieldPath, double scalingValue)
 int MRKROOTField::loadFieldROOTFile(string filePath, string histName, double scalingValue)
 {
     TFile inpFile(filePath.data(),"READ");
-    TH1* histArray[3]={NULL,NULL,NULL};
+    TH1* histArray[3]={nullptr,nullptr,nullptr};
     string specificHistName;
     for (int i=0;i<dimOfField;i++)
     {

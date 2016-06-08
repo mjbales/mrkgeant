@@ -110,7 +110,7 @@ protected:
 	double xMod,yMod,zMod,xModInv,yModInv,zModInv;
 	double xResult,yResult,zResult;
     int xF,yF,zF,xF2,yF2,zF2;
-    double oldFieldBox[3][2][2][2];
+    double oldFieldBox[3][2][2][2]={{{{}}}};
     bool symmetryInY;  //is the y dimension mirrored
 
 	//Cubic Interpolation

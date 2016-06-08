@@ -43,6 +43,7 @@ class MRKGeneratorMessenger: public G4UImessenger
     G4UIcmdWithABool* useManualDirCmd;
     G4UIcmdWithABool* useManualPosCmd;
     G4UIcmdWithABool* useManualEnergyCmd;
+    G4UIcmdWithABool* useRDKIIQuickStopsCmd;
 
 
 };

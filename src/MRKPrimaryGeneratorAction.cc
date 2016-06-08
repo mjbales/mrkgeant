@@ -20,6 +20,8 @@ MRKPrimaryGeneratorAction::MRKPrimaryGeneratorAction(MRKDetectorConstruction* my
 
 	Theta=Phi=FloatEnergy=sinTheta=cosTheta=cosPhi=sinPhi=0.;
 
+	eventSetNumber=0;
+	eventStartClock=0;
 
     theDC=myDC;
     sourceToDetectorDistance=5.5*cm;
@@ -34,11 +36,12 @@ MRKPrimaryGeneratorAction::MRKPrimaryGeneratorAction(MRKDetectorConstruction* my
     useManualDir=false;
     useManualEnergy=false;
     useManualPos=false;
+    useRDKIIQuickStops=false;
 
 
-    inpFile=NULL;
-    inpTree=NULL;
-    theEvents=NULL;
+    inpFile=nullptr;
+    inpTree=nullptr;
+    theEvents=nullptr;
 
 
     currentEventNumber=0;
@@ -59,7 +62,7 @@ MRKPrimaryGeneratorAction::MRKPrimaryGeneratorAction(MRKDetectorConstruction* my
 
 
     genMess=new MRKGeneratorMessenger(this);
-    inputFileName="";
+    generatorFileName="";
     beamOffset=G4ThreeVector(0,0,0);
 
 }
@@ -77,13 +80,13 @@ MRKPrimaryGeneratorAction::~MRKPrimaryGeneratorAction()
     {
         inpFile->Close();
         delete inpFile;
-        inpFile=NULL;
+        inpFile=nullptr;
     }
 
-    if(theEvents!=NULL)
+    if(theEvents!=nullptr)
     {
         delete theEvents;
-        theEvents=NULL;
+        theEvents=nullptr;
     }
 
     G4cout << "COMPLETED!" << G4endl;
@@ -96,11 +99,11 @@ void MRKPrimaryGeneratorAction::loadInputFile(TString inputFileName)
 
     fileLoaded=false;
     currentEventNumber=0;
-    this->inputFileName=inputFileName;
-    if(inpFile!=NULL)
+    generatorFileName=inputFileName;
+    if(inpFile!=nullptr)
     {
         delete inpFile;
-        inpFile=NULL;
+        inpFile=nullptr;
 
     }
 
@@ -123,10 +126,10 @@ void MRKPrimaryGeneratorAction::loadInputFile(TString inputFileName)
 
 void MRKPrimaryGeneratorAction::createParticleSourceEventFile()
 {
-    if(inpFile != NULL)
+    if(inpFile != nullptr)
     {
         delete inpFile;
-        inpFile=NULL;
+        inpFile=nullptr;
         fileLoaded=false;
     }
     inpFile = new TFile("Events_GPS.root","RECREATE");
@@ -152,17 +155,17 @@ void MRKPrimaryGeneratorAction::createParticleSourceEventFile()
 
 void MRKPrimaryGeneratorAction::loadRDKEventFile(TString inputFileName)
 {
-    if(inpFile != NULL)
+    if(inpFile != nullptr)
     {
         delete inpFile;
-        inpFile=NULL;
+        inpFile=nullptr;
         fileLoaded=false;
     }
     inpFile = new TFile(inputFileName,"READ");
     if(inpFile->IsZombie()){
         cout << "Error in input file:"<< inputFileName << endl;
         delete inpFile;
-        inpFile=NULL;
+        inpFile=nullptr;
         return;
     }
     TString currentParticleName=particleGun->GetParticleDefinition()->GetParticleName();
@@ -209,10 +212,10 @@ void MRKPrimaryGeneratorAction::loadRDKEventFile(TString inputFileName)
 void MRKPrimaryGeneratorAction::makeAndLoadRDKEventFile(TString inputFileName)
 {
 
-    if(theEvents != NULL)
+    if(theEvents != nullptr)
     {
         delete theEvents;
-        theEvents=NULL;
+        theEvents=nullptr;
     }
     theEvents=new MRKEvents(); //initial seed does not matter, it will be changed soon from the file.
 //    theEvents->loadFluxFileMap(fluxMapFileName);
@@ -222,7 +225,7 @@ void MRKPrimaryGeneratorAction::makeAndLoadRDKEventFile(TString inputFileName)
     TString eventFileName=filePathFromFullPath(inputFileName)+"Events"+addBeforeExtension(fileNameFromFullPath(inputFileName),"_Set"+int2str(eventSetNumber))(13,999);
     theEvents->loadEventSettingsAndMakeFile(inputFileName,eventSetNumber,eventFileName,fluxMapFileName,numberOfEventsToMake);
     delete theEvents;
-    theEvents=NULL;
+    theEvents=nullptr;
     loadRDKEventFile(eventFileName);
 
 }
@@ -242,25 +245,28 @@ void MRKPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
                 inpTree->GetEntry(currentEventNumber);
 
                 //For a speed up, do not run events that are far outside detectable range 140516
-                if(beamOffset.mag() < 0.001 && (z0 > 0.33 || z0 < -.12))
+                if(useRDKIIQuickStops)
                 {
-                    e0=0;
-                }
+					if(beamOffset.mag() < 0.001 && (z0 > 0.33 || z0 < -.12))
+					{
+						e0=0;
+					}
 
-                //Kill wrong way electrons for speedup
-                if(particleGun->GetParticleDefinition()->GetParticleName() == "e-")
-                {
-                    if(mz0 >0.45)
-                    {
-                        e0=0;
-                    }
-                }
-                else
-                {
-                    if(mze0 >0.45)
-                    {
-                        e0=0;
-                    }
+					//Kill wrong way electrons for speedup
+					if(particleGun->GetParticleDefinition()->GetParticleName() == "e-")
+					{
+						if(mz0 >0.45)
+						{
+							e0=0;
+						}
+					}
+					else
+					{
+						if(mze0 >0.45)
+						{
+							e0=0;
+						}
+					}
                 }
 
 

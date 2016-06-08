@@ -1,3 +1,9 @@
 build/
 build*/
 /Debug/
+/Release/
+/Release4.10.02/
+/cmake_command.txt
+/Release4.9.6.p02/
+/.cproject
+/.project

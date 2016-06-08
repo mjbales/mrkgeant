@@ -85,6 +85,8 @@ MRKPhysicsList::MRKPhysicsList(MRKDetectorConstruction* p)
 
   raddecayList = new G4RadioactiveDecayPhysics();
 
+  stepMaxProcess=nullptr;
+
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

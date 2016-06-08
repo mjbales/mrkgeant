@@ -46,6 +46,7 @@ MRKRunAction::MRKRunAction(MRKPrimaryGeneratorAction* generator)
     theGenerator=generator;
     macroFileName="";
     useFluxTree=false;
+    startTime=endTime=0;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

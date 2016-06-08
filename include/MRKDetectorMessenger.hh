@@ -57,13 +57,9 @@ class MRKDetectorMessenger: public G4UImessenger
   private:
     MRKDetectorConstruction* myDetector;
 
-    G4UIdirectory*             F01detDir;
-
     G4UIdirectory*             fileDir;
 
     G4UIdirectory*             detDir;
-
-    G4UIcmdWithADoubleAndUnit* StepMaxCmd;
 
     G4UIcmdWithAString*  modelCmd;
     G4UIcmdWithABool* useSBDDetectorCmd;

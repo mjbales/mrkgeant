@@ -121,7 +121,7 @@ void MRKElementField::construct()
 
 G4VisAttributes* MRKElementField::getVisAttribute(G4String color)
 {
-   G4VisAttributes* p = NULL;
+   G4VisAttributes* p = nullptr;
    if(color.size() > 0 &&
      (isdigit(color.c_str()[0]) || color.c_str()[0] == '.')) {
         G4double red=0.0, green=0.0, blue=0.0;

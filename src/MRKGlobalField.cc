@@ -249,7 +249,7 @@ void MRKGlobalField::clear()
   first = true;
 
   numElementFields = 0;
-  elementFieldArray = NULL;
+  elementFieldArray = nullptr;
 }
 
 void MRKGlobalField::setupArray()

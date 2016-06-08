@@ -37,8 +37,8 @@ MRKMaterials::MRKMaterials()
 
   nistMan->SetVerbose(2);
 
-  El_C=El_Cl=El_H=El_O=NULL;
-  StretchedTeflonTape=StainlessSteel304=G10=EpoxyResin=CartridgeBrass=NULL;
+  El_C=El_Cl=El_H=El_O=nullptr;
+  StretchedTeflonTape=StainlessSteel304=G10=EpoxyResin=CartridgeBrass=nullptr;
 
 
 
@@ -48,34 +48,34 @@ MRKMaterials::MRKMaterials()
 MRKMaterials::~MRKMaterials()
 {
 
-    if(El_O != NULL)
+    if(El_O != nullptr)
         delete El_O;
-    if(El_C != NULL)
+    if(El_C != nullptr)
         delete El_C;
-    if(El_H != NULL)
+    if(El_H != nullptr)
         delete El_H;
-    if(El_Cl != NULL)
+    if(El_Cl != nullptr)
         delete El_Cl;
-    if(El_Nd != NULL)
+    if(El_Nd != nullptr)
         delete El_Nd;
-    if(El_Fe != NULL)
+    if(El_Fe != nullptr)
         delete El_Fe;
-    if(El_B != NULL)
+    if(El_B != nullptr)
         delete El_B;
 
 
 
-    if(EpoxyResin != NULL)
+    if(EpoxyResin != nullptr)
         delete EpoxyResin;
-    if(G10 != NULL)
+    if(G10 != nullptr)
         delete G10;
-    if(StainlessSteel304 != NULL)
+    if(StainlessSteel304 != nullptr)
         delete StainlessSteel304;
-    if(CartridgeBrass != NULL)
+    if(CartridgeBrass != nullptr)
         delete CartridgeBrass;
-    if(NeodymiumMagnet != NULL)
+    if(NeodymiumMagnet != nullptr)
         delete NeodymiumMagnet;
-    if(StretchedTeflonTape != NULL)
+    if(StretchedTeflonTape != nullptr)
         delete StretchedTeflonTape;
 
 

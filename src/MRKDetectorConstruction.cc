@@ -84,12 +84,12 @@ MRKDetectorConstruction::MRKDetectorConstruction()
 
     bendToMagnetZero = 42.4*cm;
 
-    logicWorld=NULL;
-    logicSBDDetectionVolume=NULL;
+    logicWorld=nullptr;
+    logicSBDDetectionVolume=nullptr;
     numBGOsUsed=12;
-    physiWorld=NULL;
-    solidWorld=NULL;
-    materials=NULL;
+    physiWorld=nullptr;
+    solidWorld=nullptr;
+    materials=nullptr;
 
     // ensure the global field is initialized
     theGlobalField=MRKGlobalField::getObject();
@@ -109,7 +109,7 @@ MRKDetectorConstruction::MRKDetectorConstruction()
     SBDCanOff=false;
 
     useSBDDetector=true;useBGODetectors=true;useBAPDDetectors=true;
-    BAPDStepLimit=NULL;
+    BAPDStepLimit=nullptr;
 
     VisStainlessSteel304=new G4VisAttributes(G4Colour(.6,.6,.8));
     VisG4_Al=new G4VisAttributes(G4Colour(.7,.7,.7));
@@ -148,9 +148,9 @@ MRKDetectorConstruction::~MRKDetectorConstruction()
 {
    // typeAnythingToContinue("Begin MRKDC Deconstructor");
     G4cout << "Beginning to delete Detector Construction Object...";
-    if(detectorMessenger != NULL)
+    if(detectorMessenger != nullptr)
         delete detectorMessenger;
-    if(BAPDStepLimit != NULL)
+    if(BAPDStepLimit != nullptr)
         delete BAPDStepLimit;
 
     G4cout << "COMPLETED!" << G4endl;

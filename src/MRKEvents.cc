@@ -26,11 +26,11 @@ using namespace std;
 MRKEvents::MRKEvents(void)
 {
 	gE=0;
-    eventFile=NULL;
-    eventTree=NULL;
+    eventFile=nullptr;
+    eventTree=nullptr;
     numEvents=0;
     homogeneous=0;
-    ranGen = NULL;
+    ranGen = nullptr;
     fourBody=false;
     normConstant=0;
     fluxFileLoaded=false;
@@ -50,7 +50,7 @@ MRKEvents::MRKEvents(void)
 MRKEvents::~MRKEvents(void)
 {
 	reset();
-	if(ranGen!=NULL)
+	if(ranGen!=nullptr)
 	{
         delete ranGen;
 	}
@@ -58,13 +58,13 @@ MRKEvents::~MRKEvents(void)
 
 void MRKEvents::reset()  //Doesn't delete ranGen but destructor does
 {
-    if(eventFile!=NULL)
+    if(eventFile!=nullptr)
     {
         eventFile->Close();
         delete eventFile;
     }
-    eventFile=NULL;
-	eventTree=NULL;
+    eventFile=nullptr;
+	eventTree=nullptr;
 	if(fluxFileLoaded)
 	{
         fluxFileLoaded=false;
@@ -75,12 +75,12 @@ void MRKEvents::reset()  //Doesn't delete ranGen but destructor does
 
 int MRKEvents::loadEvents(TString fileName,TString treeName)
 {
-    if(eventFile!=NULL){
+    if(eventFile!=nullptr){
         eventFile->Close();
         delete eventFile;
     }
 
-    if(ranGen==NULL)
+    if(ranGen==nullptr)
     {
         ranGen=new TRandom3();
     }
@@ -546,7 +546,7 @@ void MRKEvents::genPos()
 
 void MRKEvents::loadFluxFileMap(TString fluxFileName)
 {
-	if(ranGen==NULL)
+	if(ranGen==nullptr)
 	{
 		ranGen=new TRandom3();
 	}
@@ -561,7 +561,7 @@ void MRKEvents::loadFluxFileMap(TString fluxFileName)
 
 int MRKEvents::makeEventFile(TString fileName, TString fluxFileName, int inpNumEvents,EveType evetype, double inpLittleb, bool inpHomogeneous,double inpGEMin, double inpGEMax, bool inpFermiOn,double inpZStart, double inpZEnd)
 {
-     if(ranGen==NULL)
+     if(ranGen==nullptr)
     {
         ranGen=new TRandom3();
     }
@@ -597,7 +597,7 @@ void MRKEvents::loadEventSettingsAndMakeFile(TString eventSettingsFilePath, int 
 
 int MRKEvents::makeEventFile(TString fileName, TString fluxFileName,int inpNumEvents)
 {
-    if(ranGen==NULL)
+    if(ranGen==nullptr)
     {
         ranGen=new TRandom3();
     }
@@ -690,7 +690,7 @@ int MRKEvents::makeEventFile(TString fileName, TString fluxFileName,int inpNumEv
 	eventTree->Write("", TObject::kOverwrite);
 
     delete eventFile;
-    eventFile=NULL;
+    eventFile=nullptr;
     return 0;
 }
 
@@ -701,7 +701,7 @@ int MRKEvents::makeEventFiles(TString firstFileName, TString fluxFileName, int n
     fermiOn=inpFermiOn;
     zStart=inpZStart;
     zEnd=inpZEnd;
-    if(ranGen==NULL)
+    if(ranGen==nullptr)
     {
         ranGen=new TRandom3(5211447);
     }
@@ -729,7 +729,7 @@ int MRKEvents::makeEventFiles(TString firstFileName, TString fluxFileName, int n
 
 int MRKEvents::makeDecayWidthCutMultiple(double littlebStart, double littlebIncrement,const int littlebNum)
 {
-    if(ranGen==NULL)
+    if(ranGen==nullptr)
     {
         ranGen=new TRandom3();
     }
@@ -835,7 +835,7 @@ double MRKEvents::calcNormConstant(EveType evetype,double littleb, double inpGEM
 
     gEMin=inpGEMin;
 
-    if(ranGen==NULL)
+    if(ranGen==nullptr)
     {
         ranGen=new TRandom3();
     }
@@ -961,7 +961,7 @@ void MRKEvents::generateEvent()
 
 void MRKEvents::loadEventSettings(TString eventSettingsFilePath, int eventSet)
 {
-    if(ranGen != NULL)
+    if(ranGen != nullptr)
         delete ranGen;
     if(eventSet < 0)
     {
@@ -1018,7 +1018,7 @@ double MRKEvents::calcFourBodyRate(double inpGEMin,double inpGEMax,double inpEEM
     eEMin=inpEEMin;
     fourBody=true;
     fermiOn=inpFermiOn;
-    if(ranGen==NULL)
+    if(ranGen==nullptr)
     {
         ranGen=new TRandom3();
     }

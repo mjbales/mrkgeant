@@ -51,7 +51,6 @@ using namespace std;
 using std::string;
 
 class G4Event;
-class G4HCofThisEvent;
 
 class MRKRun : public G4Run
 {
@@ -72,8 +71,14 @@ class MRKRun : public G4Run
   private:
     bool fileIsOpen;
     G4double GetTotal(const G4THitsMap<G4double> &map) const;
-    G4int SBDCollectionID,BGOCollectionID[NUM_BGOS],BAPDCollectionID[NUM_BAPDS];
-    Double_t SBDEDepTotal,SBDKEFirst,BGOEDepTotal[NUM_BGOS],BAPDEDepTotal[NUM_BAPDS], SBDTimeFirst,BAPDKEFirst[NUM_BAPDS],BGOKEFirst[NUM_BGOS];
+    G4int SBDCollectionID;
+    G4int BGOCollectionID[NUM_BGOS]={};
+    G4int BAPDCollectionID[NUM_BAPDS]={};
+    Double_t SBDEDepTotal,SBDKEFirst,SBDTimeFirst;
+    Double_t BGOEDepTotal[NUM_BGOS]={};
+    Double_t BAPDEDepTotal[NUM_BAPDS]={};
+    Double_t BGOKEFirst[NUM_BGOS]={};
+	Double_t BAPDKEFirst[NUM_BAPDS]={};
     Double_t SBDPosXFirst,SBDPosYFirst,SBDPosZFirst,SBDMomXFirst,SBDMomYFirst,SBDMomZFirst;
     Double_t MomX,MomY,MomZ,PosX,PosY,PosZ,Time,EDep,KE;
     Int_t Clocks;
@@ -83,15 +88,14 @@ class MRKRun : public G4Run
 	TFile* geantResultsFile;
 	TTree* geantResultsTree;
 	TTree* geantSBDFluxTree;
-	TTree* geantBGOFluxTree[NUM_BGOS];
-	TTree* geantBAPDFluxTree[NUM_BAPDS];
+	TTree* geantBGOFluxTree[NUM_BGOS]={};
+	TTree* geantBAPDFluxTree[NUM_BAPDS]={};
 	MRKPrimaryGeneratorAction* theGenerator;
 
 	G4THitsMap<G4double>* evtMap;
 	MRKHitsCollection* SBDHitsCollection;
-	MRKHitsCollection* BGOHitsCollection[NUM_BGOS];
-	MRKHitsCollection* BAPDHitsCollection[NUM_BAPDS];
-	G4HCofThisEvent* HCE;
+	MRKHitsCollection* BGOHitsCollection[NUM_BGOS]={};
+	MRKHitsCollection* BAPDHitsCollection[NUM_BAPDS]={};
 	G4String currentParticleName;
 	int BAPDHitCount;
 	string macroFileName;

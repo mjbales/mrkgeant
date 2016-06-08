@@ -43,15 +43,31 @@ MRKRun::MRKRun(MRKPrimaryGeneratorAction* generator)
     fileIsOpen=false;
     BAPDHitCount=0;
     macroFileName="";
-    geantResultsFile=NULL;
+    geantResultsFile=nullptr;
     useFluxTree=false;
+
+    SBDEDepTotal=SBDKEFirst=SBDTimeFirst=0.;
+    SBDPosXFirst=SBDPosYFirst=SBDPosZFirst=SBDMomXFirst=SBDMomYFirst=SBDMomZFirst=0.;
+    MomX=MomY=MomZ=PosX=PosY=PosZ=Time=EDep=KE=0.;
+    Particle=0;
+    Clocks=0;
+    HitCode=0;
+    geantResultsTree=nullptr;
+    geantSBDFluxTree=nullptr;
+    evtMap=nullptr;
+    SBDCollectionID=0;
+    SBDHitsCollection=nullptr;
+    useSBDDetector=true;
+    useBAPDDetectors=true;
+    useBGODetectors=true;
+    eventNumber=0;
 
 }
 
 MRKRun::~MRKRun()
 {
     G4cout << "Beginning to delete Run...";
-    if(geantResultsFile!=NULL)
+    if(geantResultsFile!=nullptr)
         delete geantResultsFile;
     G4cout << "COMPLETED!" << G4endl;
 
@@ -229,7 +245,7 @@ void MRKRun::closeAndWrite()
 	fileIsOpen=false;
 
 	delete geantResultsFile;
-	geantResultsFile=NULL;
+	geantResultsFile=nullptr;
 	BAPDHitCount=0;
 }
 
@@ -238,7 +254,7 @@ void MRKRun::RecordEvent(const G4Event* evt)
     SBDKEFirst=0;
     if(!fileIsOpen)
         openOutputFile();
-    HCE = evt->GetHCofThisEvent();
+    G4HCofThisEvent* HCE = evt->GetHCofThisEvent();
 
 
     if(!HCE) return;
