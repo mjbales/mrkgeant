@@ -47,7 +47,6 @@
 MRKDetectorMessenger::MRKDetectorMessenger(MRKDetectorConstruction* myDet)
 :myDetector(myDet)
 {
-
   detDir = new G4UIdirectory("/MRK/det/");
   detDir->SetGuidance("Detector Construction");
 

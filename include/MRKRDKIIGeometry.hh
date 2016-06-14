@@ -1,46 +1,29 @@
-#ifndef MRKDetectorConstruction_h
-#define MRKDetectorConstruction_h 1
+#ifndef SRC_MRKRDKIIGEOMETRY_HH_
+#define SRC_MRKRDKIIGEOMETRY_HH_
 
-#include "globals.hh"
-#include "G4VUserDetectorConstruction.hh"
-#include "MRKGlobalField.hh"
-#include "MRKMaterials.hh"
-#include "G4Box.hh"
-#include "G4UserLimits.hh"
-#include "G4VisAttributes.hh"
 #include <vector>
-#include "MRKConstants.hh"
-#include "MRKPhys.hh"
 
-class G4Tubs;
-class G4LogicalVolume;
-class G4VPhysicalVolume;
-class G4Material;
-class G4VPVParameterisation;
-class G4UserLimits;
-class MRKDetectorMessenger;
+#include "G4ThreeVector.hh"
+#include "G4RotationMatrix.hh"
+#include "G4VPhysicalVolume.hh"
+#include "G4LogicalVolume.hh"
+#include "G4VSolid.hh"
+#include "G4Box.hh"
+#include "G4VisAttributes.hh"
+#include "G4UserLimits.hh"
 
-enum ExperimentModel
-{
-	MODEL_RDK2, MODEL_RDK2BGOSONLY, MODEL_LIFETIMETEST
-};
+#include "MRKMaterials.hh"
+#include "MRKGeometry.hh"
+#include "MRKMacroMessenger.hh"
 
-class MRKDetectorConstruction: public G4VUserDetectorConstruction
+
+class MRKRDKIIGeometry : public MRKGeometry
 {
 public:
-
-	MRKDetectorConstruction();
-	~MRKDetectorConstruction();
-
-public:
+	MRKRDKIIGeometry(MRKMacroMessenger* inpMacroMessenger);
+	~MRKRDKIIGeometry();
 
 	G4VPhysicalVolume* Construct();
-
-	void setExperimentModel(string modelName);
-
-	inline const G4VPhysicalVolume* GetWorld()      {return physiWorld;};
-	inline ExperimentModel getExperimentModel(){ return experimentModel;}
-	inline void setExperimentModel(ExperimentModel inpModel){ G4cout << "Setting experimental model for detector construction." << G4endl;experimentModel=inpModel;}
 
 	inline void setUseSBDDetector(bool inp){useSBDDetector=inp;}
 	inline void setUseBGODetectors(bool inp){useBGODetectors=inp;}
@@ -57,7 +40,6 @@ public:
 	inline int getNumBGOsUsed(){return numBGOsUsed;}
 	inline void setUseNormalizedBGOLightOutput(bool inp){useNormalizedBGOLightOutput=inp;}
 	inline void setWeakSourceOffset(G4ThreeVector inp){WeakSourceOffset=inp;}
-
 	inline void setUseDoubleWeakSource(bool inp){useDoubleWeakSource=inp;}
 	inline void setUseAluminumPlug(bool inp){useAluminumPlug=inp;}
 	inline void setSBDDetectorBendOffset(G4ThreeVector inp){sbdDetectorBendOffset=inp;}
@@ -67,9 +49,9 @@ public:
 	inline void setSBDGoldLayerOff(bool inp){SBDGoldLayerOff=inp;}
 	inline void setSiDeadLayerLength(double inp){SiDeadLayerLength=inp;}
 	inline void setGammaDetOffset(G4ThreeVector inp){gammaDetOffset=inp;}
-
+	inline void setSBDCanOff(bool inp){SBDCanOff=inp;}
 private:
-
+	void defineMacroCommands(MRKMacroMessenger* inpMacroMessenger);
 	void defineDistancesAndRotationsRDK2();
 
 	//Volume construction methods
@@ -245,35 +227,12 @@ private:
 	void constructBGOWrappingsImproved();
 	void constructSBDEpoxy();
 
-	//Lifetime only
-	G4LogicalVolume* constructToyModelElectrode();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5Silicon();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5SiliconHolder();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5GoldCoating();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5AluminumCoating();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5PlasticLining();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5BackBrassRings();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5InternalBrassDisc();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5Spring();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5HexScrew();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5FrontCase();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5MidCase();
-	G4LogicalVolume* constructRDK2SBD300mmSquared1mm5BackCase();
-	void constructSBD300mmSquaredEpoxy();
-	G4LogicalVolume* constructFakeSBDDetector();
-
-	MRKMaterials materials;
-
-	G4Box* solidWorld;    // pointer to the solid envelope
-	G4LogicalVolume* logicWorld;    // pointer to the logical envelope
+	G4Box*             solidWorld;    // pointer to the solid envelope
+	G4LogicalVolume*   logicWorld;    // pointer to the logical envelope
 	G4VPhysicalVolume* physiWorld;    // pointer to the physical envelope
 	G4LogicalVolume* logicSBDDetectionVolume;
 	G4LogicalVolume* logicBGODetectionVolumes[NUM_BGOS];
 	G4LogicalVolume* logicBAPDDetectionVolumes[NUM_BAPDS];
-
-	MRKGlobalField* theGlobalField;
-
-	MRKDetectorMessenger* detectorMessenger;  // pointer to the Messenger
 
 	G4double bendToMagnetZero;
 	G4RotationMatrix* rdk2RotationMatrices[3];
@@ -285,9 +244,7 @@ private:
 	double SiDeadLayerLength;
 	G4ThreeVector gammaDetOffset;
 
-	ExperimentModel experimentModel;
-
-	bool useSBDDetector, useBGODetectors, useBAPDDetectors;
+	bool useSBDDetector,useBGODetectors,useBAPDDetectors;
 	bool useBAPDCollectionEfficiencyModel;
 	bool useBGOCalibrationWeakSource;
 	bool useDoubleWeakSource;
@@ -326,7 +283,6 @@ private:
 	G4VisAttributes* VisMylar;
 	G4VisAttributes* VisEpoxy;
 	G4VisAttributes* VisRadioactive;
-
 };
 
-#endif
+#endif /* SRC_MRKRDKIIGEOMETRY_HH_ */
