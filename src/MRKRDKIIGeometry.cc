@@ -46,8 +46,6 @@
 #include "MRKConstants.hh"
 #include "MRKText.hh"
 
-
-
 using namespace CLHEP;
 
 MRKRDKIIGeometry::MRKRDKIIGeometry(MRKMacroMessenger* inpMacroMessenger) :
@@ -56,11 +54,8 @@ MRKRDKIIGeometry::MRKRDKIIGeometry(MRKMacroMessenger* inpMacroMessenger) :
 	defineMacroCommands(inpMacroMessenger);
 	bendToMagnetZero = 42.4 * cm;
 
-	logicWorld = nullptr;
 	logicSBDDetectionVolume = nullptr;
 	numBGOsUsed = 12;
-	physiWorld = nullptr;
-	solidWorld = nullptr;
 
 	useBAPDCollectionEfficiencyModel = true;
 	useBGOCalibrationWeakSource = false;
@@ -114,158 +109,172 @@ MRKRDKIIGeometry::~MRKRDKIIGeometry()
 
 void MRKRDKIIGeometry::defineMacroCommands(MRKMacroMessenger* inpMacroMessenger)
 {
-	  //Commands will be deleted by inpMacroMessenger
-	  std::function<void(TString)> func;
+	//Commands will be deleted by inpMacroMessenger
+	std::function<void(G4String)> func;
 
-	  G4UIdirectory* detDir = new G4UIdirectory("/MRK/det/");
-	  detDir->SetGuidance("Detector Construction");
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(detDir,nullptr));
+	G4UIdirectory* detDir = new G4UIdirectory("/MRK/det/");
+	detDir->SetGuidance("Detector Construction");
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(detDir, nullptr));
 
-	  G4UIdirectory* fileDir = new G4UIdirectory("/MRK/file/");
-	  fileDir->SetGuidance("file control");
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,nullptr));
+	G4UIcmdWithABool* useSBDDetectorCmd = new G4UIcmdWithABool("/MRK/det/useSBDDetector", inpMacroMessenger);
+	useSBDDetectorCmd->SetGuidance("Sets true/false to use SBD detectors in RDK2 geometries.");
+	useSBDDetectorCmd->SetParameterName("useSBDDetector", false);
+	useSBDDetectorCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUseSBDDetector(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(useSBDDetectorCmd, func));
 
-	  G4UIcmdWithABool* useSBDDetectorCmd = new G4UIcmdWithABool("/MRK/det/useSBDDetector",inpMacroMessenger);
-	  useSBDDetectorCmd->SetGuidance("Sets true/false to use SBD detectors in RDK2 geometries.");
-	  useSBDDetectorCmd->SetParameterName("useSBDDetector",false);
-	  useSBDDetectorCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUseSBDDetector(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithABool* useBGODetectorsCmd = new G4UIcmdWithABool("/MRK/det/useBGODetectors", inpMacroMessenger);
+	useBGODetectorsCmd->SetGuidance("Sets true/false to use BGO detectors in RDK2 geometries.");
+	useBGODetectorsCmd->SetParameterName("useBGODetectors", false);
+	useBGODetectorsCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUseBGODetectors(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(useBGODetectorsCmd, func));
 
-	  G4UIcmdWithABool* useBGODetectorsCmd = new G4UIcmdWithABool("/MRK/det/useBGODetectors",inpMacroMessenger);
-	  useBGODetectorsCmd->SetGuidance("Sets true/false to use BGO detectors in RDK2 geometries.");
-	  useBGODetectorsCmd->SetParameterName("useBGODetectors",false);
-	  useBGODetectorsCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUseBGODetectors(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithABool* useBAPDDetectorsCmd = new G4UIcmdWithABool("/MRK/det/useBAPDDetectors", inpMacroMessenger);
+	useBAPDDetectorsCmd->SetGuidance("Sets true/false to use BAPD detectors in RDK2 geometries.");
+	useBAPDDetectorsCmd->SetParameterName("useBAPDDetectors", false);
+	useBAPDDetectorsCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUseBAPDDetectors(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(useBAPDDetectorsCmd, func));
 
-	  G4UIcmdWithABool* useBAPDDetectorsCmd = new G4UIcmdWithABool("/MRK/det/useBAPDDetectors",inpMacroMessenger);
-	  useBAPDDetectorsCmd->SetGuidance("Sets true/false to use BAPD detectors in RDK2 geometries.");
-	  useBAPDDetectorsCmd->SetParameterName("useBAPDDetectors",false);
-	  useBAPDDetectorsCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUseBAPDDetectors(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithABool* useBGOPositionalLightOutCmd = new G4UIcmdWithABool("/MRK/det/useBGOPositionalLightOut", inpMacroMessenger);
+	useBGOPositionalLightOutCmd->SetGuidance("Sets true/false to use BGO Positional Light output");
+	useBGOPositionalLightOutCmd->SetParameterName("usePositionalBGOLightOutput", false);
+	useBGOPositionalLightOutCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUsePositionalBGOLightOutput(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(useBGOPositionalLightOutCmd, func));
 
+	G4UIcmdWithABool* useBGONormalizedLightOutCmd = new G4UIcmdWithABool("/MRK/det/useBGONormalizedLightOutCmd", inpMacroMessenger);
+	useBGONormalizedLightOutCmd->SetGuidance("Sets true/false to set the use of BGO Positional Light Output's integral to be normalized across the bar");
+	useBGONormalizedLightOutCmd->SetParameterName("useNormalizedBGOLightOutput", false);
+	useBGONormalizedLightOutCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUseNormalizedBGOLightOutput(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(useBGONormalizedLightOutCmd, func));
 
-	  G4UIcmdWithABool* useBGOPositionalLightOutCmd = new G4UIcmdWithABool("/MRK/det/useBGOPositionalLightOut",inpMacroMessenger);
-	  useBGOPositionalLightOutCmd->SetGuidance("Sets true/false to use BGO Positional Light output");
-	  useBGOPositionalLightOutCmd->SetParameterName("usePositionalBGOLightOutput",false);
-	  useBGOPositionalLightOutCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUsePositionalBGOLightOutput(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithABool* useBAPDCollectionEfficiencyModelCmd = new G4UIcmdWithABool("/MRK/det/useBAPDCollectionEfficiencyModel", inpMacroMessenger);
+	useBAPDCollectionEfficiencyModelCmd->SetGuidance("Sets true/false to use BAPD Collection Efficiency Model");
+	useBAPDCollectionEfficiencyModelCmd->SetParameterName("useBAPDCollectionEfficiencyModel", false);
+	useBAPDCollectionEfficiencyModelCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUseBAPDCollectionEfficiencyModel(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(useBAPDCollectionEfficiencyModelCmd, func));
 
-	  G4UIcmdWithABool* useBGONormalizedLightOutCmd = new G4UIcmdWithABool("/MRK/det/useBGONormalizedLightOutCmd",inpMacroMessenger);
-	  useBGONormalizedLightOutCmd->SetGuidance("Sets true/false to set the use of BGO Positional Light Output's integral to be normalized across the bar");
-	  useBGONormalizedLightOutCmd->SetParameterName("useNormalizedBGOLightOutput",false);
-	  useBGONormalizedLightOutCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUseNormalizedBGOLightOutput(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithABool* useBGOCalibrationWeakSourceCmd = new G4UIcmdWithABool("/MRK/det/useBGOCalibrationWeakSource", inpMacroMessenger);
+	useBGOCalibrationWeakSourceCmd->SetGuidance("Sets true/false to use the BGO Calibration setup with the weak source");
+	useBGOCalibrationWeakSourceCmd->SetParameterName("useBGOCalibrationWeakSource", false);
+	useBGOCalibrationWeakSourceCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUseBGOCalibrationWeakSource(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(useBGOCalibrationWeakSourceCmd, func));
 
-	  G4UIcmdWithABool* useBAPDCollectionEfficiencyModelCmd = new G4UIcmdWithABool("/MRK/det/useBAPDCollectionEfficiencyModel",inpMacroMessenger);
-	  useBAPDCollectionEfficiencyModelCmd->SetGuidance("Sets true/false to use BAPD Collection Efficiency Model");
-	  useBAPDCollectionEfficiencyModelCmd->SetParameterName("useBAPDCollectionEfficiencyModel",false);
-	  useBAPDCollectionEfficiencyModelCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUseBAPDCollectionEfficiencyModel(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithABool* useDoubleWeakSourceCmd = new G4UIcmdWithABool("/MRK/det/useDoubleWeakSource", inpMacroMessenger);
+	useDoubleWeakSourceCmd->SetGuidance("Sets true/false to use two calibration weak sources (two plastic cylinders) in model");
+	useDoubleWeakSourceCmd->SetParameterName("useDoubleWeakSource", false);
+	useDoubleWeakSourceCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUseDoubleWeakSource(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(useDoubleWeakSourceCmd, func));
 
-	  G4UIcmdWithABool* useBGOCalibrationWeakSourceCmd = new G4UIcmdWithABool("/MRK/det/useBGOCalibrationWeakSource",inpMacroMessenger);
-	  useBGOCalibrationWeakSourceCmd->SetGuidance("Sets true/false to use the BGO Calibration setup with the weak source");
-	  useBGOCalibrationWeakSourceCmd->SetParameterName("useBGOCalibrationWeakSource",false);
-	  useBGOCalibrationWeakSourceCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUseBGOCalibrationWeakSource(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithABool* useBGOWrappingsCmd = new G4UIcmdWithABool("/MRK/det/useBGOWrappings", inpMacroMessenger);
+	useBGOWrappingsCmd->SetGuidance("Sets true/false to use Aluminized Mylar and other wrappings around BGOs");
+	useBGOWrappingsCmd->SetParameterName("useBGOWrapping", false);
+	useBGOWrappingsCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUseBGOWrappings(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(useBGOWrappingsCmd, func));
 
-	  G4UIcmdWithABool* useDoubleWeakSourceCmd = new G4UIcmdWithABool("/MRK/det/useDoubleWeakSource",inpMacroMessenger);
-	  useDoubleWeakSourceCmd->SetGuidance("Sets true/false to use two calibration weak sources (two plastic cylinders) in model");
-	  useDoubleWeakSourceCmd->SetParameterName("useDoubleWeakSource",false);
-	  useDoubleWeakSourceCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUseDoubleWeakSource(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithABool* useAluminumPlugCmd = new G4UIcmdWithABool("/MRK/det/useAluminumPlug", inpMacroMessenger);
+	useAluminumPlugCmd->SetGuidance("Sets true/false to use Aluminized Plug to simulate matter that may reflect electrons");
+	useAluminumPlugCmd->SetParameterName("useAluminumPlug", false);
+	useAluminumPlugCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUseAluminumPlug(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(useAluminumPlugCmd, func));
 
+	G4UIcmdWithABool* use1_5mmSBDCmd = new G4UIcmdWithABool("/MRK/det/use15mmSBD", inpMacroMessenger);
+	use1_5mmSBDCmd->SetGuidance("Sets true/false to use 1.5mm SBD or instead the 1.0mm SBD");
+	use1_5mmSBDCmd->SetParameterName("use15mmSBD", false);
+	use1_5mmSBDCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUse1_5mmSBD(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(use1_5mmSBDCmd, func));
 
-	  G4UIcmdWithABool* useBGOWrappingsCmd = new G4UIcmdWithABool("/MRK/det/useBGOWrappings",inpMacroMessenger);
-	  useBGOWrappingsCmd->SetGuidance("Sets true/false to use Aluminized Mylar and other wrappings around BGOs");
-	  useBGOWrappingsCmd->SetParameterName("useBGOWrapping",false);
-	  useBGOWrappingsCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUseBGOWrappings(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithADouble* setAlLengthContractionFactorCmd = new G4UIcmdWithADouble("/MRK/det/setAlLengthContractionFactor", inpMacroMessenger);
+	setAlLengthContractionFactorCmd->SetGuidance("Sets length thermal contraction factor for Al");
+	setAlLengthContractionFactorCmd->SetParameterName("AlLengthContractionFactor", false);
+	setAlLengthContractionFactorCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setUseAluminumPlug(G4UIcommand::ConvertToDouble(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(setAlLengthContractionFactorCmd, func));
 
-	  G4UIcmdWithABool* useAluminumPlugCmd = new G4UIcmdWithABool("/MRK/det/useAluminumPlug",inpMacroMessenger);
-	  useAluminumPlugCmd->SetGuidance("Sets true/false to use Aluminized Plug to simulate matter that may reflect electrons");
-	  useAluminumPlugCmd->SetParameterName("useAluminumPlug",false);
-	  useAluminumPlugCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUseAluminumPlug(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithADouble* setBGOLengthContractionFactorCmd = new G4UIcmdWithADouble("/MRK/det/setBGOLengthContractionFactor", inpMacroMessenger);
+	setBGOLengthContractionFactorCmd->SetGuidance("Sets length thermal contraction factor for BGO");
+	setBGOLengthContractionFactorCmd->SetParameterName("BGOLengthContractionFactor", false);
+	setBGOLengthContractionFactorCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setBGOLengthContractionFactor(G4UIcommand::ConvertToDouble(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(setBGOLengthContractionFactorCmd, func));
 
-	  G4UIcmdWithABool* use1_5mmSBDCmd = new G4UIcmdWithABool("/MRK/det/use15mmSBD",inpMacroMessenger);
-	  use1_5mmSBDCmd->SetGuidance("Sets true/false to use 1.5mm SBD or instead the 1.0mm SBD");
-	  use1_5mmSBDCmd->SetParameterName("use15mmSBD",false);
-	  use1_5mmSBDCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUse1_5mmSBD(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithAnInteger* numBGOsUsedCmd = new G4UIcmdWithAnInteger("/MRK/det/numBGOsUsed", inpMacroMessenger);
+	numBGOsUsedCmd->SetGuidance("Sets number of BGOs to create in detector construction");
+	numBGOsUsedCmd->SetParameterName("numBGOsUsed", false);
+	numBGOsUsedCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setNumBGOsUsed(G4UIcommand::ConvertToInt(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(numBGOsUsedCmd, func));
 
-	  G4UIcmdWithADouble* setAlLengthContractionFactorCmd = new G4UIcmdWithADouble("/MRK/det/setAlLengthContractionFactor",inpMacroMessenger);
-	  setAlLengthContractionFactorCmd->SetGuidance("Sets length thermal contraction factor for Al");
-	  setAlLengthContractionFactorCmd->SetParameterName("AlLengthContractionFactor",false);
-	  setAlLengthContractionFactorCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setUseAluminumPlug(G4UIcommand::ConvertToDouble(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWith3VectorAndUnit* setWeakSourceOffsetCmd = new G4UIcmdWith3VectorAndUnit("/MRK/det/setWeakSourceOffset", inpMacroMessenger);
+	setWeakSourceOffsetCmd->SetGuidance("Sets offset for weak source (already centered on BGO)");
+	setWeakSourceOffsetCmd->SetParameterName("weakSourceOffsetX", "weakSourceOffsetY", "weakSourceOffsetZ", false);
+	setWeakSourceOffsetCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setWeakSourceOffset(G4UIcommand::ConvertToDimensioned3Vector(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(setWeakSourceOffsetCmd, func));
 
-	  G4UIcmdWithADouble* setBGOLengthContractionFactorCmd = new G4UIcmdWithADouble("/MRK/det/setBGOLengthContractionFactor",inpMacroMessenger);
-	  setBGOLengthContractionFactorCmd->SetGuidance("Sets length thermal contraction factor for BGO");
-	  setBGOLengthContractionFactorCmd->SetParameterName("BGOLengthContractionFactor",false);
-	  setBGOLengthContractionFactorCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setBGOLengthContractionFactor(G4UIcommand::ConvertToDouble(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWith3VectorAndUnit* setSBDDetectorBendOffsetCmd = new G4UIcmdWith3VectorAndUnit("/MRK/det/setSBDDetectorBendOffset", inpMacroMessenger);
+	setSBDDetectorBendOffsetCmd->SetGuidance("Sets offset for SBD Detector (along bend axis)");
+	setSBDDetectorBendOffsetCmd->SetParameterName("SBDDetectorBendOffsetX", "SBDDetectorBendOffsetY", "SBDDetectorBendOffsetZ", false);
+	setSBDDetectorBendOffsetCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setSBDDetectorBendOffset(G4UIcommand::ConvertToDimensioned3Vector(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(setSBDDetectorBendOffsetCmd, func));
 
-	  G4UIcmdWithAnInteger* numBGOsUsedCmd = new G4UIcmdWithAnInteger("/MRK/det/numBGOsUsed",inpMacroMessenger);
-	  numBGOsUsedCmd->SetGuidance("Sets number of BGOs to create in detector construction");
-	  numBGOsUsedCmd->SetParameterName("numBGOsUsed",false);
-	  numBGOsUsedCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setNumBGOsUsed(G4UIcommand::ConvertToInt(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithABool* SBDGoldLayerOffCmd = new G4UIcmdWithABool("/MRK/det/SBDGoldLayerOff", inpMacroMessenger);
+	SBDGoldLayerOffCmd->SetGuidance("Sets true/false to turn the gold layer of the SBD off");
+	SBDGoldLayerOffCmd->SetParameterName("SBDGoldLayerOff", false);
+	SBDGoldLayerOffCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setSBDGoldLayerOff(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(SBDGoldLayerOffCmd, func));
 
-	  G4UIcmdWith3VectorAndUnit* setWeakSourceOffsetCmd = new G4UIcmdWith3VectorAndUnit("/MRK/det/setWeakSourceOffset",inpMacroMessenger);
-	  setWeakSourceOffsetCmd->SetGuidance("Sets offset for weak source (already centered on BGO)");
-	  setWeakSourceOffsetCmd->SetParameterName("weakSourceOffsetX","weakSourceOffsetY","weakSourceOffsetZ",false);
-	  setWeakSourceOffsetCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setWeakSourceOffset(G4UIcommand::ConvertToDimensioned3Vector(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithABool* SBDCanOffCmd = new G4UIcmdWithABool("/MRK/det/SBDCanOff", inpMacroMessenger);
+	SBDCanOffCmd->SetGuidance("Sets true/false to turn the can and other SBD components off");
+	SBDCanOffCmd->SetParameterName("SBDCanOff", false);
+	SBDCanOffCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setSBDCanOff(G4UIcommand::ConvertToBool(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(SBDCanOffCmd, func));
 
-	  G4UIcmdWith3VectorAndUnit* setSBDDetectorBendOffsetCmd = new G4UIcmdWith3VectorAndUnit("/MRK/det/setSBDDetectorBendOffset",inpMacroMessenger);
-	  setSBDDetectorBendOffsetCmd->SetGuidance("Sets offset for SBD Detector (along bend axis)");
-	  setSBDDetectorBendOffsetCmd->SetParameterName("SBDDetectorBendOffsetX","SBDDetectorBendOffsetY","SBDDetectorBendOffsetZ",false);
-	  setSBDDetectorBendOffsetCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setSBDDetectorBendOffset(G4UIcommand::ConvertToDimensioned3Vector(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWithADoubleAndUnit* setSiDeadLayerLengthCmd = new G4UIcmdWithADoubleAndUnit("/MRK/det/setSiDeadLayerLengthCmd", inpMacroMessenger);
+	setSiDeadLayerLengthCmd->SetGuidance("Sets length Si dead layer on SBD");
+	setSiDeadLayerLengthCmd->SetParameterName("SiDeadLayerLength", false);
+	setSiDeadLayerLengthCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setSiDeadLayerLength(G4UIcommand::ConvertToDimensionedDouble(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(setSiDeadLayerLengthCmd, func));
 
-	  G4UIcmdWithABool* SBDGoldLayerOffCmd = new G4UIcmdWithABool("/MRK/det/SBDGoldLayerOff",inpMacroMessenger);
-	  SBDGoldLayerOffCmd->SetGuidance("Sets true/false to turn the gold layer of the SBD off");
-	  SBDGoldLayerOffCmd->SetParameterName("SBDGoldLayerOff",false);
-	  SBDGoldLayerOffCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setSBDGoldLayerOff(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
-
-	  G4UIcmdWithABool* SBDCanOffCmd = new G4UIcmdWithABool("/MRK/det/SBDCanOff",inpMacroMessenger);
-	  SBDCanOffCmd->SetGuidance("Sets true/false to turn the can and other SBD components off");
-	  SBDCanOffCmd->SetParameterName("SBDCanOff",false);
-	  SBDCanOffCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setSBDCanOff(G4UIcommand::ConvertToBool(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
-
-	  G4UIcmdWithADoubleAndUnit* setSiDeadLayerLengthCmd= new G4UIcmdWithADoubleAndUnit("/MRK/det/setSiDeadLayerLengthCmd",inpMacroMessenger);
-	  setSiDeadLayerLengthCmd->SetGuidance("Sets length Si dead layer on SBD");
-	  setSiDeadLayerLengthCmd->SetParameterName("SiDeadLayerLength",false);
-	  setSiDeadLayerLengthCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setSiDeadLayerLength(G4UIcommand::ConvertToDimensionedDouble(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
-
-	  G4UIcmdWith3VectorAndUnit* setGammaDetOffsetCmd = new G4UIcmdWith3VectorAndUnit("/MRK/det/setGammaDetOffset",inpMacroMessenger);
-	  setGammaDetOffsetCmd->SetGuidance("Sets offset for gamma detectors and electrostatic mirror (need to set field manually)");
-	  setGammaDetOffsetCmd->SetParameterName("gammaDetOffsetX","gammaDetOffsetY","gammaDetOffsetZ",false);
-	  setGammaDetOffsetCmd->AvailableForStates(G4State_PreInit);
-	  func = [=](TString a) {this->setGammaDetOffset(G4UIcommand::ConvertToDimensioned3Vector(a));};
-	  inpMacroMessenger->addCommand(MRKCommandAndFunction(fileDir,func));
+	G4UIcmdWith3VectorAndUnit* setGammaDetOffsetCmd = new G4UIcmdWith3VectorAndUnit("/MRK/det/setGammaDetOffset", inpMacroMessenger);
+	setGammaDetOffsetCmd->SetGuidance("Sets offset for gamma detectors and electrostatic mirror (need to set field manually)");
+	setGammaDetOffsetCmd->SetParameterName("gammaDetOffsetX", "gammaDetOffsetY", "gammaDetOffsetZ", false);
+	setGammaDetOffsetCmd->AvailableForStates(G4State_PreInit);
+	func = [=](G4String a)
+	{	this->setGammaDetOffset(G4UIcommand::ConvertToDimensioned3Vector(a));};
+	inpMacroMessenger->addCommand(MRKCommandAndFunction(setGammaDetOffsetCmd, func));
 }
 
 G4VPhysicalVolume* MRKRDKIIGeometry::Construct()
@@ -559,7 +568,7 @@ void MRKRDKIIGeometry::constructRDK2World()
 	G4GeometryManager::GetInstance()->SetWorldMaximumExtent(WorldLength);
 	G4cout << "Computed tolerance = " << G4GeometryTolerance::GetInstance()->GetSurfaceTolerance() / mm << " mm" << G4endl;
 
-	solidWorld = new G4Box("world", WorldLength * .5, WorldWidth * .5, WorldHeight * .5);
+	G4Box* solidWorld = new G4Box("world", WorldLength * .5, WorldWidth * .5, WorldHeight * .5);
 	logicWorld = new G4LogicalVolume(solidWorld, materials.getMaterial("G4_Galactic"), "World", 0, 0, 0);
 
 	//  Must place the World Physical volume unrotated at (0,0,0).

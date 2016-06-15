@@ -227,9 +227,6 @@ private:
 	void constructBGOWrappingsImproved();
 	void constructSBDEpoxy();
 
-	G4Box*             solidWorld;    // pointer to the solid envelope
-	G4LogicalVolume*   logicWorld;    // pointer to the logical envelope
-	G4VPhysicalVolume* physiWorld;    // pointer to the physical envelope
 	G4LogicalVolume* logicSBDDetectionVolume;
 	G4LogicalVolume* logicBGODetectionVolumes[NUM_BGOS];
 	G4LogicalVolume* logicBAPDDetectionVolumes[NUM_BAPDS];

@@ -52,6 +52,7 @@
 
 
 //MRKGeant Libraries
+#include "MRKMacroMessenger.hh"
 #include "MRKDetectorConstruction.hh"
 #include "MRKPrimaryGeneratorAction.hh"
 #include "MRKRunAction.hh"
@@ -61,7 +62,7 @@
 
 
 //Matt Libraries
-#include "include/MRKText.hh"
+#include "MRKText.hh"
 
 using namespace std;
 using std::string;
@@ -100,7 +101,8 @@ int main(int argc,char** argv)
     }
     G4cout << "The initial Random seed for Geant4(CLHEP) is: " << CLHEP::HepRandom::getTheSeed() << endl;
 
-
+    //Macro messenger
+    MRKMacroMessenger theMacroMessenger;
 
     // User Verbose output class
     G4VSteppingVerbose* verbosity = new MRKSteppingVerbose;
@@ -109,9 +111,10 @@ int main(int argc,char** argv)
     // Run manager
     G4RunManager * runManager = new G4RunManager;
 
+
     // User Initialization classes (mandatory)
     G4cout << "Creating detector construction object: " << G4endl;
-    MRKDetectorConstruction* detector= new MRKDetectorConstruction();
+    MRKDetectorConstruction* detector= new MRKDetectorConstruction(&theMacroMessenger);
     runManager->SetUserInitialization(detector);
     G4cout << "completed!"<<G4endl;
 
