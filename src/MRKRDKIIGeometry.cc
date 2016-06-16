@@ -47,6 +47,7 @@
 #include "MRKText.hh"
 
 using namespace CLHEP;
+using namespace std;
 
 MRKRDKIIGeometry::MRKRDKIIGeometry(MRKMacroMessenger* inpMacroMessenger) :
 	MRKGeometry(inpMacroMessenger)
@@ -279,7 +280,7 @@ void MRKRDKIIGeometry::defineMacroCommands(MRKMacroMessenger* inpMacroMessenger)
 
 G4VPhysicalVolume* MRKRDKIIGeometry::Construct()
 {
-	cout << "Constructing RDK2 Experiment" << endl;
+	G4cout << "Constructing RDK2 Experiment" << G4endl;
 
 	defineDistancesAndRotationsRDK2();
 	numBGOsUsed = 12;

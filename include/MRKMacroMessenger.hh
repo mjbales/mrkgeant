@@ -21,7 +21,7 @@ public:
 	virtual ~MRKMacroMessenger();
 
 	void addCommand(MRKCommandAndFunction inpCommandAndFunctionPair);
-	void SetNewValue(G4UIcommand* command,G4String newValue); //From G4UImessenger
+	void SetNewValue(G4UIcommand* command, G4String newValue); //From G4UImessenger
 private:
 	std::unordered_map<std::string, MRKCommandAndFunction> commandMap;  //Map of command paths to the commands
 	std::vector<G4UIdirectory> directories;

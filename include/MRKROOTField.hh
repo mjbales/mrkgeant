@@ -27,51 +27,18 @@
 #include "TFile.h"
 #include "TSystem.h"
 
-using namespace std;
-
 class MRKROOTField{
-private:
-    int numBins[3];
-    TVector3 startCorner;
-    TVector3 endCorner;
-    TVector3 spacing;
-    TVector3 length;
-
-	bool fieldLoaded;
-	bool symmetry[3];  //Are we mirroring across any of the axis.  Presumes start corner is at 0 in that axis and that it is mirrored in the negative direction
-
-	vector<vector<vector<double> > > theField[3]; //The field.  Stored as nested STL vectors.  Access by theField[i][x][y][z].
-
-	int dimOfSpace; //2 = cylindrical coordinates(r,z)   3 = 3D cartesian (x,y,z)
-	int dimOfField; //Scalar field or vector field?
-
-	//For interpolation
-	double radius;
-    TVector3 resultVec;
-    double modx,mody,modz,modxm,modym,modzm;
-    double dx,dy,dz;
-    int x,y,z,xp1,yp1,zp1;
-    double a1,a2,a3,a4,a5,a6,a7,a8;
-    double rotateX,rotateY,rotateZ;  //Rotate angle theta aroudn each axis in order to transform coordinates.  Transformed in order X,Y,Z.
-
-    //private functions
-	int loadFieldROOTFile(string filePath, string histName, double scalingValue);
-    int loadFieldTXTFile(string filePath, double scalingValue);
-    TVector3 getPosInField(TVector3 inp);  //Rotates the mirrors position as well as turns 3D position into radius and z coordinate (only first 2 coordinates used) in the case of 2D space field
-    void setSize(int,int,int);
-
-
 public:
     MRKROOTField();
-    MRKROOTField(string filePath, string histName, double scalingValue,int inpSpaceDim,int inpFieldDim);
+    MRKROOTField(std::string filePath, std::string histName, double scalingValue,int inpSpaceDim,int inpFieldDim);
     ~MRKROOTField();
     void reset();
     void linearInterp3D(TVector3 pos,TVector3& vecOut);
     void cubicInterp3D(TVector3 pos,TVector3& vecOut);
-    int loadFieldFromFile(string filePath, string histName, double scalingValue, int inpSpaceDim, int inpFieldDim);
+    int loadFieldFromFile(std::string filePath, std::string histName, double scalingValue, int inpSpaceDim, int inpFieldDim);
     bool isPositionInsideField(TVector3 pos);
-    int saveFieldToFile(string filePath,string histName);
-    bool fieldFileExists(string strFileName) ;
+    int saveFieldToFile(std::string filePath,std::string histName);
+    bool fieldFileExists(std::string strFileName) ;
 
     //From http://www.paulinternet.nl/?page=bicubic
     TVector3 cubicInterpolate(TVector3 p[4], double xIn);  //cubic interpolation along 1D, p is an array of data values around the position, xIn is the value from 0,1 representing how far betweeen p[1] and p[2] we are interpolating
@@ -99,8 +66,36 @@ public:
     inline void setRotation(double inpx,double inpy,double inpz){rotateX=inpx; rotateY=inpy; rotateZ=inpz;};
     inline TVector3 getVector(int inpX, int inpY, int inpZ){return TVector3(theField[0][inpX][inpY][inpZ],theField[1][inpX][inpY][inpZ],theField[2][inpX][inpY][inpZ]);};
 
+private:
+	int numBins[3];
+	TVector3 startCorner;
+	TVector3 endCorner;
+	TVector3 spacing;
+	TVector3 length;
+
+	bool fieldLoaded;
+	bool symmetry[3];  //Are we mirroring across any of the axis.  Presumes start corner is at 0 in that axis and that it is mirrored in the negative direction
+
+	std::vector<std::vector<std::vector<double> > > theField[3]; //The field.  Stored as nested STL vectors.  Access by theField[i][x][y][z].
+
+	int dimOfSpace; //2 = cylindrical coordinates(r,z)   3 = 3D cartesian (x,y,z)
+	int dimOfField; //Scalar field or vector field?
+
+	//For interpolation
+	double radius;
+	TVector3 resultVec;
+	double modx, mody, modz, modxm, modym, modzm;
+	double dx, dy, dz;
+	int x, y, z, xp1, yp1, zp1;
+	double a1, a2, a3, a4, a5, a6, a7, a8;
+	double rotateX, rotateY, rotateZ;  //Rotate angle theta aroudn each axis in order to transform coordinates.  Transformed in order X,Y,Z.
+
+	//private functions
+	int loadFieldROOTFile(std::string filePath, std::string histName, double scalingValue);
+	int loadFieldTXTFile(std::string filePath, double scalingValue);
+	TVector3 getPosInField(TVector3 inp);  //Rotates the mirrors position as well as turns 3D position into radius and z coordinate (only first 2 coordinates used) in the case of 2D space field
+	void setSize(int, int, int);
+
 };
-
-
 
 #endif // ROOT2FIELD_H

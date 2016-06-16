@@ -1,45 +1,46 @@
 #ifndef MRKPrimaryGeneratorAction_h
 #define MRKPrimaryGeneratorAction_h 1
 
+#include <time.h>
+
 #include "G4VUserPrimaryGeneratorAction.hh"
 #include "G4ParticleDefinition.hh"
 #include "G4ThreeVector.hh"
-
 #include "globals.hh"
+#include "G4ParticleGun.hh"
+#include "G4GeneralParticleSource.hh"
+#include "Randomize.hh"
+
 #include "TFile.h"
 #include "TTree.h"
 #include "TString.h"
 
 #include "MRKDetectorConstruction.hh"
-#include "G4ParticleGun.hh"
-#include "G4GeneralParticleSource.hh"
-#include "Randomize.hh"
-#include <time.h>
-
 #include "MRKEvents.hh"
 #include "MRKGeneratorMessenger.hh"
 #include "MRKVector.hh"
-using namespace std;
-
 
 class G4Event;
 
-enum GeneratorMode{PARTICLE_GUN=0,RDKEVENTFILE=1,RDKEVENTGENERATOR=3,PARTICLE_SOURCE=4};
-
-class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
+enum GeneratorMode
 {
-  public:
-    MRKPrimaryGeneratorAction(MRKDetectorConstruction*);
-   ~MRKPrimaryGeneratorAction();
+	PARTICLE_GUN = 0, RDKEVENTFILE = 1, RDKEVENTGENERATOR = 3, PARTICLE_SOURCE = 4
+};
 
-  public:
-    void GeneratePrimaries(G4Event*);
-    void loadInputFile(TString inputFileName);
-    void createParticleSourceEventFile();
-    void loadRDKEventFile(TString inputFileName);
-    void makeAndLoadRDKEventFile(TString inputFileName);  //also loads flux map
-    void setFluxMapFileName(TString inpFluxMapFileName){fluxMapFileName=inpFluxMapFileName;}
+class MRKPrimaryGeneratorAction: public G4VUserPrimaryGeneratorAction
+{
+public:
+	MRKPrimaryGeneratorAction(MRKDetectorConstruction*);
+	~MRKPrimaryGeneratorAction();
 
+public:
+	void GeneratePrimaries(G4Event*);
+	void loadInputFile(TString inputFileName);
+	void createParticleSourceEventFile();
+	void loadRDKEventFile(TString inputFileName);
+	void makeAndLoadRDKEventFile(TString inputFileName);  //also loads flux map
+
+	inline void setFluxMapFileName(TString inpFluxMapFileName){fluxMapFileName=inpFluxMapFileName;}
     inline GeneratorMode getGeneratorMode(){return generatorMode;}
     inline bool getVerbose() { return eventByEventVerbose; }
     inline G4ThreeVector getMomDir() { return momDir;}
@@ -69,59 +70,57 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
 
     void writeEventsToFile(){inpFile->cd(); inpTree->Write("", TObject::kOverwrite); inpFile->Close();}
 
+private:
+	MRKDetectorConstruction* theDC;
+	GeneratorMode generatorMode;
+	bool eventByEventVerbose;
+	std::string generatorFileName;
+	std::string fluxMapFileName;
+	bool fileLoaded;
 
-  private:
-        MRKDetectorConstruction* theDC;
-        GeneratorMode generatorMode;
-        bool eventByEventVerbose;
-        string generatorFileName;
-        string fluxMapFileName;
-		bool fileLoaded;
+	G4double sourceToDetectorDistance;
 
-		G4double sourceToDetectorDistance;
+	MRKVector3D r,dirE,dirP,dirG;
+	G4ThreeVector pos,momDir;
+	int currentEventNumber;
 
-		MRKVector3D r,dirE,dirP,dirG;
-		G4ThreeVector pos,momDir;
-		int currentEventNumber;
+	TFile* inpFile;
+	TTree* inpTree;
 
-		TFile* inpFile;
-		TTree* inpTree;
+	bool useManualPos;
+	bool useManualDir;
+	bool useManualEnergy;
+	bool useRDKIIQuickStops; //Sets whether to simulate event based on RDKII parameters
 
-		bool useManualPos;
-		bool useManualDir;
-		bool useManualEnergy;
-		bool useRDKIIQuickStops; //Sets whether to simulate event based on RDKII parameters
+	Double_t vx0,vy0,vz0,x0,y0,z0,e0,mx0,my0,mz0,tofp;
 
-		Double_t vx0,vy0,vz0,x0,y0,z0,e0,mx0,my0,mz0,tofp;
+	Double_t mze0;//always check this for speedup
 
-		Double_t mze0; //always check this for speedup
-
-		Double_t Theta,Phi,FloatEnergy;
-		Double_t sinTheta,cosTheta,cosPhi,sinPhi;
+	Double_t Theta,Phi,FloatEnergy;
+	Double_t sinTheta,cosTheta,cosPhi,sinPhi;
 //		Int_t DecayNum;
 
 //		Int_t hitcodee, hitcodep;
-		Int_t dwcutb[41];
+	Int_t dwcutb[41];
 //		Int_t dummy;
-        G4ParticleTable* particleTable;
-		G4ParticleDefinition* electronParDef;
-		G4ParticleDefinition* protonParDef;
-		G4ParticleDefinition* gammaParDef;
-		G4ParticleDefinition* geantinoParDef;
-        G4ParticleGun* particleGun;
-        G4GeneralParticleSource* particleSource;
-        MRKDetectorConstruction* myDetector;
-        MRKGeneratorMessenger* genMess;
-        MRKEvents* theEvents;
+	G4ParticleTable* particleTable;
+	G4ParticleDefinition* electronParDef;
+	G4ParticleDefinition* protonParDef;
+	G4ParticleDefinition* gammaParDef;
+	G4ParticleDefinition* geantinoParDef;
+	G4ParticleGun* particleGun;
+	G4GeneralParticleSource* particleSource;
+	MRKDetectorConstruction* myDetector;
+	MRKGeneratorMessenger* genMess;
+	MRKEvents* theEvents;
 
-        int eventStartClock;
-        int eventSetNumber;
-        int numberOfEventsToMake;
+	int eventStartClock;
+	int eventSetNumber;
+	int numberOfEventsToMake;
 
-        G4ThreeVector beamOffset;
+	G4ThreeVector beamOffset;
 
 };
 
 #endif
-
 

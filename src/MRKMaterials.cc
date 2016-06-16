@@ -8,8 +8,8 @@ MRKMaterials::MRKMaterials()
 
 //	nistMan->SetVerbose(2);
 
-	El_B=El_Fe=El_Nd=El_C = El_Cl = El_H = El_O = nullptr;
-	NeodymiumMagnet=BorosilicateGlass=AluminumOxide=StretchedTeflonTape = StainlessSteel304 = G10 = EpoxyResin = CartridgeBrass = nullptr;
+	El_B = El_Fe = El_Nd = El_C = El_Cl = El_H = El_O = nullptr;
+	NeodymiumMagnet = BorosilicateGlass = AluminumOxide = StretchedTeflonTape = StainlessSteel304 = G10 = EpoxyResin = CartridgeBrass = nullptr;
 }
 
 MRKMaterials::~MRKMaterials()
@@ -31,7 +31,6 @@ MRKMaterials::~MRKMaterials()
 //	delete StretchedTeflonTape;
 
 }
-
 
 G4Material* MRKMaterials::getMaterial(const G4String material)
 {

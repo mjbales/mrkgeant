@@ -52,7 +52,7 @@ void MRKDetectorConstruction::defineMacroCommands(MRKMacroMessenger* inpMacroMes
 void MRKDetectorConstruction::setExperimentModel(G4String inpModelString)
 {
 	delete theGeometry;
-	theGeometry=nullptr;
+	theGeometry = nullptr;
 	if(inpModelString == "RDK2")
 	{
 		experimentModel = MRKExperimentModel::MODEL_RDK2;

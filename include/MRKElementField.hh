@@ -1,35 +1,3 @@
-//
-// ********************************************************************
-// * License and Disclaimer                                           *
-// *                                                                  *
-// * The  Geant4 software  is  copyright of the Copyright Holders  of *
-// * the Geant4 Collaboration.  It is provided  under  the terms  and *
-// * conditions of the Geant4 Software License,  included in the file *
-// * LICENSE and available at  http://cern.ch/geant4/license .  These *
-// * include a list of copyright holders.                             *
-// *                                                                  *
-// * Neither the authors of this software system, nor their employing *
-// * institutes,nor the agencies providing financial support for this *
-// * work  make  any representation or  warranty, express or implied, *
-// * regarding  this  software system or assume any liability for its *
-// * use.  Please see the license in the file  LICENSE  and URL above *
-// * for the full disclaimer and the limitation of liability.         *
-// *                                                                  *
-// * This  code  implementation is the result of  the  scientific and *
-// * technical work of the GEANT4 collaboration.                      *
-// * By using,  copying,  modifying or  distributing the software (or *
-// * any work based  on the software)  you  agree  to acknowledge its *
-// * use  in  resulting  scientific  publications,  and indicate your *
-// * acceptance of all terms of the Geant4 Software license.          *
-// ********************************************************************
-//
-//
-//
-//
-
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo....
-
 #ifndef MRKElementField_h
 #define MRKElementField_h 1
 
@@ -37,7 +5,6 @@
 
 #include "G4Navigator.hh"
 #include "G4TransportationManager.hh"
-
 #include "G4UserLimits.hh"
 #include "G4VisAttributes.hh"
 
@@ -56,17 +23,17 @@
 class MRKElementField
 {
 
-  private:
+private:
 
-    MRKElementField& operator=(const MRKElementField&);
+	MRKElementField& operator=(const MRKElementField&);
 
-  public:
+public:
 
-    ///  Constructor.
-    MRKElementField(const G4ThreeVector, G4LogicalVolume*);
+	///  Constructor.
+	MRKElementField(const G4ThreeVector, G4LogicalVolume*);
 
-    /// the actual implementation constructs the MRKElementField
-    void construct();
+	/// the actual implementation constructs the MRKElementField
+	void construct();
 
     ///  Destructor.
     virtual ~MRKElementField() { if (aNavigator) delete aNavigator; }
@@ -136,25 +103,25 @@ class MRKElementField
     virtual G4double getWidth()  = 0;
     virtual G4double getHeight() = 0;
 
-  protected:
+protected:
 
-    G4LogicalVolume* lvolume;
+	G4LogicalVolume* lvolume;
 
-    G4AffineTransform global2local;
+	G4AffineTransform global2local;
 
 //    MRKElementField(const MRKElementField&);
 
-  private:
+private:
 
-    static G4Navigator* aNavigator;
+	static G4Navigator* aNavigator;
 
-    G4String color;
+	G4String color;
 
-    G4ThreeVector center;
-    G4double minX, minY, minZ, maxX, maxY,maxZ;
+	G4ThreeVector center;
+	G4double minX, minY, minZ, maxX, maxY,maxZ;
 
-    G4double maxStep;
-    G4UserLimits* userLimits;
+	G4double maxStep;
+	G4UserLimits* userLimits;
 
 };
 

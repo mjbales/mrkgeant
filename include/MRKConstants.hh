@@ -1,6 +1,5 @@
 #ifndef MRKCONSTANTS_H_INCLUDED
 #define MRKCONSTANTS_H_INCLUDED
-#pragma once
 
 //Physical or other constants (2006 CODATA)
 #define PCHARGE 1.602176487e-19   	//Elementary charge in Columbs (Also joules/eV)

@@ -350,7 +350,6 @@ int countTString(TString inpString, char inpChar)
 	return numCharFound;
 }
 
-
 TString getNextEventFileName(TString inpFileName)
 {
 

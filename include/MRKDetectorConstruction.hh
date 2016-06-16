@@ -1,6 +1,8 @@
 #ifndef MRKDetectorConstruction_h
 #define MRKDetectorConstruction_h 1
 
+#include <string>
+
 #include "G4VUserDetectorConstruction.hh"
 #include "G4VPhysicalVolume.hh"
 
@@ -11,7 +13,7 @@
 
 enum class MRKExperimentModel
 {
-	MODEL_RDK2,MODEL_SBDONLY
+	MODEL_RDK2, MODEL_SBDONLY
 };
 
 class MRKDetectorConstruction: public G4VUserDetectorConstruction
@@ -26,11 +28,11 @@ public:
 
 	void defineMacroCommands(MRKMacroMessenger* inpMacroMessenger);
 
-	void setExperimentModel(string modelName);
+	void setExperimentModel(std::string modelName);
 
 	inline const G4VPhysicalVolume* GetWorld()      {return physiWorld;};
 	inline MRKExperimentModel getExperimentModel(){ return experimentModel;}
-	inline void setExperimentModel(G4String inpModelString);
+	void setExperimentModel(G4String inpModelString);
 
 	inline bool getUseSBDDetector(){return theGeometry->getUseSBDDetector();};
 	inline bool getUseBAPDDetectors(){return theGeometry->getUseBAPDDetectors();};

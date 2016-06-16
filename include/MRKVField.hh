@@ -24,7 +24,6 @@
 #include "MRKConstants.hh"
 #include "MRKText.hh"
 #include "MRKVector.hh" //Math/Physics vectors
-using namespace std;
 
 //File should be called cField.h  but I haven't renamed it yet
 
@@ -75,7 +74,7 @@ public:
 //Scalar field in 3D
 class cSField3D:public cField3D{
 protected:
-	vector<vector<vector<double> > > fArray;
+	std::vector<std::vector<std::vector<double> > > fArray;
 
     //Linear Interp
     double xFloor,yFloor,zFloor;
@@ -101,9 +100,9 @@ public:
 //Vector field in 3D
 class cVField3D:public cField3D{
 protected:
-	vector<vector<vector<double> > > xArray;
-	vector<vector<vector<double> > > yArray;
-	vector<vector<vector<double> > > zArray;
+	std::vector<std::vector<std::vector<double> > > xArray;
+	std::vector<std::vector<std::vector<double> > > yArray;
+	std::vector<std::vector<std::vector<double> > > zArray;
 
     //Linear Interp
     double xFloor,yFloor,zFloor;
@@ -130,7 +129,7 @@ public:
 	void setSize( int, int, int); //Clears values and then resizes
 	void setVector( int inpRow, int inpColumn, int inpLayer,MRKVector3D inpVec);
 	inline void setSymmetryInY(bool inp){symmetryInY=inp;};
-	void convertToROOTFile(string rootPathOut);
+	void convertToROOTFile(std::string rootPathOut);
 
 
 private:
@@ -185,7 +184,7 @@ public:
 
 class cSField2D:public cField2D{
 protected:
-	vector<vector<double> > fArray;  //Multidimensional storage vector of math/physics vectors...confusing I know
+	std::vector<std::vector<double> > fArray;  //Multidimensional storage vector of math/physics vectors...confusing I know
 
 	//Linear Interp
 	double rFloor,zFloor;
@@ -214,8 +213,8 @@ public:
 //For cylindrically symmetric fields
 class cVField2D:public cField2D{
 protected:
-    vector<vector<double> > rArray;
-    vector<vector<double> > zArray;
+	std::vector<std::vector<double> > rArray;
+	std::vector<std::vector<double> > zArray;
 
     //2D Interp
     double rFloor,zFloor;

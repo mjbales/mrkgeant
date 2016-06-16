@@ -1,13 +1,4 @@
-/*
- *  cVector.cce
- *  Tracker
- *
- *  Created by Matthew Bales on 3/24/09.
- *  Copyright 2009 __MyCompanyName__. All rights reserved.
- *
- */
-
-#include "../include/MRKVector.hh"
+#include "MRKVector.hh"
 
 
 

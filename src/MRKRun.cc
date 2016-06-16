@@ -5,7 +5,7 @@
 
 #include "MRKText.hh"
 #include "MRKDetectorConstruction.hh"
-
+using namespace std;
 MRKRun::MRKRun(MRKPrimaryGeneratorAction* generator)
 {
 	theGenerator = generator;
@@ -41,7 +41,7 @@ MRKRun::~MRKRun()
 
 }
 
-void MRKRun::setOutputFile(string outputFileName)
+void MRKRun::setOutputFile(TString outputFileName)
 {
 	if(outputFileName == "")
 		this->outputFileName = "mattOut.root";
@@ -86,11 +86,11 @@ void MRKRun::openOutputFile()
 		}
 	}
 
-	geantResultsFile = new TFile(this->outputFileName.data(), "recreate");
+	geantResultsFile = new TFile(this->outputFileName, "recreate");
 	if(macroFileName != "")
 	{
 		//Add macro file to results file as record
-		TMacro macroFile(macroFileName.data());
+		TMacro macroFile(macroFileName);
 		macroFile.Write();
 	}
 

@@ -13,6 +13,7 @@
 #include "MRKPhys.hh"
 #include "MRKText.hh"
 
+using namespace std;
 MRKPrimaryGeneratorAction::MRKPrimaryGeneratorAction(MRKDetectorConstruction* myDC)
 :myDetector(myDC)
 {
@@ -163,14 +164,14 @@ void MRKPrimaryGeneratorAction::loadRDKEventFile(TString inputFileName)
     }
     inpFile = new TFile(inputFileName,"READ");
     if(inpFile->IsZombie()){
-        cout << "Error in input file:"<< inputFileName << endl;
+        G4cout << "Error in input file:"<< inputFileName << G4endl;
         delete inpFile;
         inpFile=nullptr;
         return;
     }
     TString currentParticleName=particleGun->GetParticleDefinition()->GetParticleName();
 
-    G4cout << "Loading " << currentParticleName << " data from event file:  " << inputFileName << endl;
+    G4cout << "Loading " << currentParticleName << " data from event file:  " << inputFileName << G4endl;
     inpTree=(TTree*) inpFile->Get(DEFAULT_EVENTS_TREENAME);
     inpTree->SetBranchAddress("x0",&x0);
     inpTree->SetBranchAddress("y0",&y0);

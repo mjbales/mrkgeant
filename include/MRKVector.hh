@@ -8,8 +8,6 @@
 #ifndef CVECTOR_H_INCLUDED
 #define CVECTOR_H_INCLUDED
 
-#pragma once
-
 //Standard Libraries
 #include <cmath>
 #include <math.h>
@@ -17,26 +15,26 @@
 //Matt Libraries
 #include "MRKConstants.hh"
 
-class MRKVector3D{
-	friend MRKVector3D operator * (const double&, const MRKVector3D&);
+class MRKVector3D
+{
+	friend MRKVector3D operator *(const double&, const MRKVector3D&);
 public:
 	double x, y, z;
 
-
-	MRKVector3D(const double,const double,const double);
+	MRKVector3D(const double, const double, const double);
 	MRKVector3D();
 	void get(double& outX, double& outY, double& outZ);
-	const MRKVector3D operator + (const MRKVector3D&) const;
-	const MRKVector3D operator - (const MRKVector3D&) const;
-	const MRKVector3D& operator = (const MRKVector3D&);
-	const MRKVector3D operator * (const double) const;
-	const MRKVector3D operator / (const double) const;
-	const MRKVector3D& operator += (const MRKVector3D&);
-	const MRKVector3D& operator -= (const MRKVector3D&);
-	const MRKVector3D& operator *= (const double);
-	const MRKVector3D& operator /= (const double);
-	bool operator == (const MRKVector3D&);
-	bool operator != (const MRKVector3D&);
+	const MRKVector3D operator +(const MRKVector3D&) const;
+	const MRKVector3D operator -(const MRKVector3D&) const;
+	const MRKVector3D& operator =(const MRKVector3D&);
+	const MRKVector3D operator *(const double) const;
+	const MRKVector3D operator /(const double) const;
+	const MRKVector3D& operator +=(const MRKVector3D&);
+	const MRKVector3D& operator -=(const MRKVector3D&);
+	const MRKVector3D& operator *=(const double);
+	const MRKVector3D& operator /=(const double);
+	bool operator ==(const MRKVector3D&);
+	bool operator !=(const MRKVector3D&);
 	double mag();
 	double dotProd(const MRKVector3D&);
 	MRKVector3D crossProd(const MRKVector3D&);
@@ -54,23 +52,24 @@ public:
 
 MRKVector3D zeroVec3D();
 
-class MRKVector2D{
-	friend MRKVector2D operator * (const double&, const MRKVector2D&);
+class MRKVector2D
+{
+	friend MRKVector2D operator *(const double&, const MRKVector2D&);
 public:
-	double r,z;
-	MRKVector2D(const double,const double);
+	double r, z;
+	MRKVector2D(const double, const double);
 	MRKVector2D();
-	const MRKVector2D operator + (const MRKVector2D&) const;
-	const MRKVector2D operator - (const MRKVector2D&) const;
-	const MRKVector2D& operator = (const MRKVector2D&);
-	const MRKVector2D operator * (const double) const;
-	const MRKVector2D operator / (const double) const;
-	const MRKVector2D& operator += (const MRKVector2D&);
-	const MRKVector2D& operator -= (const MRKVector2D&);
-	const MRKVector2D& operator *= (const double);
-	const MRKVector2D& operator /= (const double);
-	bool operator == (const MRKVector2D&);
-	bool operator != (const MRKVector2D&);
+	const MRKVector2D operator +(const MRKVector2D&) const;
+	const MRKVector2D operator -(const MRKVector2D&) const;
+	const MRKVector2D& operator =(const MRKVector2D&);
+	const MRKVector2D operator *(const double) const;
+	const MRKVector2D operator /(const double) const;
+	const MRKVector2D& operator +=(const MRKVector2D&);
+	const MRKVector2D& operator -=(const MRKVector2D&);
+	const MRKVector2D& operator *=(const double);
+	const MRKVector2D& operator /=(const double);
+	bool operator ==(const MRKVector2D&);
+	bool operator !=(const MRKVector2D&);
 	double mag();
 	double dotProd(const MRKVector2D&);
 	MRKVector2D scale(const double);

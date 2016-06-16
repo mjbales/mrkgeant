@@ -1,4 +1,4 @@
-#include "../include/MRKPhys.hh"
+#include "MRKPhys.hh"
 
 using namespace std;
 

@@ -16,8 +16,7 @@
 #include "MRKGeometry.hh"
 #include "MRKMacroMessenger.hh"
 
-
-class MRKSBDOnlyGeometry : public MRKGeometry
+class MRKSBDOnlyGeometry: public MRKGeometry
 {
 public:
 	MRKSBDOnlyGeometry(MRKMacroMessenger* inpMacroMessenger);

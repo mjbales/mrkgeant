@@ -1,89 +1,52 @@
-//
-// ********************************************************************
-// * License and Disclaimer                                           *
-// *                                                                  *
-// * The  Geant4 software  is  copyright of the Copyright Holders  of *
-// * the Geant4 Collaboration.  It is provided  under  the terms  and *
-// * conditions of the Geant4 Software License,  included in the file *
-// * LICENSE and available at  http://cern.ch/geant4/license .  These *
-// * include a list of copyright holders.                             *
-// *                                                                  *
-// * Neither the authors of this software system, nor their employing *
-// * institutes,nor the agencies providing financial support for this *
-// * work  make  any representation or  warranty, express or implied, *
-// * regarding  this  software system or assume any liability for its *
-// * use.  Please see the license in the file  LICENSE  and URL above *
-// * for the full disclaimer and the limitation of liability.         *
-// *                                                                  *
-// * This  code  implementation is the result of  the  scientific and *
-// * technical work of the GEANT4 collaboration.                      *
-// * By using,  copying,  modifying or  distributing the software (or *
-// * any work based  on the software)  you  agree  to acknowledge its *
-// * use  in  resulting  scientific  publications,  and indicate your *
-// * acceptance of all terms of the Geant4 Software license.          *
-// ********************************************************************
-//
-
 #ifndef MRKBGODetector_h
 #define MRKBGODetector_h 1
 
 #include "G4VSensitiveDetector.hh"
-#include "MRKHit.hh"
 #include "G4ParticleTable.hh"
 #include "G4ParticleDefinition.hh"
+
 #include "TRandom3.h"
 
 #include "MRKText.hh"
+#include "MRKHit.hh"
 class G4Step;
 class G4HCofThisEvent;
 class G4TouchableHistory;
 
-
-
-class MRKBGODetector : public G4VSensitiveDetector
+class MRKBGODetector: public G4VSensitiveDetector
 {
 
-  public:
+public:
 
-      MRKBGODetector(G4String name, int inpDetNum, G4ThreeVector inpGammaDetOffset,bool inpusePositionalLightOutput=true,bool inpuseNormalizedlightOutput=true);
-      ~MRKBGODetector();
+	MRKBGODetector(G4String name, int inpDetNum, G4ThreeVector inpGammaDetOffset, bool inpusePositionalLightOutput = true, bool inpuseNormalizedlightOutput = true);
+	~MRKBGODetector();
 
-      void Initialize(G4HCofThisEvent* HCE);
-      G4bool ProcessHits(G4Step*aStep,G4TouchableHistory* ROhist);
-      void EndOfEvent(G4HCofThisEvent *HCE);
-      void clear();
-      void DrawAll();
-      void PrintAll();
+	void Initialize(G4HCofThisEvent* HCE);
+	G4bool ProcessHits(G4Step*aStep, G4TouchableHistory* ROhist);
+	void EndOfEvent(G4HCofThisEvent *HCE);
+	void clear();
+	void DrawAll();
+	void PrintAll();
 
-
-  private:
-      MRKHitsCollection* mrkCollection;
-      G4ParticleDefinition* protonParDef;
-      G4ParticleDefinition* electronParDef;
-      G4ParticleDefinition* photonParDef;
-      double getBGOPosGain(G4double z);
-      double kk0[12];
-      double kk1[12];
-      double kk2[12];
-      double kk3[12];
-      double kk4[12];
-      double kk5[12];
-      double kk6[12];
-      double norm_func[12];
-      bool usePositionalLightOutput,useNormalizedLightOutput;
+private:
+	MRKHitsCollection* mrkCollection;
+	G4ParticleDefinition* protonParDef;
+	G4ParticleDefinition* electronParDef;
+	G4ParticleDefinition* photonParDef;
+	double getBGOPosGain(G4double z);
+	double kk0[12];
+	double kk1[12];
+	double kk2[12];
+	double kk3[12];
+	double kk4[12];
+	double kk5[12];
+	double kk6[12];
+	double norm_func[12];
+	bool usePositionalLightOutput, useNormalizedLightOutput;
 	double bgoCenterZPosition;
-      int HCID;
+	int HCID;
+	int DetNum;
 
-      double absorbDataStart,absorbDataSpacing,thicknessMultiplier;
-      G4ThreeVector gMomentum;
-      double gKE;
-      int DetNum;
-
-
-  public:
 };
-
-
-
 
 #endif

@@ -41,10 +41,7 @@ TString filePathFromFullPath(TString fullPath);
 TString fileExtensionFromFullPath(TString fullPath);
 int replaceAllInString(TString& original, TString toFind, TString toReplace);
 int countTString(TString inpString, char inpChar);
-inline void getline(std::istream& inpFileStream, TString inpString)
-{
-	inpString.ReadLine(inpFileStream);
-}
+inline void getline(std::istream& inpFileStream, TString inpString){ inpString.ReadLine(inpFileStream);}
 TString removeChar(TString inp);
 
 TString getNextEventFileName(TString inpFileName);                       //Based on Changbo's event naming pattern, increments the set number

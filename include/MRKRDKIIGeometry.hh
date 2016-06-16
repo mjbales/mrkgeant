@@ -16,8 +16,7 @@
 #include "MRKGeometry.hh"
 #include "MRKMacroMessenger.hh"
 
-
-class MRKRDKIIGeometry : public MRKGeometry
+class MRKRDKIIGeometry: public MRKGeometry
 {
 public:
 	MRKRDKIIGeometry(MRKMacroMessenger* inpMacroMessenger);
@@ -241,7 +240,7 @@ private:
 	double SiDeadLayerLength;
 	G4ThreeVector gammaDetOffset;
 
-	bool useSBDDetector,useBGODetectors,useBAPDDetectors;
+	bool useSBDDetector, useBGODetectors, useBAPDDetectors;
 	bool useBAPDCollectionEfficiencyModel;
 	bool useBGOCalibrationWeakSource;
 	bool useDoubleWeakSource;

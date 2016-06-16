@@ -19,7 +19,12 @@
 
 MRKSurfaceBarrierDetector::MRKSurfaceBarrierDetector(G4String name):G4VSensitiveDetector(name)
 {
+	G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+	protonParDef=particleTable->FindParticle("proton");
+	electronParDef=particleTable->FindParticle("e-");
+	photonParDef=particleTable->FindParticle("gamma");
 
+	mrkCollection=nullptr;
     HCID=-1;
     G4String HCname=name+"_collection";
     collectionName.insert(HCname);
@@ -33,10 +38,7 @@ void MRKSurfaceBarrierDetector::Initialize(G4HCofThisEvent* HCE)
 
     mrkCollection = new MRKHitsCollection(SensitiveDetectorName,collectionName[0]);
 
-    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-    protonParDef=particleTable->FindParticle("proton");
-    electronParDef=particleTable->FindParticle("e-");
-    photonParDef=particleTable->FindParticle("gamma");
+
 }
 
 G4bool MRKSurfaceBarrierDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)

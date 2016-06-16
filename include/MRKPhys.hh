@@ -13,8 +13,6 @@
 #include <string>
 #include <fstream>
 
-//Matt Libraries
-
 //ROOT Libraries
 #include "TRandom3.h"
 #include "TMath.h"
