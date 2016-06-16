@@ -9,9 +9,9 @@
 #include "MRKGlobalField.hh"
 #include "MRKGeometry.hh"
 
-enum ExperimentModel
+enum class MRKExperimentModel
 {
-	MODEL_RDK2
+	MODEL_RDK2,MODEL_SBDONLY
 };
 
 class MRKDetectorConstruction: public G4VUserDetectorConstruction
@@ -29,9 +29,8 @@ public:
 	void setExperimentModel(string modelName);
 
 	inline const G4VPhysicalVolume* GetWorld()      {return physiWorld;};
-	inline ExperimentModel getExperimentModel(){ return experimentModel;}
+	inline MRKExperimentModel getExperimentModel(){ return experimentModel;}
 	inline void setExperimentModel(G4String inpModelString);
-	inline void setExperimentModel(ExperimentModel inpModel){ G4cout << "Setting experimental model for detector construction." << G4endl;experimentModel=inpModel;}
 
 	inline bool getUseSBDDetector(){return theGeometry->getUseSBDDetector();};
 	inline bool getUseBAPDDetectors(){return theGeometry->getUseBAPDDetectors();};
@@ -47,7 +46,7 @@ private:
 
 	MRKGeometry* theGeometry; //Geometry - Owned by this
 
-	ExperimentModel experimentModel;
+	MRKExperimentModel experimentModel;
 
 };
 

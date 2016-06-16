@@ -362,28 +362,28 @@ G4VPhysicalVolume* MRKRDKIIGeometry::Construct()
 	constructRDK2MagnetCoil9();
 	constructRDK2MagnetCoil10();
 	constructRDK2MagnetCoil11();
-	logicSBDDetectionVolume = constructRDK2SBD1mm5Silicon();
+	logicSBDDetectionVolume = constructRDK2SBDSilicon();
 
-	constructRDK2SBD1mm5SiliconHolder();
+	constructRDK2SBDSiliconHolder();
 	if(SiDeadLayerLength > 0)
 	{
 		constructRDK2SBDDeadLayer();
 	}
 	if(!SBDGoldLayerOff)
 	{
-		constructRDK2SBD1mm5GoldCoating();
+		constructRDK2SBDGoldCoating();
 	}
 	if(!SBDCanOff)
 	{
-		constructRDK2SBD1mm5AluminumCoating();
-		constructRDK2SBD1mm5PlasticLining();
-		constructRDK2SBD1mm5BackBrassRings();
-		constructRDK2SBD1mm5InternalBrassDisc();
-		constructRDK2SBD1mm5Spring();
-		constructRDK2SBD1mm5HexScrew();
-		constructRDK2SBD1mm5FrontCase();
-		constructRDK2SBD1mm5MidCase();
-		constructRDK2SBD1mm5BackCase();
+		constructRDK2SBDAluminumCoating();
+		constructRDK2SBDPlasticLining();
+		constructRDK2SBDBackBrassRings();
+		constructRDK2SBDInternalBrassDisc();
+		constructRDK2SBDSpring();
+		constructRDK2SBDHexScrew();
+		constructRDK2SBDFrontCase();
+		constructRDK2SBDMidCase();
+		constructRDK2SBDBackCase();
 		constructSBDEpoxy();
 	}
 	constructRDK2BeOTube();
@@ -1323,7 +1323,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2MagnetCoil11()
 	return logicMagnetCoil11;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5SiliconHolder()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDSiliconHolder()
 {
 	G4ThreeVector position = G4ThreeVector(-4.59465367880202 * cm, 0 * cm, -27.4565677206964 * cm) + sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5SiliconHolder = new G4Tubs("solidSBD1mm5SiliconHolder", 1.382 * cm, 1.74719 * cm, 0.24384 * cm, 0., twopi);
@@ -1335,7 +1335,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5SiliconHolder()
 	return logicSBD1mm5SiliconHolder;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5Silicon()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDSilicon()
 {
 	double shrink = SiDeadLayerLength;  //Amount to shrink length SBD Silicon
 	if(!use1_5mmSBD)
@@ -1367,7 +1367,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDDeadLayer()
 	return logicSBDDeadLayer;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5GoldCoating()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDGoldCoating()
 {
 	G4ThreeVector position = G4ThreeVector(-4.5883232779 * cm, 0 * cm, -27.4187387364 * cm) + sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5GoldCoating = new G4Tubs("solidSBD1mm5GoldCoating", 0 * cm, 1.382 * cm, 0.000001 * cm, 0., twopi);
@@ -1379,7 +1379,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5GoldCoating()
 	return logicSBD1mm5GoldCoating;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5AluminumCoating()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDAluminumCoating()
 {
 	double shrink = 0; //Amount to shrink length SBD Silicon
 	if(!use1_5mmSBD)
@@ -1428,7 +1428,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5AluminumCoating()
 //	return logicSBD1mm5AluminumCoating;
 //}
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5PlasticLining()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDPlasticLining()
 {
 	G4ThreeVector position = G4ThreeVector(-4.59936413747328 * cm, 0 * cm, -27.4847163117643 * cm) + sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5PlasticLining = new G4Tubs("solidSBD1mm5PlasticLining", 1.74719 * cm, 1.75039 * cm, 0.27238 * cm, 0., twopi);
@@ -1438,7 +1438,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5PlasticLining()
 	return logicSBD1mm5PlasticLining;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5BackBrassRings()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDBackBrassRings()
 {
 	G4ThreeVector position = G4ThreeVector(-4.6374142125284 * cm, 0 * cm, -27.7120945943427 * cm) + sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5BackBrassRings = new G4Tubs("solidSBD1mm5BackBrassRings", 1.511138 * cm, 1.74719 * cm, 0.01524 * cm, 0., twopi);
@@ -1448,7 +1448,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5BackBrassRings()
 	return logicSBD1mm5BackBrassRings;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5InternalBrassDisc()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDInternalBrassDisc()
 {
 	G4ThreeVector position = G4ThreeVector(-4.64212467119967 * cm, 0 * cm, -27.7402431854105 * cm) + sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5InternalBrassDisc = new G4Tubs("solidSBD1mm5InternalBrassDisc", 0.15748 * cm, 1.74719 * cm, 0.0132999999999992 * cm, 0., twopi);
@@ -1458,7 +1458,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5InternalBrassDisc()
 	return logicSBD1mm5InternalBrassDisc;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5Spring()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDSpring()
 {
 	G4ThreeVector position = G4ThreeVector(-4.69479053699178 * cm, 0 * cm, -28.0549619894331 * cm) + sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5Spring = new G4Tubs("solidSBD1mm5Spring", 0.029 * cm, 0.222 * cm, 0.305795 * cm, 0., twopi);
@@ -1468,7 +1468,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5Spring()
 	return logicSBD1mm5Spring;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5HexScrew()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDHexScrew()
 {
 	G4ThreeVector position = G4ThreeVector(-4.78142320007002 * cm, 0 * cm, -28.5726583702519 * cm) + sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5HexScrew = new G4Tubs("solidSBD1mm5HexScrew", 0.20955 * cm, 0.4178 * cm, 0.219099999999999 * cm, 0., twopi);
@@ -1478,7 +1478,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5HexScrew()
 	return logicSBD1mm5HexScrew;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5FrontCase()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDFrontCase()
 {
 	G4ThreeVector position = G4ThreeVector(-4.54864418295427 * cm, 0 * cm, -27.1816258149839 * cm) + sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5FrontCase = new G4Tubs("solidSBD1mm5FrontCase", 1.511138 * cm, 1.805 * cm, 0.0349249999999994 * cm, 0., twopi);
@@ -1490,7 +1490,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5FrontCase()
 	return logicSBD1mm5FrontCase;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5MidCase()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDMidCase()
 {
 	G4ThreeVector position = G4ThreeVector(-4.65916005983858 * cm, 0 * cm, -27.8420426537732 * cm) + sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5MidCase = new G4Tubs("solidSBD1mm5MidCase", 1.75039 * cm, 1.805 * cm, 0.634675 * cm, 0., twopi);
@@ -1500,7 +1500,7 @@ G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5MidCase()
 	return logicSBD1mm5MidCase;
 }
 
-G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBD1mm5BackCase()
+G4LogicalVolume* MRKRDKIIGeometry::constructRDK2SBDBackCase()
 {
 	G4ThreeVector position = G4ThreeVector(-4.76810385827706 * cm, 0 * cm, -28.4930651222079 * cm) + sbdDetectorOffset;
 	G4Tubs* solidSBD1mm5BackCase = new G4Tubs("solidSBD1mm5BackCase", 0.4178 * cm, 1.805 * cm, 0.0253999999999994 * cm, 0., twopi);

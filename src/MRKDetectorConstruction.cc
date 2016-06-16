@@ -1,9 +1,10 @@
 #include "MRKDetectorConstruction.hh"
 
-#include "MRKRDKIIGeometry.hh"
-
 #include "G4UIcmdWithAString.hh"
 #include "G4UIdirectory.hh"
+
+#include "MRKRDKIIGeometry.hh"
+#include "MRKSBDOnlyGeometry.hh"
 
 using namespace CLHEP;
 MRKDetectorConstruction::MRKDetectorConstruction(MRKMacroMessenger* inpMacroMessenger)
@@ -12,12 +13,12 @@ MRKDetectorConstruction::MRKDetectorConstruction(MRKMacroMessenger* inpMacroMess
 	defineMacroCommands(inpMacroMessenger);
 
 	physiWorld = nullptr;
-	theGeometry = nullptr;
+	theGeometry = new MRKRDKIIGeometry(theMacroMessenger);
 
 	// ensure the global field is initialized
 	theGlobalField = MRKGlobalField::getObject();
 
-	experimentModel = MODEL_RDK2;
+	experimentModel = MRKExperimentModel::MODEL_RDK2;
 }
 
 MRKDetectorConstruction::~MRKDetectorConstruction()
@@ -38,9 +39,9 @@ void MRKDetectorConstruction::defineMacroCommands(MRKMacroMessenger* inpMacroMes
 	detDir->SetGuidance("Detector Construction");
 	inpMacroMessenger->addCommand(MRKCommandAndFunction(detDir, nullptr));
 
-	G4UIcmdWithAString* modelCmd = new G4UIcmdWithAString("/MRK/det/setmodel",inpMacroMessenger);
+	G4UIcmdWithAString* modelCmd = new G4UIcmdWithAString("/MRK/det/setmodel", inpMacroMessenger);
 	modelCmd->SetGuidance("Sets model used in detector construction");
-	modelCmd->SetParameterName("filename",false);
+	modelCmd->SetParameterName("filename", false);
 	modelCmd->AvailableForStates(G4State_PreInit);
 	func = [=](G4String a)
 	{	this->setExperimentModel(a);};
@@ -50,24 +51,29 @@ void MRKDetectorConstruction::defineMacroCommands(MRKMacroMessenger* inpMacroMes
 
 void MRKDetectorConstruction::setExperimentModel(G4String inpModelString)
 {
+	delete theGeometry;
+	theGeometry=nullptr;
 	if(inpModelString == "RDK2")
-		experimentModel = MODEL_RDK2;
-	else
-		G4cout << inpModelString << " not a recognized model" << inpModelString;
+	{
+		experimentModel = MRKExperimentModel::MODEL_RDK2;
+		theGeometry = new MRKRDKIIGeometry(theMacroMessenger);
 	}
+	else if(inpModelString == "SBDONLY" || inpModelString == "SBDOnly")
+	{
+		G4cout << "Set to SBD Only Model" << G4endl;
+		experimentModel = MRKExperimentModel::MODEL_SBDONLY;
+		theGeometry = new MRKSBDOnlyGeometry(theMacroMessenger);
+	}
+	else
+	{
+		G4cout << inpModelString << " not a recognized model" << inpModelString << G4endl;
+	}
+}
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
 G4VPhysicalVolume* MRKDetectorConstruction::Construct()
 {
-	switch (experimentModel)
-	{
-		case MODEL_RDK2:
-			theGeometry = new MRKRDKIIGeometry(theMacroMessenger);
-			break;
-		default:
-			break;
-	}
 	physiWorld = theGeometry->Construct();
 
 	theGlobalField->constructFields(theGeometry->getWorldLogicalVolume());

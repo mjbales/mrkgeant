@@ -1,62 +1,34 @@
-//
-// ********************************************************************
-// * License and Disclaimer                                           *
-// *                                                                  *
-// * The  Geant4 software  is  copyright of the Copyright Holders  of *
-// * the Geant4 Collaboration.  It is provided  under  the terms  and *
-// * conditions of the Geant4 Software License,  included in the file *
-// * LICENSE and available at  http://cern.ch/geant4/license .  These *
-// * include a list of copyright holders.                             *
-// *                                                                  *
-// * Neither the authors of this software system, nor their employing *
-// * institutes,nor the agencies providing financial support for this *
-// * work  make  any representation or  warranty, express or implied, *
-// * regarding  this  software system or assume any liability for its *
-// * use.  Please see the license in the file  LICENSE  and URL above *
-// * for the full disclaimer and the limitation of liability.         *
-// *                                                                  *
-// * This  code  implementation is the result of  the  scientific and *
-// * technical work of the GEANT4 collaboration.                      *
-// * By using,  copying,  modifying or  distributing the software (or *
-// * any work based  on the software)  you  agree  to acknowledge its *
-// * use  in  resulting  scientific  publications,  and indicate your *
-// * acceptance of all terms of the Geant4 Software license.          *
-// ********************************************************************
-//
-//
-//
-
 #include "MRKMaterials.hh"
 
-#include "../include/MRKText.hh"
+#include "MRKText.hh"
 
 MRKMaterials::MRKMaterials()
 {
 	nistMan = G4NistManager::Instance();
 
-	nistMan->SetVerbose(2);
+//	nistMan->SetVerbose(2);
 
-	El_C = El_Cl = El_H = El_O = nullptr;
-	StretchedTeflonTape = StainlessSteel304 = G10 = EpoxyResin = CartridgeBrass = nullptr;
+	El_B=El_Fe=El_Nd=El_C = El_Cl = El_H = El_O = nullptr;
+	NeodymiumMagnet=BorosilicateGlass=AluminumOxide=StretchedTeflonTape = StainlessSteel304 = G10 = EpoxyResin = CartridgeBrass = nullptr;
 }
 
 MRKMaterials::~MRKMaterials()
 {
 
-	delete El_O;
-	delete El_C;
-	delete El_H;
-	delete El_Cl;
-	delete El_Nd;
-	delete El_Fe;
-	delete El_B;
-
-	delete EpoxyResin;
-	delete G10;
-	delete StainlessSteel304;
-	delete CartridgeBrass;
-	delete NeodymiumMagnet;
-	delete StretchedTeflonTape;
+//	delete El_O;
+//	delete El_C;
+//	delete El_H;
+//	delete El_Cl;
+//	delete El_Nd;
+//	delete El_Fe;
+//	delete El_B;
+//
+//	delete EpoxyResin;
+//	delete G10;
+//	delete StainlessSteel304;
+//	delete CartridgeBrass;
+//	delete NeodymiumMagnet;
+//	delete StretchedTeflonTape;
 
 }
 
@@ -153,7 +125,7 @@ void MRKMaterials::createMaterials()
 
 	// Print all the materials defined.
 	//
-	G4cout << G4endl<< "The materials defined are : " << G4endl << G4endl;
-	G4cout << *(G4Material::GetMaterialTable()) << G4endl;
+//	G4cout << G4endl<< "The materials defined are : " << G4endl << G4endl;
+//	G4cout << *(G4Material::GetMaterialTable()) << G4endl;
 
 }

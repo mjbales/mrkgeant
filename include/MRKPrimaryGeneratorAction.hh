@@ -52,7 +52,7 @@ class MRKPrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
     inline void setGeneratorMode(GeneratorMode inp) { G4cout << "Setting generator mode." << G4endl; generatorMode=inp;}
     inline void setVerbose(bool inpBool){ eventByEventVerbose=inpBool; }
 
-    inline ExperimentModel getExperimentModel(){return myDetector->getExperimentModel();}
+    inline MRKExperimentModel getExperimentModel(){return myDetector->getExperimentModel();}
     inline bool getUseSBDDetector(){return myDetector->getUseSBDDetector();};
     inline bool getUseBAPDDetectors(){return myDetector->getUseBAPDDetectors();};
     inline bool getUseBGODetectors(){return myDetector->getUseBGODetectors();};
