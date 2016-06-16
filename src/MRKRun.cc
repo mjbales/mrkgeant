@@ -65,9 +65,6 @@ void MRKRun::openOutputFile()
 	{
 		fullName = "SBD_det/SBD_det_collection";
 		SBDCollectionID = SDMan->GetCollectionID(fullName);
-		G4cout << SBDCollectionID << G4endl;
-		string temp;
-		cin >> temp;
 	}
 
 	if(useBAPDDetectors)

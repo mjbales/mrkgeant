@@ -182,11 +182,6 @@ G4VPhysicalVolume* MRKSBDOnlyGeometry::Construct()
 	SDman->AddNewDetector(newSBDDet);
 	logicSBDDetectionVolume->SetSensitiveDetector(newSBDDet);
 	SDman->SetVerboseLevel(0);
-	G4String fullName = "SBD_det/SBD_det_collection";
-	G4int SBDCollectionID = SDman->GetCollectionID(fullName);
-	G4cout << SBDCollectionID << G4endl;
-	string temp;
-	cin >> temp;
 
 	G4cout << "------Returning world from detector construction----" << G4endl;
 
@@ -197,9 +192,9 @@ G4VPhysicalVolume* MRKSBDOnlyGeometry::Construct()
 
 void MRKSBDOnlyGeometry::constructWorld()
 {
-	G4double WorldLength = 4 * cm;
-	G4double WorldWidth = 4 * cm;
-	G4double WorldHeight = 4 * cm;
+	G4double WorldLength = 10 * cm;
+	G4double WorldWidth = 10 * cm;
+	G4double WorldHeight = 10 * cm;
 	G4GeometryManager::GetInstance()->SetWorldMaximumExtent(WorldLength);
 	G4cout << "Computed tolerance = " << G4GeometryTolerance::GetInstance()->GetSurfaceTolerance() / mm << " mm" << G4endl;
 
@@ -224,8 +219,8 @@ G4LogicalVolume*  MRKSBDOnlyGeometry::constructSBDDetectorEnvelope()
 	double thickness=1.6644*cm;
 
 	G4Tubs* solidSBDDetectorEnvelope = new G4Tubs("solidSBDDetectorEnvelope", 0., 1.805 * cm, thickness*0.5, 0., twopi);
-	G4LogicalVolume* logicSBDDetectorEnvelope = new G4LogicalVolume(solidSBDDetectorEnvelope, materials.getMaterial("G4_ALUMINUM_OXIDE"), "logicSBDDetectorEnvelope", 0, 0, 0);
-	new G4PVPlacement(nullptr, position, logicSBDDetectorEnvelope, "physiSBD1mm5SiliconHolder", logicWorld, false, 0);
+	G4LogicalVolume* logicSBDDetectorEnvelope = new G4LogicalVolume(solidSBDDetectorEnvelope, materials.getMaterial("G4_Galactic"), "logicSBDDetectorEnvelope", 0, 0, 0);
+	new G4PVPlacement(nullptr, position, logicSBDDetectorEnvelope, "physiSBD1mm5SiliconEnvelope", logicWorld, false, 0);
 	logicSBDDetectorEnvelope->SetVisAttributes(G4VisAttributes::Invisible);
 	return logicSBDDetectorEnvelope;
 
@@ -233,7 +228,7 @@ G4LogicalVolume*  MRKSBDOnlyGeometry::constructSBDDetectorEnvelope()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDSiliconHolder()
 {
-	G4ThreeVector position = G4ThreeVector(0,0,0.51851);
+	G4ThreeVector position = G4ThreeVector(0,0,0.51851*cm);
 	G4Tubs* solidSBD1mm5SiliconHolder = new G4Tubs("solidSBD1mm5SiliconHolder", 1.382 * cm, 1.74719 * cm, 0.24384 * cm, 0., twopi);
 	G4LogicalVolume* logicSBD1mm5SiliconHolder = new G4LogicalVolume(solidSBD1mm5SiliconHolder, materials.getMaterial("G4_ALUMINUM_OXIDE"), "logicSBD1mm5SiliconHolder", 0, 0, 0);
 	new G4PVPlacement(nullptr,  position, logicSBD1mm5SiliconHolder, "physiSBD1mm5SiliconHolder", logicSBDDetectorEnvelope, false, 0);
@@ -246,9 +241,9 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDSiliconHolder()
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDSilicon()
 {
 	G4ThreeVector position = G4ThreeVector(0,0,0.481864*cm-.5*SiDeadLayerLength)+sbdThicknessModifierVector;
-	double thickness=0.14999999*cm-.5*SiDeadLayerLength+sbdThicknessModifier;
+	double thickness=0.1499999999*cm-.5*SiDeadLayerLength+sbdThicknessModifier;
 
-	G4Tubs* solidSBD1mm5Silicon = new G4Tubs("solidSBD1mm5Silicon", 0 * cm, 1.382 * cm, thickness, 0., twopi);
+	G4Tubs* solidSBD1mm5Silicon = new G4Tubs("solidSBD1mm5Silicon", 0 * cm, 1.382 * cm, 0.5*thickness, 0., twopi);
 	G4LogicalVolume* logicSBD1mm5Silicon = new G4LogicalVolume(solidSBD1mm5Silicon, materials.getMaterial("G4_Si"), "logicSBD1mm5Silicon", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5Silicon, "physiSBD1mm5Silicon", logicSBDDetectorEnvelope, false, 0);
 	G4UserLimits* stepLimit = new G4UserLimits(1 * nm);
@@ -261,7 +256,7 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDDeadLayer()
 {
 	G4ThreeVector position = G4ThreeVector(0., 0. , 0.556865 * cm); //Get to center of gold layer
 	position += G4ThreeVector(0., 0., -0.5*20 * nm); //shift from gold layer position
-	position += G4ThreeVector(0., 0., SiDeadLayerLength * .5); //shift based on deadlayer thickness
+	position += G4ThreeVector(0., 0., -SiDeadLayerLength * .5); //shift based on deadlayer thickness
 	G4Tubs* solidSBDDeadLayer = new G4Tubs("solidSBDDeadLayer", 0 * cm, 1.382 * cm, 0.5 * SiDeadLayerLength, 0., twopi);
 	G4LogicalVolume* logicSBDDeadLayer = new G4LogicalVolume(solidSBDDeadLayer, materials.getMaterial("G4_SILICON_DIOXIDE"), "logicSBDDeadLayer", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBDDeadLayer, "physiSBDDeadLayer", logicSBDDetectorEnvelope, false, 0);
