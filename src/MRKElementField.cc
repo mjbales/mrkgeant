@@ -22,13 +22,13 @@ MRKElementField::MRKElementField(G4ThreeVector c, G4LogicalVolume* lv)
 	lvolume = lv;
 	lvolume->SetVisAttributes(getVisAttribute(color));
 
-	maxStep = 1 * um;
+	maxStep = 1 * CLHEP::um;
 
 	userLimits->SetMaxAllowedStep(maxStep);
 
-	userLimits->SetUserMaxTime(PROTON_MAX_TIME * second);
-	userLimits->SetUserMinEkine(1 * keV);
-	userLimits->SetUserMinRange(1 * um);
+	userLimits->SetUserMaxTime(PROTON_MAX_TIME * CLHEP::second);
+	userLimits->SetUserMinEkine(1 * CLHEP::keV);
+	userLimits->SetUserMinRange(1 * CLHEP::um);
 
 	lvolume->SetUserLimits(userLimits);
 }

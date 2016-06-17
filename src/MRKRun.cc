@@ -246,14 +246,14 @@ void MRKRun::RecordEvent(const G4Event* evt)
 				{
 					HitCode = theHit->GetHitCode();
 					Particle = theHit->GetParType();
-					Time = theHit->GetTime() / second;
-					PosX = theHit->GetPos().getX() / meter;
-					PosY = theHit->GetPos().getY() / meter;
-					PosZ = theHit->GetPos().getZ() / meter;
-					MomX = theHit->GetMom().getX() / keV;
-					MomY = theHit->GetMom().getY() / keV;
-					MomZ = theHit->GetMom().getZ() / keV;
-					KE = theHit->GetKE() / keV;
+					Time = theHit->GetTime() / CLHEP::second;
+					PosX = theHit->GetPos().getX() / CLHEP::meter;
+					PosY = theHit->GetPos().getY() / CLHEP::meter;
+					PosZ = theHit->GetPos().getZ() / CLHEP::meter;
+					MomX = theHit->GetMom().getX() / CLHEP::keV;
+					MomY = theHit->GetMom().getY() / CLHEP::keV;
+					MomZ = theHit->GetMom().getZ() / CLHEP::keV;
+					KE = theHit->GetKE() / CLHEP::keV;
 					if(useFluxTree) geantSBDFluxTree->Fill();
 
 					if(SBDTimeFirst == 0)
@@ -272,7 +272,7 @@ void MRKRun::RecordEvent(const G4Event* evt)
 				//Or add for EDeposit tree
 				else if(HitCode == MRKHITCODE_DETEDEP)
 				{
-					EDep = theHit->GetEDep() / keV;
+					EDep = theHit->GetEDep() / CLHEP::keV;
 					SBDEDepTotal += EDep;
 				}
 
@@ -305,8 +305,8 @@ void MRKRun::RecordEvent(const G4Event* evt)
 					if((HitCode != MRKHITCODE_NOTHING && HitCode != MRKHITCODE_DETEDEP))
 					{
 
-						KE = theHit->GetKE() / keV;
-						Time = theHit->GetTime() / second;
+						KE = theHit->GetKE() / CLHEP::keV;
+						Time = theHit->GetTime() / CLHEP::second;
 
 						if(Time < earliestBAPDFluxEventTime && (HitCode == MRKHITCODE_DETIN || HitCode == MRKHITCODE_SIO2REJECT))
 						{
@@ -316,13 +316,13 @@ void MRKRun::RecordEvent(const G4Event* evt)
 						if(useFluxTree)
 						{
 							Particle = theHit->GetParType();
-							Time = theHit->GetTime() / second;
-							PosX = theHit->GetPos().getX() / meter;
-							PosY = theHit->GetPos().getY() / meter;
-							PosZ = theHit->GetPos().getZ() / meter;
-							MomX = theHit->GetMom().getX() / keV;
-							MomY = theHit->GetMom().getY() / keV;
-							MomZ = theHit->GetMom().getZ() / keV;
+							Time = theHit->GetTime() / CLHEP::second;
+							PosX = theHit->GetPos().getX() / CLHEP::meter;
+							PosY = theHit->GetPos().getY() / CLHEP::meter;
+							PosZ = theHit->GetPos().getZ() / CLHEP::meter;
+							MomX = theHit->GetMom().getX() / CLHEP::keV;
+							MomY = theHit->GetMom().getY() / CLHEP::keV;
+							MomZ = theHit->GetMom().getZ() / CLHEP::keV;
 							geantBAPDFluxTree[j]->Fill();
 						}
 
@@ -330,7 +330,7 @@ void MRKRun::RecordEvent(const G4Event* evt)
 					//Or add for EDeposit tree
 					else if(HitCode == MRKHITCODE_DETEDEP)
 					{
-						EDep = theHit->GetEDep() / keV;
+						EDep = theHit->GetEDep() / CLHEP::keV;
 						BAPDEDepTotal[j] += EDep;
 						BAPDEnergyDeposited = true;
 
@@ -367,8 +367,8 @@ void MRKRun::RecordEvent(const G4Event* evt)
 					if(HitCode != MRKHITCODE_NOTHING && HitCode != MRKHITCODE_DETEDEP)
 					{
 
-						KE = theHit->GetKE() / keV;
-						Time = theHit->GetTime() / second;
+						KE = theHit->GetKE() / CLHEP::keV;
+						Time = theHit->GetTime() / CLHEP::second;
 						if(Time < earliestBGOFluxEventTime && HitCode == MRKHITCODE_DETIN)
 						{
 							earliestBGOFluxEventTime = Time;
@@ -380,12 +380,12 @@ void MRKRun::RecordEvent(const G4Event* evt)
 							HitCode = theHit->GetHitCode();
 							Particle = theHit->GetParType();
 
-							PosX = theHit->GetPos().getX() / meter;
-							PosY = theHit->GetPos().getY() / meter;
-							PosZ = theHit->GetPos().getZ() / meter;
-							MomX = theHit->GetMom().getX() / keV;
-							MomY = theHit->GetMom().getY() / keV;
-							MomZ = theHit->GetMom().getZ() / keV;
+							PosX = theHit->GetPos().getX() / CLHEP::meter;
+							PosY = theHit->GetPos().getY() / CLHEP::meter;
+							PosZ = theHit->GetPos().getZ() / CLHEP::meter;
+							MomX = theHit->GetMom().getX() / CLHEP::keV;
+							MomY = theHit->GetMom().getY() / CLHEP::keV;
+							MomZ = theHit->GetMom().getZ() / CLHEP::keV;
 							geantBGOFluxTree[j]->Fill();
 						}
 
@@ -394,7 +394,7 @@ void MRKRun::RecordEvent(const G4Event* evt)
 					else if(HitCode == MRKHITCODE_DETEDEP)
 					{
 						//   G4cout << "EDep hit!" << G4endl;
-						EDep = theHit->GetEDep() / keV;
+						EDep = theHit->GetEDep() / CLHEP::keV;
 						BGOEDepTotal[j] += EDep;
 						BGOEnergyDeposited = true;
 

@@ -15,6 +15,7 @@
 #include "TH1.h"
 #include "TVectorT.h"
 #include "TVector3.h"
+#include "TMath.h"
 
 #include "MRKConstants.hh"
 #include "MRKPhys.hh"
@@ -336,11 +337,11 @@ bool MRKEvents::createRandomParameters(bool useEarlyRejector)
 	}
 
 	eE = (ETEMAX - EMASSE - eEMin) * ranGen->Rndm() + EMASSE + eEMin; //Electron Energy
-	ePhi = ranGen->Rndm() * PI * 2. - PI;  //Electron phi angle
+	ePhi = ranGen->Rndm() * TMath::Pi() * 2. - TMath::Pi();  //Electron phi angle
 
 	eCTheta = ranGen->Rndm() * 2. - 1.;  //Electron cos theta angle
 
-	nPhi = ranGen->Rndm() * PI * 2. - PI; //Neutrino phi angle
+	nPhi = ranGen->Rndm() * TMath::Pi() * 2. - TMath::Pi(); //Neutrino phi angle
 
 	nCTheta = ranGen->Rndm() * 2. - 1.;  //Neutrino cos theta angle
 
@@ -352,7 +353,7 @@ bool MRKEvents::createRandomParameters(bool useEarlyRejector)
 	//Generate parameters that relate to four body events alone
 	if(fourBody)
 	{
-		gPhi = ranGen->Rndm() * PI * 2. - PI; //Photon phi angle
+		gPhi = ranGen->Rndm() * TMath::Pi() * 2. - TMath::Pi(); //Photon phi angle
 //        thrown++;
 		gCTheta = ranGen->Rndm() * 2. - 1.;  //Photon cos theta angle
 //        thrown++;
@@ -397,7 +398,7 @@ bool MRKEvents::createRandomParameters(bool useEarlyRejector)
 double MRKEvents::getJTWProb()
 {
 //     return (eE/eP)*FSCONST/(1.-exp(-eE/eP*FSCONST))*eP*eE*pow(ETEMAX-eE,2)*(1.+LITTLEA*eP/eE*cos_en+littleb*EMASSE/eE);
-	return (eE / eP) * 2 * PI * FSCONST / (1. - exp(-eE / eP * FSCONST * 2 * PI)) * eP * eE * pow(ETEMAX - eE, 2) * (1. + LITTLEA * eP / eE * cos_en + littleb * EMASSE / eE);  //Fermi function corrected 4/25/13
+	return (eE / eP) * 2 * TMath::Pi() * FSCONST / (1. - exp(-eE / eP * FSCONST * 2 * TMath::Pi())) * eP * eE * pow(ETEMAX - eE, 2) * (1. + LITTLEA * eP / eE * cos_en + littleb * EMASSE / eE);  //Fermi function corrected 4/25/13
 }
 
 double MRKEvents::getGapanovProb()
@@ -413,7 +414,7 @@ double MRKEvents::getGapanovProb()
 
 	if(fermiOn)
 	{
-		Prob *= (eE / eP) * 2 * PI * FSCONST / (1. - exp(-eE / eP * 2 * PI * FSCONST)); //Fermi function added 4/25/13
+		Prob *= (eE / eP) * 2 * TMath::Pi() * FSCONST / (1. - exp(-eE / eP * 2 * TMath::Pi() * FSCONST)); //Fermi function added 4/25/13
 	}
 	return Prob;
 }
@@ -1015,8 +1016,8 @@ double MRKEvents::calcFourBodyRate(double inpGEMin, double inpGEMax, double inpE
 	}
 	avg_integrand /= (double) numRadEvents;
 	double fraction = ((double) numRadEvents) / ((double) thrown);
-	rate = FSCONST * (GVCONSTANT * GVCONSTANT) / (pow(PI, 4)) * (ETEMAX - EMASSE) * (gEMax - gEMin) * fraction * avg_integrand;
-	rate *= 2. * PI / PLANKCONSTANT;
+	rate = FSCONST * (GVCONSTANT * GVCONSTANT) / (pow(TMath::Pi(), 4)) * (ETEMAX - EMASSE) * (gEMax - gEMin) * fraction * avg_integrand;
+	rate *= 2. * TMath::Pi() / PLANKCONSTANT;
 	return rate;
 }
 
@@ -1044,8 +1045,8 @@ double MRKEvents::calcFourBodyRate(double inpGEMin, double inpGEMax, double inpE
 //    }
 //    avg_integrand /= (double) numEvents;
 //    double fraction=((double) numEvents)/((double) thrown);
-//    rate=FSCONST*(GVCONSTANT*GVCONSTANT)/(pow(PI,4))*(ETEMAX-EMASSE)*fraction*avg_integrand;
-//	rate*=2.*PI/PLANKCONSTANT;
+//    rate=FSCONST*(GVCONSTANT*GVCONSTANT)/(pow(TMath::Pi(),4))*(ETEMAX-EMASSE)*fraction*avg_integrand;
+//	rate*=2.*TMath::Pi()/PLANKCONSTANT;
 //    return rate;
 //}
 

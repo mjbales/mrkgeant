@@ -10,14 +10,14 @@ MRKMirror::MRKMirror(G4LogicalVolume* lv, G4ThreeVector c, string fieldFilePath,
 {
 
 	G4cout << "Loading mirror E field:" << G4endl;
-	if(eField.loadField(fieldFilePath.data(),fieldScale*volt/m))
+	if(eField.loadField(fieldFilePath.data(),fieldScale*CLHEP::volt/CLHEP::m))
 	{
 		G4cout << "Error loading E field." << G4endl;
 	}
 	eFieldPrinted=false;
 	this->lvolume->SetVisAttributes(G4VisAttributes::Invisible);
 
-	fieldOffset.setVal(inpFieldOffset.getX()/m,inpFieldOffset.getY()/m,inpFieldOffset.getZ()/m);
+	fieldOffset.setVal(inpFieldOffset.getX()/CLHEP::m,inpFieldOffset.getY()/CLHEP::m,inpFieldOffset.getZ()/CLHEP::m);
 
 }
 
@@ -31,7 +31,7 @@ void MRKMirror::addFieldValue(const G4double point[4], G4double field[6])
 {
 
 	vecOut.setVal(0, 0, 0);
-	posIn.setVal(point[0] / m, point[1] / m, point[2] / m);
+	posIn.setVal(point[0] / CLHEP::m, point[1] / CLHEP::m, point[2] / CLHEP::m);
 	posIn -= fieldOffset;
 	eField.linearInterpAs3D(posIn, vecOut);
 	field[3] += vecOut.x;

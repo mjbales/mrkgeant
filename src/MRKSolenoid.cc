@@ -10,14 +10,14 @@ MRKSolenoid::MRKSolenoid(G4LogicalVolume* lv, G4ThreeVector c, std::string field
 {
 
 	G4cout << "Loading B field:" << G4endl;
-	if(bField.loadField(fieldFilePath.data(),fieldScale*tesla))
+	if(bField.loadField(fieldFilePath.data(),fieldScale*CLHEP::tesla))
 	{
 		G4cout << "Error loading B field." << G4endl;
 	}
 	bFieldPrinted=false;
 	this->lvolume->SetVisAttributes(G4VisAttributes::Invisible);
 
-	fieldOffset.setVal(inpFieldOffset.getX()/m,inpFieldOffset.getY()/m,inpFieldOffset.getZ()/m);
+	fieldOffset.setVal(inpFieldOffset.getX()/CLHEP::m,inpFieldOffset.getY()/CLHEP::m,inpFieldOffset.getZ()/CLHEP::m);
 
 }
 
@@ -31,7 +31,7 @@ void MRKSolenoid::addFieldValue(const G4double point[4], G4double field[6])
 {
 
 	vecOut.setVal(0., 0., 0.);
-	posIn.setVal(point[0] / m, point[1] / m, point[2] / m);
+	posIn.setVal(point[0] / CLHEP::m, point[1] / CLHEP::m, point[2] / CLHEP::m);
 	posIn -= fieldOffset;
 	bField.linearInterp(posIn, vecOut);
 

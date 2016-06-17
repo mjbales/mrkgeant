@@ -23,7 +23,7 @@ public:
 		angleX = angleY = angleZ = 0;
 		symmetry[0] = symmetry[1] = symmetry[2] = false;
 		histName = "field";
-		extents = G4ThreeVector(1. * m, 1. * m, 1. * m);
+		extents = G4ThreeVector(1. * CLHEP::m, 1. * CLHEP::m, 1. * CLHEP::m);
 		fieldFilePath = "";
 		useCubicInterpolation = false;
 	}

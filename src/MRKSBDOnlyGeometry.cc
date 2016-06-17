@@ -31,6 +31,7 @@
 #include "G4UnionSolid.hh"
 #include "G4UnitsTable.hh"
 #include "G4ios.hh"
+#include "G4SystemOfUnits.hh"
 
 #include "G4UIdirectory.hh"
 #include "G4UIcmdWithAString.hh"
@@ -45,8 +46,6 @@
 #include "MRKBAPDDetector.hh"
 #include "MRKConstants.hh"
 #include "MRKText.hh"
-
-using namespace CLHEP;
 
 MRKSBDOnlyGeometry::MRKSBDOnlyGeometry(MRKMacroMessenger* inpMacroMessenger) :
 	MRKGeometry(inpMacroMessenger)
@@ -73,7 +72,7 @@ MRKSBDOnlyGeometry::MRKSBDOnlyGeometry(MRKMacroMessenger* inpMacroMessenger) :
 	VisMylar = new G4VisAttributes(G4Colour(.7, .7, 1));
 	VisEpoxy = new G4VisAttributes(G4Colour(.8, .4, .4));
 
-	SiDeadLayerLength = 22 * nm;
+	SiDeadLayerLength = 22 * CLHEP::nm;
 	sbdThicknessModifier = 0;
 
 }
@@ -131,12 +130,12 @@ G4VPhysicalVolume* MRKSBDOnlyGeometry::Construct()
 	G4cout << "Constructing SBD only" << G4endl;
 	if(!use1_5mmSBD)
 	{
-		sbdThicknessModifier = -0.5*mm;
+		sbdThicknessModifier = -0.5*CLHEP::mm;
 		sbdThicknessModifierVector = G4ThreeVector(0,0,-0.5*sbdThicknessModifier); //Positive
 	}
 	else
 	{
-		sbdThicknessModifier = 0*mm;
+		sbdThicknessModifier = 0*CLHEP::mm;
 		sbdThicknessModifierVector = G4ThreeVector(0,0,0); //Positive
 	}
 	G4cout << "SBD Silicon dead layer thickness: " << SiDeadLayerLength << G4endl;
@@ -150,7 +149,7 @@ G4VPhysicalVolume* MRKSBDOnlyGeometry::Construct()
 	logicSBDDetectionVolume = constructRDK2SBDSilicon();
 
 	constructRDK2SBDSiliconHolder();
-	if(SiDeadLayerLength > 0.1*nm)
+	if(SiDeadLayerLength > 0.1*CLHEP::nm)
 	{
 		constructRDK2SBDDeadLayer();
 	}
@@ -190,11 +189,11 @@ G4VPhysicalVolume* MRKSBDOnlyGeometry::Construct()
 
 void MRKSBDOnlyGeometry::constructWorld()
 {
-	G4double WorldLength = 10 * cm;
-	G4double WorldWidth = 10 * cm;
-	G4double WorldHeight = 10 * cm;
+	G4double WorldLength = 10 * CLHEP::cm;
+	G4double WorldWidth = 10 * CLHEP::cm;
+	G4double WorldHeight = 10 * CLHEP::cm;
 	G4GeometryManager::GetInstance()->SetWorldMaximumExtent(WorldLength);
-	G4cout << "Computed tolerance = " << G4GeometryTolerance::GetInstance()->GetSurfaceTolerance() / mm << " mm" << G4endl;
+	G4cout << "Computed tolerance = " << G4GeometryTolerance::GetInstance()->GetSurfaceTolerance() / CLHEP::mm << " mm" << G4endl;
 
 	G4Box* solidWorld = new G4Box("world", WorldLength * .5, WorldWidth * .5, WorldHeight * .5);
 	logicWorld = new G4LogicalVolume(solidWorld, materials.getMaterial("G4_Galactic"), "World", 0, 0, 0);
@@ -213,10 +212,10 @@ void MRKSBDOnlyGeometry::constructWorld()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructSBDDetectorEnvelope()
 {
-	G4ThreeVector position = G4ThreeVector(0, 0, -0.556864 * cm) + sbdSiliconFrontCenter;
-	double thickness = 1.6644 * cm;
+	G4ThreeVector position = G4ThreeVector(0, 0, -0.556864 * CLHEP::cm) + sbdSiliconFrontCenter;
+	double thickness = 1.6644 * CLHEP::cm;
 
-	G4Tubs* solidSBDDetectorEnvelope = new G4Tubs("solidSBDDetectorEnvelope", 0., 1.805 * cm, thickness * 0.5, 0., twopi);
+	G4Tubs* solidSBDDetectorEnvelope = new G4Tubs("solidSBDDetectorEnvelope", 0., 1.805 * CLHEP::cm, thickness * 0.5, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBDDetectorEnvelope = new G4LogicalVolume(solidSBDDetectorEnvelope, materials.getMaterial("G4_Galactic"), "logicSBDDetectorEnvelope", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBDDetectorEnvelope, "physiSBD1mm5SiliconEnvelope", logicWorld, false, 0);
 	logicSBDDetectorEnvelope->SetVisAttributes(G4VisAttributes::Invisible);
@@ -226,11 +225,11 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructSBDDetectorEnvelope()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDSiliconHolder()
 {
-	G4ThreeVector position = G4ThreeVector(0, 0, 0.51851 * cm);
-	G4Tubs* solidSBD1mm5SiliconHolder = new G4Tubs("solidSBD1mm5SiliconHolder", 1.382 * cm, 1.74719 * cm, 0.24384 * cm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0, 0, 0.51851 * CLHEP::cm);
+	G4Tubs* solidSBD1mm5SiliconHolder = new G4Tubs("solidSBD1mm5SiliconHolder", 1.382 * CLHEP::cm, 1.74719 * CLHEP::cm, 0.24384 * CLHEP::cm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5SiliconHolder = new G4LogicalVolume(solidSBD1mm5SiliconHolder, materials.getMaterial("G4_ALUMINUM_OXIDE"), "logicSBD1mm5SiliconHolder", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5SiliconHolder, "physiSBD1mm5SiliconHolder", logicSBDDetectorEnvelope, false, 0);
-	G4UserLimits* stepLimit = new G4UserLimits(1 * nm);
+	G4UserLimits* stepLimit = new G4UserLimits(1 * CLHEP::nm);
 	logicSBD1mm5SiliconHolder->SetUserLimits(stepLimit);
 	logicSBD1mm5SiliconHolder->SetVisAttributes(VisG4_ALUMINUM_OXIDE);
 	return logicSBD1mm5SiliconHolder;
@@ -238,13 +237,13 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDSiliconHolder()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDSilicon()
 {
-	G4ThreeVector position = G4ThreeVector(0, 0, 0.481864 * cm - .5 * SiDeadLayerLength) + sbdThicknessModifierVector;
-	double thickness = 0.1499999999 * cm - .5 * SiDeadLayerLength + sbdThicknessModifier;
+	G4ThreeVector position = G4ThreeVector(0, 0, 0.481864 * CLHEP::cm - .5 * SiDeadLayerLength) + sbdThicknessModifierVector;
+	double thickness = 0.1499999999 * CLHEP::cm - .5 * SiDeadLayerLength + sbdThicknessModifier;
 
-	G4Tubs* solidSBD1mm5Silicon = new G4Tubs("solidSBD1mm5Silicon", 0 * cm, 1.382 * cm, 0.5 * thickness, 0., twopi);
+	G4Tubs* solidSBD1mm5Silicon = new G4Tubs("solidSBD1mm5Silicon", 0 * CLHEP::cm, 1.382 * CLHEP::cm, 0.5 * thickness, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5Silicon = new G4LogicalVolume(solidSBD1mm5Silicon, materials.getMaterial("G4_Si"), "logicSBD1mm5Silicon", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5Silicon, "physiSBD1mm5Silicon", logicSBDDetectorEnvelope, false, 0);
-	G4UserLimits* stepLimit = new G4UserLimits(1 * nm);
+	G4UserLimits* stepLimit = new G4UserLimits(1 * CLHEP::nm);
 	logicSBD1mm5Silicon->SetUserLimits(stepLimit);
 	logicSBD1mm5Silicon->SetVisAttributes(VisG4_Si);
 	return logicSBD1mm5Silicon;
@@ -252,13 +251,13 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDSilicon()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDDeadLayer()
 {
-	G4ThreeVector position = G4ThreeVector(0., 0., 0.556865 * cm); //Get to center of gold layer
-	position += G4ThreeVector(0., 0., -0.5 * 20 * nm); //shift from gold layer position
+	G4ThreeVector position = G4ThreeVector(0., 0., 0.556865 * CLHEP::cm); //Get to center of gold layer
+	position += G4ThreeVector(0., 0., -0.5 * 20 * CLHEP::nm); //shift from gold layer position
 	position += G4ThreeVector(0., 0., -SiDeadLayerLength * .5); //shift based on deadlayer thickness
-	G4Tubs* solidSBDDeadLayer = new G4Tubs("solidSBDDeadLayer", 0 * cm, 1.382 * cm, 0.5 * SiDeadLayerLength, 0., twopi);
+	G4Tubs* solidSBDDeadLayer = new G4Tubs("solidSBDDeadLayer", 0 * CLHEP::cm, 1.382 * CLHEP::cm, 0.5 * SiDeadLayerLength, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBDDeadLayer = new G4LogicalVolume(solidSBDDeadLayer, materials.getMaterial("G4_SILICON_DIOXIDE"), "logicSBDDeadLayer", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBDDeadLayer, "physiSBDDeadLayer", logicSBDDetectorEnvelope, false, 0);
-	G4UserLimits* stepLimit = new G4UserLimits(.001 * nm);
+	G4UserLimits* stepLimit = new G4UserLimits(.001 * CLHEP::nm);
 	logicSBDDeadLayer->SetUserLimits(stepLimit);
 	logicSBDDeadLayer->SetVisAttributes(VisG4_Si);
 	return logicSBDDeadLayer;
@@ -266,11 +265,11 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDDeadLayer()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDGoldCoating()
 {
-	G4ThreeVector position = G4ThreeVector(0., 0., 0.556865 * cm); //Get to center of gold layer
-	G4Tubs* solidSBD1mm5GoldCoating = new G4Tubs("solidSBD1mm5GoldCoating", 0 * cm, 1.382 * cm, 0.5 * 19.999 * nm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0., 0., 0.556865 * CLHEP::cm); //Get to center of gold layer
+	G4Tubs* solidSBD1mm5GoldCoating = new G4Tubs("solidSBD1mm5GoldCoating", 0 * CLHEP::cm, 1.382 * CLHEP::cm, 0.5 * 19.999 * CLHEP::nm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5GoldCoating = new G4LogicalVolume(solidSBD1mm5GoldCoating, materials.getMaterial("G4_Au"), "logicSBD1mm5GoldCoating", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5GoldCoating, "physiSBD1mm5GoldCoating", logicSBDDetectorEnvelope, false, 0);
-	G4UserLimits* stepLimit = new G4UserLimits(.001 * nm);
+	G4UserLimits* stepLimit = new G4UserLimits(.001 * CLHEP::nm);
 	logicSBD1mm5GoldCoating->SetUserLimits(stepLimit);
 	logicSBD1mm5GoldCoating->SetVisAttributes(VisG4_Au);
 	return logicSBD1mm5GoldCoating;
@@ -279,8 +278,8 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDGoldCoating()
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDAluminumCoating()
 {
 
-	G4ThreeVector position = G4ThreeVector(0., 0., 0.406809 * cm) + sbdThicknessModifierVector;
-	G4Tubs* solidSBD1mm5AluminumCoating = new G4Tubs("solidSBD1mm5AluminumCoating", 0 * cm, 1.382 * cm, 0.0000549999999996942 * cm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0., 0., 0.406809 * CLHEP::cm) + sbdThicknessModifierVector;
+	G4Tubs* solidSBD1mm5AluminumCoating = new G4Tubs("solidSBD1mm5AluminumCoating", 0 * CLHEP::cm, 1.382 * CLHEP::cm, 0.0000549999999996942 * CLHEP::cm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5AluminumCoating = new G4LogicalVolume(solidSBD1mm5AluminumCoating, materials.getMaterial("G4_Al"), "logicSBD1mm5AluminumCoating", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5AluminumCoating, "physiSBD1mm5AluminumCoating", logicSBDDetectorEnvelope, false, 0);
 	logicSBD1mm5AluminumCoating->SetVisAttributes(VisG4_Al);
@@ -289,8 +288,8 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDAluminumCoating()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDPlasticLining()
 {
-	G4ThreeVector position = G4ThreeVector(0. * cm, 0 * cm, 0.48997 * cm);
-	G4Tubs* solidSBD1mm5PlasticLining = new G4Tubs("solidSBD1mm5PlasticLining", 1.74719 * cm, 1.75039 * cm, 0.27238 * cm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0. * CLHEP::cm, 0 * CLHEP::cm, 0.48997 * CLHEP::cm);
+	G4Tubs* solidSBD1mm5PlasticLining = new G4Tubs("solidSBD1mm5PlasticLining", 1.74719 * CLHEP::cm, 1.75039 * CLHEP::cm, 0.27238 * CLHEP::cm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5PlasticLining = new G4LogicalVolume(solidSBD1mm5PlasticLining, materials.getMaterial("G4_POLYCARBONATE"), "logicSBD1mm5PlasticLining", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5PlasticLining, "physiSBD1mm5PlasticLining", logicSBDDetectorEnvelope, false, 0);
 	logicSBD1mm5PlasticLining->SetVisAttributes(VisG4_POLYCARBONATE);
@@ -299,8 +298,8 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDPlasticLining()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDBackBrassRings()
 {
-	G4ThreeVector position = G4ThreeVector(0. * cm, 0 * cm, 0.25943 * cm);
-	G4Tubs* solidSBD1mm5BackBrassRings = new G4Tubs("solidSBD1mm5BackBrassRings", 1.511138 * cm, 1.74719 * cm, 0.01524 * cm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0. * CLHEP::cm, 0 * CLHEP::cm, 0.25943 * CLHEP::cm);
+	G4Tubs* solidSBD1mm5BackBrassRings = new G4Tubs("solidSBD1mm5BackBrassRings", 1.511138 * CLHEP::cm, 1.74719 * CLHEP::cm, 0.01524 * CLHEP::cm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5BackBrassRings = new G4LogicalVolume(solidSBD1mm5BackBrassRings, materials.getMaterial("CartridgeBrass"), "logicSBD1mm5BackBrassRings", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5BackBrassRings, "physiSBD1mm5BackBrassRings", logicSBDDetectorEnvelope, false, 0);
 	logicSBD1mm5BackBrassRings->SetVisAttributes(VisCartridgeBrass);
@@ -309,8 +308,8 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDBackBrassRings()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDInternalBrassDisc()
 {
-	G4ThreeVector position = G4ThreeVector(0. * cm, 0 * cm, 0.23089 * cm);
-	G4Tubs* solidSBD1mm5InternalBrassDisc = new G4Tubs("solidSBD1mm5InternalBrassDisc", 0.15748 * cm, 1.74719 * cm, 0.0132999999999992 * cm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0. * CLHEP::cm, 0 * CLHEP::cm, 0.23089 * CLHEP::cm);
+	G4Tubs* solidSBD1mm5InternalBrassDisc = new G4Tubs("solidSBD1mm5InternalBrassDisc", 0.15748 * CLHEP::cm, 1.74719 * CLHEP::cm, 0.0132999999999992 * CLHEP::cm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5InternalBrassDisc = new G4LogicalVolume(solidSBD1mm5InternalBrassDisc, materials.getMaterial("CartridgeBrass"), "logicSBD1mm5InternalBrassDisc", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5InternalBrassDisc, "physiSBD1mm5InternalBrassDisc", logicSBDDetectorEnvelope, false, 0);
 	logicSBD1mm5InternalBrassDisc->SetVisAttributes(VisCartridgeBrass);
@@ -319,8 +318,8 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDInternalBrassDisc()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDSpring()
 {
-	G4ThreeVector position = G4ThreeVector(0. * cm, 0. * cm, -0.088205 * cm);
-	G4Tubs* solidSBD1mm5Spring = new G4Tubs("solidSBD1mm5Spring", 0.029 * cm, 0.222 * cm, 0.305795 * cm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0. * CLHEP::cm, 0. * CLHEP::cm, -0.088205 * CLHEP::cm);
+	G4Tubs* solidSBD1mm5Spring = new G4Tubs("solidSBD1mm5Spring", 0.029 * CLHEP::cm, 0.222 * CLHEP::cm, 0.305795 * CLHEP::cm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5Spring = new G4LogicalVolume(solidSBD1mm5Spring, materials.getMaterial("CartridgeBrass"), "logicSBD1mm5Spring", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5Spring, "physiSBD1mm5Spring", logicSBDDetectorEnvelope, false, 0);
 	logicSBD1mm5Spring->SetVisAttributes(VisCartridgeBrass);
@@ -329,8 +328,8 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDSpring()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDHexScrew()
 {
-	G4ThreeVector position = G4ThreeVector(0. * cm, 0. * cm, -0.6131 * cm);
-	G4Tubs* solidSBD1mm5HexScrew = new G4Tubs("solidSBD1mm5HexScrew", 0.20955 * cm, 0.4178 * cm, 0.219099999999999 * cm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0. * CLHEP::cm, 0. * CLHEP::cm, -0.6131 * CLHEP::cm);
+	G4Tubs* solidSBD1mm5HexScrew = new G4Tubs("solidSBD1mm5HexScrew", 0.20955 * CLHEP::cm, 0.4178 * CLHEP::cm, 0.219099999999999 * CLHEP::cm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5HexScrew = new G4LogicalVolume(solidSBD1mm5HexScrew, materials.getMaterial("CartridgeBrass"), "logicSBD1mm5HexScrew", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5HexScrew, "physiSBD1mm5HexScrew", logicSBDDetectorEnvelope, false, 0);
 	logicSBD1mm5HexScrew->SetVisAttributes(VisCartridgeBrass);
@@ -339,11 +338,11 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDHexScrew()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDFrontCase()
 {
-	G4ThreeVector position = G4ThreeVector(0. * cm, 0. * cm, 0.797275 * cm);
-	G4Tubs* solidSBD1mm5FrontCase = new G4Tubs("solidSBD1mm5FrontCase", 1.511138 * cm, 1.805 * cm, 0.0349249999999994 * cm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0. * CLHEP::cm, 0. * CLHEP::cm, 0.797275 * CLHEP::cm);
+	G4Tubs* solidSBD1mm5FrontCase = new G4Tubs("solidSBD1mm5FrontCase", 1.511138 * CLHEP::cm, 1.805 * CLHEP::cm, 0.0349249999999994 * CLHEP::cm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5FrontCase = new G4LogicalVolume(solidSBD1mm5FrontCase, materials.getMaterial("CartridgeBrass"), "logicSBD1mm5FrontCase", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5FrontCase, "physiSBD1mm5FrontCase", logicSBDDetectorEnvelope, false, 0);
-	G4UserLimits* stepLimit = new G4UserLimits(1 * nm);
+	G4UserLimits* stepLimit = new G4UserLimits(1 * CLHEP::nm);
 	logicSBD1mm5FrontCase->SetUserLimits(stepLimit);
 	logicSBD1mm5FrontCase->SetVisAttributes(VisCartridgeBrass);
 	return logicSBD1mm5FrontCase;
@@ -351,8 +350,8 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDFrontCase()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDMidCase()
 {
-	G4ThreeVector position = G4ThreeVector(0. * cm, 0. * cm, 0.127675 * cm);
-	G4Tubs* solidSBD1mm5MidCase = new G4Tubs("solidSBD1mm5MidCase", 1.75039 * cm, 1.805 * cm, 0.634675 * cm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0. * CLHEP::cm, 0. * CLHEP::cm, 0.127675 * CLHEP::cm);
+	G4Tubs* solidSBD1mm5MidCase = new G4Tubs("solidSBD1mm5MidCase", 1.75039 * CLHEP::cm, 1.805 * CLHEP::cm, 0.634675 * CLHEP::cm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5MidCase = new G4LogicalVolume(solidSBD1mm5MidCase, materials.getMaterial("CartridgeBrass"), "logicSBD1mm5MidCase", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5MidCase, "physiSBD1mm5MidCase", logicSBDDetectorEnvelope, false, 0);
 	logicSBD1mm5MidCase->SetVisAttributes(VisCartridgeBrass);
@@ -361,8 +360,8 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDMidCase()
 
 G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDBackCase()
 {
-	G4ThreeVector position = G4ThreeVector(0. * cm, 0. * cm, -0.5324 * cm);
-	G4Tubs* solidSBD1mm5BackCase = new G4Tubs("solidSBD1mm5BackCase", 0.4178 * cm, 1.805 * cm, 0.0253999999999994 * cm, 0., twopi);
+	G4ThreeVector position = G4ThreeVector(0. * CLHEP::cm, 0. * CLHEP::cm, -0.5324 * CLHEP::cm);
+	G4Tubs* solidSBD1mm5BackCase = new G4Tubs("solidSBD1mm5BackCase", 0.4178 * CLHEP::cm, 1.805 * CLHEP::cm, 0.0253999999999994 * CLHEP::cm, 0., CLHEP::twopi);
 	G4LogicalVolume* logicSBD1mm5BackCase = new G4LogicalVolume(solidSBD1mm5BackCase, materials.getMaterial("CartridgeBrass"), "logicSBD1mm5BackCase", 0, 0, 0);
 	new G4PVPlacement(nullptr, position, logicSBD1mm5BackCase, "physiSBD1mm5BackCase", logicSBDDetectorEnvelope, false, 0);
 	logicSBD1mm5BackCase->SetVisAttributes(VisCartridgeBrass);
@@ -371,19 +370,19 @@ G4LogicalVolume* MRKSBDOnlyGeometry::constructRDK2SBDBackCase()
 
 void MRKSBDOnlyGeometry::constructSBDEpoxy()
 {
-	G4double SBDEpoxyLength = .1599999 * cm;
-	G4double SBDEpoxyTopCenterZ = 0.556884 * cm + 20 * nm + SBDEpoxyLength * .5;
-	G4double SBDEpoxyBottomCenterZ = 0.406664 * cm - 20 * nm - sbdThicknessModifier - SBDEpoxyLength * .5;
-	G4double SBDEpoxyInnerRadius2 = 1.372 * cm;
-	G4double SBDEpoxyOuterRadius2 = 1.38 * cm;
-	G4double SBDEpoxyInnerRadius1 = 1.3 * cm;
-	G4double SBDEpoxyOuterRadius1 = 1.38 * cm;
+	G4double SBDEpoxyLength = .1599999 * CLHEP::cm;
+	G4double SBDEpoxyTopCenterZ = 0.556884 * CLHEP::cm + 20 * CLHEP::nm + SBDEpoxyLength * .5;
+	G4double SBDEpoxyBottomCenterZ = 0.406664 * CLHEP::cm - 20 * CLHEP::nm - sbdThicknessModifier - SBDEpoxyLength * .5;
+	G4double SBDEpoxyInnerRadius2 = 1.372 * CLHEP::cm;
+	G4double SBDEpoxyOuterRadius2 = 1.38 * CLHEP::cm;
+	G4double SBDEpoxyInnerRadius1 = 1.3 * CLHEP::cm;
+	G4double SBDEpoxyOuterRadius1 = 1.38 * CLHEP::cm;
 	G4ThreeVector SBDEpoxyPositionTop = G4ThreeVector(0., 0, SBDEpoxyTopCenterZ);
 	G4ThreeVector SBDEpoxyPositionBottom = G4ThreeVector(0., 0, SBDEpoxyBottomCenterZ);
-	G4Cons* solidSBDEpoxy = new G4Cons("solidSBDEpoxy", SBDEpoxyInnerRadius1, SBDEpoxyOuterRadius1, SBDEpoxyInnerRadius2, SBDEpoxyOuterRadius2, .5 * SBDEpoxyLength, 0., twopi);
+	G4Cons* solidSBDEpoxy = new G4Cons("solidSBDEpoxy", SBDEpoxyInnerRadius1, SBDEpoxyOuterRadius1, SBDEpoxyInnerRadius2, SBDEpoxyOuterRadius2, .5 * SBDEpoxyLength, 0., CLHEP::twopi);
 
 	G4LogicalVolume* logicSBDEpoxy = new G4LogicalVolume(solidSBDEpoxy, materials.getMaterial("EpoxyResin"), "logicSBDEpoxy", 0, 0, 0);
-	G4UserLimits* stepLimit = new G4UserLimits(1 * nm);
+	G4UserLimits* stepLimit = new G4UserLimits(1 * CLHEP::nm);
 	logicSBDEpoxy->SetUserLimits(stepLimit);
 
 	G4RotationMatrix* flippedAngle = new G4RotationMatrix();

@@ -23,13 +23,13 @@ public:
 	~MRKMirror();
 
     ///  getLength() returns the length of the solenoid
-    inline virtual G4double getLength() { return 17.6*cm; }
+    inline virtual G4double getLength() { return 17.6*CLHEP::cm; }
 
     ///  getWidth() returns the solenoid diameter
-    inline virtual G4double getWidth() { return 12.*cm; }
+    inline virtual G4double getWidth() { return 12.*CLHEP::cm; }
 
     ///  getHeight() returns the solenoid diameter
-    inline virtual G4double getHeight() { return 100.*cm; }
+    inline virtual G4double getHeight() { return 100.*CLHEP::cm; }
 
 	///  addFieldValue() adds the field for this solenoid into field[].
 	///  point[] is in global coordinates.

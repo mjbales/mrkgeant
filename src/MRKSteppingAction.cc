@@ -3,16 +3,14 @@
 
 #include "MRKConstants.hh"
 
-using namespace CLHEP;
-
 MRKSteppingAction::MRKSteppingAction()
 {
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
     protonParDef=particleTable->FindParticle("proton");
     electronParDef=particleTable->FindParticle("e-");
     photonParDef=particleTable->FindParticle("gamma");
-    emaxTime=ELECTRON_MAX_TIME*second;
-    pmaxTime=PROTON_MAX_TIME*second;
+    emaxTime=ELECTRON_MAX_TIME*CLHEP::second;
+    pmaxTime=PROTON_MAX_TIME*CLHEP::second;
 
 }
 

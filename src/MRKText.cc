@@ -23,7 +23,7 @@ int skipCommentLines(ifstream& inpFileStream)
 	return 0;
 }
 
-int getNonCommentLine(ifstream& inpFileStream, TString& outString, char delim)
+int getNonCommentLine(std::ifstream& inpFileStream, TString& outString, char delim)
 {
 	outString = "";
 	if(!inpFileStream.is_open() || inpFileStream.fail() || inpFileStream.eof()) return -1;

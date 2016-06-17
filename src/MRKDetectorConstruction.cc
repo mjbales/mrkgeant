@@ -6,7 +6,6 @@
 #include "MRKRDKIIGeometry.hh"
 #include "MRKSBDOnlyGeometry.hh"
 
-using namespace CLHEP;
 MRKDetectorConstruction::MRKDetectorConstruction(MRKMacroMessenger* inpMacroMessenger)
 {
 	theMacroMessenger = inpMacroMessenger;

@@ -25,7 +25,7 @@ MRKGlobalField* MRKGlobalField::object = 0;
  fFieldPropagator(0), fStepper(0), fChordFinder(0)
  */
 MRKGlobalField::MRKGlobalField() :
-	G4ElectroMagneticField(), minStep(0.001 * mm), deltaChord(0.1 * mm), deltaOneStep(0.0001 * mm), deltaIntersection(0.0001 * mm), epsMin(2.5e-7 * mm), epsMax(0.001 * mm), largestStepSize(1 * mm), fEquation(0), fFieldManager(0), fFieldPropagator(0), fStepper(0), fChordFinder(0)
+	G4ElectroMagneticField(), minStep(0.001 * CLHEP::mm), deltaChord(0.1 * CLHEP::mm), deltaOneStep(0.0001 * CLHEP::mm), deltaIntersection(0.0001 * CLHEP::mm), epsMin(2.5e-7 * CLHEP::mm), epsMax(0.001 * CLHEP::mm), largestStepSize(1 * CLHEP::mm), fEquation(0), fFieldManager(0), fFieldPropagator(0), fStepper(0), fChordFinder(0)
 {
 	fFieldMessenger = new MRKFieldMessenger(this);
 
@@ -255,7 +255,7 @@ void MRKGlobalField::addNamedField(string fieldSettingsName)
 	oldSBDFieldSettings.scalingValue = -25000;
 	oldSBDFieldSettings.spaceDim = 2;
 	oldSBDFieldSettings.fieldDim = 2;
-	oldSBDFieldSettings.angleY = -9.5 * PI / 180.;
+	oldSBDFieldSettings.angleY = -9.5 * CLHEP::pi / 180.;
 
 	FieldSettings mattMirrorFieldSettings;
 	mattMirrorFieldSettings.isMagnetic = false;
@@ -268,7 +268,7 @@ void MRKGlobalField::addNamedField(string fieldSettingsName)
 	mattSBDFieldSettings.fieldFilePath = "COMSOL_SBDElectricField_Fine130515.root";
 	mattSBDFieldSettings.histName = "sbd";
 	mattSBDFieldSettings.scalingValue = -25000;
-	mattSBDFieldSettings.offset = G4ThreeVector(-0.31359045121 * mm, 0, -1.87394264285 * mm);
+	mattSBDFieldSettings.offset = G4ThreeVector(-0.31359045121 * CLHEP::mm, 0, -1.87394264285 * CLHEP::mm);
 
 	FieldSettings mattBAPDFieldSettings;
 	mattBAPDFieldSettings.isMagnetic = false;

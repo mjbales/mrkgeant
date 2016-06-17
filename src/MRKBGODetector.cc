@@ -17,8 +17,6 @@
 #include "MRKPhys.hh"
 #include "MRKHit.hh"
 
-using namespace CLHEP;
-
 MRKBGODetector::MRKBGODetector(G4String name, int inpDetNum, G4ThreeVector inpGammaDetOffset, bool inpusePositionalLightOutput, bool inpuseNormalizedlightOutput) :
 	G4VSensitiveDetector(name)
 {
@@ -29,7 +27,7 @@ MRKBGODetector::MRKBGODetector(G4String name, int inpDetNum, G4ThreeVector inpGa
 	useNormalizedLightOutput = inpuseNormalizedlightOutput;
 	DetNum = inpDetNum;
 
-	bgoCenterZPosition = 224 * mm + inpGammaDetOffset.z();
+	bgoCenterZPosition = 224 * CLHEP::mm + inpGammaDetOffset.z();
 
 	//Constants for BGO light response along length--I shouldn't have these stored each time they are created...
 
@@ -183,7 +181,7 @@ void MRKBGODetector::PrintAll()
 double MRKBGODetector::getBGOPosGain(G4double z)
 {
 
-	double zTrans = (bgoCenterZPosition - z) / mm; //Adjust to center of BGO
+	double zTrans = (bgoCenterZPosition - z) / CLHEP::mm; //Adjust to center of BGO
 	//double zTrans=-z/mm; //Temporary for BGO centered case
 	// if(zTrans>100.001 || zTrans < -100.001)
 	//{

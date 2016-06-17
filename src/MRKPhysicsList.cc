@@ -19,15 +19,13 @@
 #include "MRKPhysicsListMessenger.hh"
 #include "MRKStepMax.hh"
 
-using namespace CLHEP;
-
 MRKPhysicsList::MRKPhysicsList(MRKDetectorConstruction* p) :
 	G4VModularPhysicsList()
 {
 	G4LossTableManager::Instance();
 	pDet = p;
 
-	currentDefaultCut = 1 * nm;
+	currentDefaultCut = 1 * CLHEP::nm;
 	cutForGamma = currentDefaultCut;
 	cutForElectron = currentDefaultCut;
 	cutForPositron = currentDefaultCut;
@@ -118,7 +116,7 @@ void MRKPhysicsList::AddPhysicsList(const G4String& name)
 
 	if (name == emName) return;
 
-	G4double lowLimit = 250*eV;
+	G4double lowLimit = 250*CLHEP::eV;
 	G4double highLimit = 1*MeV;
 
 	if (name == "emstandard_opt0")
@@ -246,7 +244,7 @@ void MRKPhysicsList::SetCuts()
 {
 	// set cut values for gamma at first and for e- second and next for e+,
 	// because some processes for e+/e- need cut values for gamma
-	G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(250 * eV, 1 * GeV);
+	G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(250 * CLHEP::eV, 1 * GeV);
 	SetCutValue(cutForGamma, "gamma");
 	SetCutValue(cutForElectron, "e-");
 	SetCutValue(cutForPositron, "e+");

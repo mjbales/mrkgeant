@@ -22,7 +22,6 @@
 
 using namespace std;
 
-using namespace CLHEP;
 
 //Detector numbers 0-11 BGO, 12-14 BAPDS
 MRKBAPDDetector::MRKBAPDDetector(G4String name, TH1D* inpSio2Hist, int inpDetNum, G4ThreeVector inpGammaDetOffset, bool inpUseCollectionEfficiencyModel) :
@@ -36,7 +35,7 @@ MRKBAPDDetector::MRKBAPDDetector(G4String name, TH1D* inpSio2Hist, int inpDetNum
 	DetNum = inpDetNum;
 	gKE=thicknessMultiplier=absorbDataStart=absorbDataSpacing=0.;
 	useCollectionEfficiencyModel = inpUseCollectionEfficiencyModel;
-	bapdFrontFacePosition = 3.9 * cm + inpGammaDetOffset.z();
+	bapdFrontFacePosition = 3.9 * CLHEP::cm + inpGammaDetOffset.z();
 	mrkCollection = nullptr;
 
 	G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
@@ -98,7 +97,7 @@ G4bool MRKBAPDDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 			if(sio2Hist != nullptr)
 			{
 
-				gKE = preStep->GetKineticEnergy() / keV;
+				gKE = preStep->GetKineticEnergy() / CLHEP::keV;
 
 //                G4cout << "Applying SiO2 layer Gamma Energy: "<< gKE<<" keV" << G4endl;
 
@@ -189,9 +188,9 @@ G4bool MRKBAPDDetector::ProcessHits(G4Step* aStep, G4TouchableHistory*)
 		if(useCollectionEfficiencyModel)
 		{
 
-			depth = (bapdFrontFacePosition - postStep->GetPosition().z()) / um;
+			depth = (bapdFrontFacePosition - postStep->GetPosition().z()) / CLHEP::um;
 			// G4cout << "E0 " << eDep/eV << "    Depth " << depth << G4endl;
-			eDep = BAPDCollectionEfficiencyModel(eDep / eV, depth) * eV;
+			eDep = BAPDCollectionEfficiencyModel(eDep / CLHEP::eV, depth) * CLHEP::eV;
 			//  typeAnythingToContinue("");
 
 		}

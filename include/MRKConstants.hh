@@ -19,7 +19,6 @@
 #define INVCSQUARED 1.11265005605362e-17 //To avoid a divide
 #define FSCONST     7.2973525376e-3     //Fine structure constant
 #define SQRT2 1.41421356237309515 //Square root of 2
-#define PI 3.14159265358979323846       //Pi...ya know math pi
 #define ADIAB_POS_INCREMENT 0.00001  //In meters
 #define RADDECAY_LAMBDA 1.2695
 #define NLIFE 885.7                 //Neutron lifetime in seconds

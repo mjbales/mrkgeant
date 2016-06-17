@@ -24,13 +24,13 @@ public:
 	~MRKEField();
 
     ///  getLength() returns the overall extents of the field diameter (bigger than necessary)
-    virtual G4double getLength() { return 17.6*cm; }
+    virtual G4double getLength() { return 17.6*CLHEP::cm; }
 
     ///  getWidth() returns the overall extents of the field diameter (bigger than necessary)
-    virtual G4double getWidth() { return 12.*cm; }
+    virtual G4double getWidth() { return 12.*CLHEP::cm; }
 
     ///  getHeight() returns the overall extents of the field diameter (bigger than necessary)
-    virtual G4double getHeight() { return 100.*cm; }
+    virtual G4double getHeight() { return 100.*CLHEP::cm; }
 
 	///  addFieldValue() adds the field for this solenoid into field[].
 	///  point[] is in global coordinates.

@@ -8,6 +8,7 @@
 #include "G4ParticleDefinition.hh"
 #include "G4UnitsTable.hh"
 #include "globals.hh"
+#include "G4SystemOfUnits.hh"
 
 #include "MRKConstants.hh"
 #include "MRKPhys.hh"
@@ -25,7 +26,7 @@ MRKPrimaryGeneratorAction::MRKPrimaryGeneratorAction(MRKDetectorConstruction* my
 	eventStartClock=0;
 
     theDC=myDC;
-    sourceToDetectorDistance=5.5*cm;
+    sourceToDetectorDistance=5.5*CLHEP::cm;
     generatorMode=PARTICLE_GUN;
     G4int n_particle = 1;
     particleGun = new G4ParticleGun(n_particle);
@@ -58,7 +59,7 @@ MRKPrimaryGeneratorAction::MRKPrimaryGeneratorAction(MRKDetectorConstruction* my
     particleGun->SetParticleDefinition(electronParDef);
     particleGun->SetParticlePosition(G4ThreeVector(0.,0.,0.));
     particleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.5,.5));
-    particleGun->SetParticleEnergy(100.*keV);
+    particleGun->SetParticleEnergy(100.*CLHEP::keV);
 
 
 
@@ -271,7 +272,7 @@ void MRKPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
                 }
 
 
-                pos.set(x0*m,y0*m,z0*m);
+                pos.set(x0*CLHEP::m,y0*CLHEP::m,z0*CLHEP::m);
 
                 dirP.setVal(mx0,my0,mz0);
             }
@@ -279,7 +280,7 @@ void MRKPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
             if(!useManualDir)
                 particleGun->SetParticleMomentumDirection(momDir);
             if(!useManualEnergy)
-                particleGun->SetParticleEnergy(e0*keV);
+                particleGun->SetParticleEnergy(e0*CLHEP::keV);
             if(!useManualPos)
                 particleGun->SetParticlePosition(pos+beamOffset);
             break;
@@ -342,10 +343,10 @@ void MRKPrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
     else
     {
         particleSource->GeneratePrimaryVertex(anEvent);
-        x0=anEvent->GetPrimaryVertex()->GetX0()/m;
-        y0=anEvent->GetPrimaryVertex()->GetY0()/m;
-        z0=anEvent->GetPrimaryVertex()->GetZ0()/m;
-        e0=anEvent->GetPrimaryVertex()->GetPrimary()->GetKineticEnergy()/keV;
+        x0=anEvent->GetPrimaryVertex()->GetX0()/CLHEP::m;
+        y0=anEvent->GetPrimaryVertex()->GetY0()/CLHEP::m;
+        z0=anEvent->GetPrimaryVertex()->GetZ0()/CLHEP::m;
+        e0=anEvent->GetPrimaryVertex()->GetPrimary()->GetKineticEnergy()/CLHEP::keV;
         mx0=anEvent->GetPrimaryVertex()->GetPrimary()->GetPx();
         my0=anEvent->GetPrimaryVertex()->GetPrimary()->GetPy();
         mz0=anEvent->GetPrimaryVertex()->GetPrimary()->GetPz();

@@ -12,13 +12,13 @@ MRKBField::MRKBField(G4LogicalVolume* lv, G4ThreeVector centerPos, std::string f
 	fieldScale = scalingValue;
 	histName = inpHistName;
 	G4cout << "Loading B field: " << fieldFileName << "... ";
-	if(bField.loadFieldFromFile(fieldFileName, histName, scalingValue * tesla, inpSpaceDim, inpFieldDim))  //presume file is in V/m
+	if(bField.loadFieldFromFile(fieldFileName, histName, scalingValue * CLHEP::tesla, inpSpaceDim, inpFieldDim))  //presume file is in V/m
 		G4cout << "Error loading B field." << G4endl;
 	G4cout << " loading complete." << G4endl;
 
 	bField.setRotation(angleX, angleY, angleZ);
 
-	fieldOffset.SetXYZ(inpFieldOffset.getX() / m, inpFieldOffset.getY() / m, inpFieldOffset.getZ() / m);  //let's pre calculate the field offset in terms of meters
+	fieldOffset.SetXYZ(inpFieldOffset.getX() / CLHEP::m, inpFieldOffset.getY() / CLHEP::m, inpFieldOffset.getZ() / CLHEP::m);  //let's pre calculate the field offset in terms of meters
 
 	this->lvolume->SetVisAttributes(G4VisAttributes::Invisible);
 }
@@ -34,7 +34,7 @@ void MRKBField::addFieldValue(const G4double point[4], G4double field[6])
 {
 
 	vecOut.SetXYZ(0., 0., 0.);
-	posIn.SetXYZ(point[0] / m, point[1] / m, point[2] / m);
+	posIn.SetXYZ(point[0] / CLHEP::m, point[1] / CLHEP::m, point[2] / CLHEP::m);
 	posIn -= fieldOffset;
 	bField.linearInterp3D(posIn, vecOut);
 	field[0] += vecOut.x();

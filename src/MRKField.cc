@@ -14,19 +14,19 @@ MRKField::MRKField(G4LogicalVolume* lv,FieldSettings inpFS): MRKElementField(inp
     double tempScaling=fs.scalingValue;
     if(fs.isMagnetic)
     {
-        tempScaling*=tesla;
+        tempScaling*=CLHEP::tesla;
         g4FieldX=0;
         g4FieldY=1;
         g4FieldZ=2;
     }
     else
     {
-        tempScaling*=volt/m;
+        tempScaling*=CLHEP::volt/CLHEP::m;
         g4FieldX=3;
         g4FieldY=4;
         g4FieldZ=5;
     }
-    offset.SetXYZ(fs.offset[0]/m,fs.offset[1]/m,fs.offset[2]/m); //Convert to ROOT vector format
+    offset.SetXYZ(fs.offset[0]/CLHEP::m,fs.offset[1]/CLHEP::m,fs.offset[2]/CLHEP::m); //Convert to ROOT vector format
     if(theField.loadFieldFromFile(fs.fieldFilePath, fs.histName, tempScaling, fs.spaceDim,  fs.fieldDim))
         G4cout << "error loading field!" << G4endl;
     G4cout<<" loading complete."<< G4endl;
@@ -64,7 +64,7 @@ void MRKField::addFieldValue(const G4double point[4],G4double field[6])
     {
         return;
     }
-    posIn.SetXYZ(point[0]/m,point[1]/m,point[2]/m);
+    posIn.SetXYZ(point[0]/CLHEP::m,point[1]/CLHEP::m,point[2]/CLHEP::m);
     vecOut.SetXYZ(0,0,0);
     if(fs.useCubicInterpolation)
     {
