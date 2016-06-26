@@ -1,4 +1,7 @@
-# mrkgeant ("Matt/Michigan" Runge Kutta with Geant4) - Simulation for RDK II experiment
+# mrkgeant 
+("Matt/Michigan" Runge Kutta with Geant4)
+
+Simulation for RDK II experiment
 
 
 ## Purpose
