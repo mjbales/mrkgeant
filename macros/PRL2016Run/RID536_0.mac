@@ -1,0 +1,21 @@
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+#
+/MRK/field/addNamedFields NEW_RDK2_MATT
+/MRK/det/setSiDeadLayerLengthCmd 13.7 nm
+/process/eLoss/StepFunction .2 .1 mm
+/process/eLoss/minKinEnergy 250 eV
+/process/msc/RangeFactor .01
+/process/msc/Skin 3
+/MRK/phys/setCuts 1 nm
+/cuts/setMaxCutEnergy 99 eV
+/MRK/file/genMode 3
+/MRK/field/update
+/run/initialize
+/gun/particle e-
+/MRK/file/fluxmap Fluxmap_RDK2_Matt1.txt
+/MRK/file/eventSetNumber 0
+/MRK/file/inpfile EventSettings_STD_4B_100eV_Endpoint_130429.root
+/MRK/file/rootout Results_RID536_E_STD_4B_100eV_Endpoint_130429_Set0.root
+/run/beamOn 1000000

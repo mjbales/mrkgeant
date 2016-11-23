@@ -1,0 +1,65 @@
+/run/verbose 0
+/event/verbose 0
+/tracking/verbose 0
+#
+/MRK/phys/addPhysics emstandardSS
+/MRK/field/addNamedFields None
+/MRK/det/setmodel SBDOnly
+/MRK/det/setSiDeadLayerLengthCmd 20 nm
+/process/eLoss/StepFunction .2 .1 mm
+/process/eLoss/minKinEnergy 10 eV
+#/process/em/lowestMuHadEnergy 0.1 eV
+/process/msc/RangeFactor .01
+/process/msc/Skin 3
+/MRK/phys/setCuts 1 nm
+/cuts/setMaxCutEnergy 99 eV
+/MRK/file/genMode 0
+/MRK/field/update
+/run/initialize
+/gun/position 0 0 0.02 cm
+/gun/particle e-
+#
+######################################################
+/gun/direction 0 0 -1
+#
+/MRK/file/rootout SBDOnly_E_4.10.02_SingleScatter_100keV_90deg.root
+/gun/energy 100 keV
+/run/beamOn 1000000
+#
+/MRK/file/rootout SBDOnly_E_4.10.02_SingleScatter_200keV_90deg.root
+/gun/energy 200 keV
+/run/beamOn 1000000
+#
+/MRK/file/rootout SBDOnly_E_4.10.02_SingleScatter_400keV_90deg.root
+/gun/energy 400 keV
+/run/beamOn 1000000
+#
+/MRK/file/rootout SBDOnly_E_4.10.02_SingleScatter_600keV_90deg.root
+/gun/energy 600 keV
+/run/beamOn 1000000
+#
+/MRK/file/rootout SBDOnly_E_4.10.02_SingleScatter_800keV_90deg.root
+/gun/energy 800 keV
+/run/beamOn 1000000
+######################################################
+/gun/direction 0 0.707106781186548 -0.707106781186547
+#
+/MRK/file/rootout SBDOnly_E_4.10.02_SingleScatter_100keV_45deg.root
+/gun/energy 100 keV
+/run/beamOn 1000000
+#
+/MRK/file/rootout SBDOnly_E_4.10.02_SingleScatter_200keV_45deg.root
+/gun/energy 200 keV
+/run/beamOn 1000000
+#
+/MRK/file/rootout SBDOnly_E_4.10.02_SingleScatter_400keV_45deg.root
+/gun/energy 400 keV
+/run/beamOn 1000000
+#
+/MRK/file/rootout SBDOnly_E_4.10.02_SingleScatter_600keV_45deg.root
+/gun/energy 600 keV
+/run/beamOn 1000000
+#
+/MRK/file/rootout SBDOnly_E_4.10.02_SingleScatter_800keV_45deg.root
+/gun/energy 800 keV
+/run/beamOn 1000000
