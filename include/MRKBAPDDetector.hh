@@ -15,6 +15,7 @@ class G4Step;
 class G4HCofThisEvent;
 class G4TouchableHistory;
 
+/// Defines the sensitive detector for the bare APD detectors including the complciated energy resolution
 class MRKBAPDDetector: public G4VSensitiveDetector
 {
 

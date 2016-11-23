@@ -8,6 +8,7 @@
 #include "MRKGlobalField.hh"
 #include "MRKMaterials.hh"
 
+///Base class for different modes used in detector construction
 class MRKGeometry
 {
 public:

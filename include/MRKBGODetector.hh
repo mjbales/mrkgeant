@@ -13,6 +13,7 @@ class G4Step;
 class G4HCofThisEvent;
 class G4TouchableHistory;
 
+///Sensitive detector class representing a BGO detector.  Handles positional light output along the bar
 class MRKBGODetector: public G4VSensitiveDetector
 {
 

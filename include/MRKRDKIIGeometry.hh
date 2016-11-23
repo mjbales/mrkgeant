@@ -16,6 +16,7 @@
 #include "MRKGeometry.hh"
 #include "MRKMacroMessenger.hh"
 
+/// Model for full RDK II geometry
 class MRKRDKIIGeometry: public MRKGeometry
 {
 public:

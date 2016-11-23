@@ -9,6 +9,7 @@ class G4UIdirectory;
 class G4UIcmdWithADoubleAndUnit;
 class G4UIcmdWithAString;
 
+//Defines macro commands for the physics list
 class MRKPhysicsListMessenger: public G4UImessenger
 {
 public:

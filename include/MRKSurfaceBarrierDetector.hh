@@ -12,7 +12,7 @@ class G4Step;
 class G4HCofThisEvent;
 class G4TouchableHistory;
 
-
+/// Defines the sensitive detector for the surface barrier detector
 class MRKSurfaceBarrierDetector : public G4VSensitiveDetector
 {
 

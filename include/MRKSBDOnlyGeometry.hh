@@ -16,6 +16,7 @@
 #include "MRKGeometry.hh"
 #include "MRKMacroMessenger.hh"
 
+/// A geometry which only has an SBD in it
 class MRKSBDOnlyGeometry: public MRKGeometry
 {
 public:

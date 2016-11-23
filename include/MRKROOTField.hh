@@ -27,6 +27,7 @@
 #include "TFile.h"
 #include "TSystem.h"
 
+/// Stores a scalar or vector field and allows for interpolation
 class MRKROOTField{
 public:
     MRKROOTField();
@@ -63,7 +64,7 @@ public:
     inline double getZLength(){return length.Z();};
     inline void setSymmetry(bool inpX, bool inpY=false, bool inpZ=false){symmetry[0]=inpX;symmetry[1]=inpY;symmetry[2]=inpZ; }
     inline void setSymmetry(int symmetryToSet, bool inpBool){symmetry[symmetryToSet]=inpBool;};
-    inline void setRotation(double inpx,double inpy,double inpz){rotateX=inpx; rotateY=inpy; rotateZ=inpz;};
+    inline void setRotation(double inpx,double inpy,double inpz){rotateX=inpx; rotateY=inpy; rotateZ=inpz; isRot=true;};
     inline TVector3 getVector(int inpX, int inpY, int inpZ){return TVector3(theField[0][inpX][inpY][inpZ],theField[1][inpX][inpY][inpZ],theField[2][inpX][inpY][inpZ]);};
 
 private:
@@ -78,8 +79,8 @@ private:
 
 	std::vector<std::vector<std::vector<double> > > theField[3]; //The field.  Stored as nested STL vectors.  Access by theField[i][x][y][z].
 
-	int dimOfSpace; //2 = cylindrical coordinates(r,z)   3 = 3D cartesian (x,y,z)
-	int dimOfField; //Scalar field or vector field?
+	char dimOfSpace; //2 = cylindrical coordinates(r,z)   3 = 3D cartesian (x,y,z)
+	char dimOfField; //Scalar field or vector field?
 
 	//For interpolation
 	double radius;
@@ -89,6 +90,7 @@ private:
 	int x, y, z, xp1, yp1, zp1;
 	double a1, a2, a3, a4, a5, a6, a7, a8;
 	double rotateX, rotateY, rotateZ;  //Rotate angle theta aroudn each axis in order to transform coordinates.  Transformed in order X,Y,Z.
+	bool isRot;
 
 	//private functions
 	int loadFieldROOTFile(std::string filePath, std::string histName, double scalingValue);

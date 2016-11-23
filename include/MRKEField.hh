@@ -13,6 +13,7 @@
 #include "TVector3.h"
 #include "MRKROOTField.hh"
 
+/// Electric field class.  Values are stored in the ROOT field data structure.
 class MRKEField: public MRKElementField
 {
 public:
@@ -40,7 +41,7 @@ public:
 
 private:
 
-	MRKROOTField eField;
+	MRKROOTField eField; //Field vectors defined here
 
 	TVector3 posIn, vecOut;
 	TVector3 fieldOffset;

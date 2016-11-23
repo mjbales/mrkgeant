@@ -14,6 +14,7 @@ class G4UIcmdWithADoubleAndUnit;
 class G4UIcmdWithoutParameter;
 class G4UIcmdWith3VectorAndUnit;
 
+/// Class which defines macro commands relating to magnetic and electric fields
 class MRKFieldMessenger: public G4UImessenger
 {
 public:

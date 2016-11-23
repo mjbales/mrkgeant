@@ -9,6 +9,7 @@ class MRKPhysicsListMessenger;
 class G4VPhysicsConstructor;
 class MRKStepMax;
 
+///Physics list class for the RDK simulation
 class MRKPhysicsList: public G4VModularPhysicsList
 {
 public:

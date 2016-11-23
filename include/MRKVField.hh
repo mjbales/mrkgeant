@@ -1,5 +1,5 @@
 /////////////////////////////////////////////////
-//cVField- by Matthew Bales
+//MRKVField- by Matthew Bales
 //
 //Should be really renamed cField as I now use more than just
 //a vector field.
@@ -25,7 +25,7 @@
 #include "MRKText.hh"
 #include "MRKVector.hh" //Math/Physics vectors
 
-//File should be called cField.h  but I haven't renamed it yet
+//File should be called MRKVField.h  but I haven't renamed it yet
 
 
 //Structure that contains/calculates vectors and derivatives at point (for cubic interpolation)

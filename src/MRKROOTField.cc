@@ -32,6 +32,7 @@ void MRKROOTField::reset()
 	rotateX = rotateY = rotateZ = 0;
 	dimOfSpace = 0;
 	dimOfField = 0;
+	isRot=false;
 
 }
 
@@ -436,9 +437,11 @@ void MRKROOTField::linearInterp3D(TVector3 posInField, TVector3& vecOut)
 	}
 
 	//Rotate coordinates of sampling location
-	posInField.RotateX(rotateX);
-	posInField.RotateY(rotateY);
-	posInField.RotateZ(rotateZ);
+	if(isRot){
+		posInField.RotateX(rotateX);
+		posInField.RotateY(rotateY);
+		posInField.RotateZ(rotateZ);
+	}
 
 //    posInField.Print();
 //    startCorner.Print();
@@ -474,14 +477,20 @@ void MRKROOTField::linearInterp3D(TVector3 posInField, TVector3& vecOut)
 		{
 			modz = modf((posInField[2] - startCorner[2]) / spacing[2], &(dz));
 		}
+		x = int(dx);
+		y = int(dy);
+		z = int(dz);
+
+		if(x >= numBins[0] - 1 || x < 0 || y >= numBins[1] - 1 || y < 0 || z >= numBins[2] - 1 || z < 0)
+		{
+			return;
+		}
 
 		modxm = 1. - modx;
 		modym = 1. - mody;
 		modzm = 1. - modz;
 
-		x = int(dx);
-		y = int(dy);
-		z = int(dz);
+
 		xp1 = x + 1;
 		yp1 = y + 1;
 		zp1 = z + 1;
@@ -495,10 +504,7 @@ void MRKROOTField::linearInterp3D(TVector3 posInField, TVector3& vecOut)
 		a7 = (modx) * (mody) * (modzm);
 		a8 = (modx) * (mody) * (modz);
 
-		if(x >= numBins[0] - 1 || x < 0 || y >= numBins[1] - 1 || y < 0 || z >= numBins[2] - 1 || z < 0)
-		{
-			return;
-		}
+
 
 		for (int i = 0; i < dimOfField; i++)
 		{
@@ -569,6 +575,12 @@ void MRKROOTField::linearInterp3D(TVector3 posInField, TVector3& vecOut)
 		resultVec.RotateY(-rotateY);
 		resultVec.RotateX(-rotateX);
 
+	}
+
+	if(isRot){
+		resultVec.RotateZ(-rotateZ);
+		resultVec.RotateY(-rotateY);
+		resultVec.RotateX(-rotateX);
 	}
 
 	vecOut += resultVec;

@@ -8,6 +8,7 @@
 
 class MRKStepMaxMessenger;
 
+//Implements a maximum step size in the simulation
 class MRKStepMax: public G4VDiscreteProcess
 {
 public:

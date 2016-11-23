@@ -294,6 +294,7 @@ G4VPhysicalVolume* MRKRDKIIGeometry::Construct()
 	constructRDK2World();
 
 	//Straight Axis Cylinders
+	/*
 	constructRDK2StraightAndBentBore();
 	constructRDK2HighVoltageTube();
 	constructRDK2FrontNylonSpacer();
@@ -363,6 +364,7 @@ G4VPhysicalVolume* MRKRDKIIGeometry::Construct()
 	constructRDK2MagnetCoil9();
 	constructRDK2MagnetCoil10();
 	constructRDK2MagnetCoil11();
+	*/
 	logicSBDDetectionVolume = constructRDK2SBDSilicon();
 
 	constructRDK2SBDSiliconHolder();
@@ -387,6 +389,7 @@ G4VPhysicalVolume* MRKRDKIIGeometry::Construct()
 		constructRDK2SBDBackCase();
 		constructSBDEpoxy();
 	}
+	/*
 	constructRDK2BeOTube();
 	constructRDK2SBD1mm5StainlessSteelTube();
 	constructRDK2CoilTray2PartA();
@@ -401,10 +404,12 @@ G4VPhysicalVolume* MRKRDKIIGeometry::Construct()
 	constructRDK2CoilTray3PartO();
 	constructRDK2CoilTray3PartP();
 	constructRDK2CoilTray3PartQ();
+	*/
 	//Boxes
 	logicBAPDDetectionVolumes[0] = constructRDK2ActiveAreaBareAPD1();
 	logicBAPDDetectionVolumes[1] = constructRDK2ActiveAreaBareAPD2();
 	logicBAPDDetectionVolumes[2] = constructRDK2ActiveAreaBareAPD3();
+	/*
 	constructRDK2SiBareAPD1();
 	constructRDK2SiBareAPD2();
 	constructRDK2SiBareAPD3();
@@ -438,6 +443,8 @@ G4VPhysicalVolume* MRKRDKIIGeometry::Construct()
 	constructRDK2SmallAPDBacking10();
 	constructRDK2SmallAPDBacking11();
 	constructRDK2SmallAPDBacking12();
+
+	*/
 	logicBGODetectionVolumes[0] = constructRDK2BGOCrystal1();
 	logicBGODetectionVolumes[1] = constructRDK2BGOCrystal2();
 	logicBGODetectionVolumes[2] = constructRDK2BGOCrystal3();
@@ -450,12 +457,12 @@ G4VPhysicalVolume* MRKRDKIIGeometry::Construct()
 	logicBGODetectionVolumes[9] = constructRDK2BGOCrystal10();
 	logicBGODetectionVolumes[10] = constructRDK2BGOCrystal11();
 	logicBGODetectionVolumes[11] = constructRDK2BGOCrystal12();
-
+/*
 	if(useBGOWrappings)
 	{
 		constructBGOWrappingsImproved();
 	}
-
+*/
 	//Setup senstive detectors
 	if(useSBDDetector)
 	{

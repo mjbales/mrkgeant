@@ -5,6 +5,8 @@
 
 class G4Event;
 
+///Defines user event actions which activate at the beginning or end of events.
+///Currently only used for printing every 100 events
 class MRKEventAction: public G4UserEventAction
 {
 public:

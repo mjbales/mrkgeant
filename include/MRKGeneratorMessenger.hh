@@ -12,6 +12,7 @@ class G4UIcmdWithABool;
 class G4UIcmdWithAnInteger;
 class G4UIcmdWith3VectorAndUnit;
 
+/// Class which defines macro commands relating to event generator
 class MRKGeneratorMessenger: public G4UImessenger
 {
 public:

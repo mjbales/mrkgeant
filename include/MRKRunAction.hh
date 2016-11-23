@@ -11,6 +11,7 @@
 
 class G4Run;
 
+///Actions run at the beginning and end of every run
 class MRKRunAction: public G4UserRunAction
 {
 public:

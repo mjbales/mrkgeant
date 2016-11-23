@@ -11,6 +11,7 @@
 #include "MRKVector.hh"
 #include "MRKVField.hh"
 
+/// Defines the electric field associated with the biased SBD
 class MRKSBDField: public MRKElementField
 {
 public:

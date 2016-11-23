@@ -14,6 +14,7 @@
 
 using MRKCommandAndFunction=std::pair<G4UIcommand*,std::function<void(G4String)>>;
 
+/// Class which handles macro commands
 class MRKMacroMessenger: public G4UImessenger
 {
 public:

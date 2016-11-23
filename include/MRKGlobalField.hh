@@ -20,22 +20,22 @@
 #include "MRKElementField.hh"
 #include "MRKField.hh"
 
+
+
+typedef std::vector<MRKElementField*> FieldList;
+const int MAX_MRK_NUM_FIELDS = 1000;
+
 //  MRKGlobalField - handles the global ElectroMagnetic field
 //
-//  There is a single G04GlobalField object.
+//  There is a single MRKGlobalField object.
 //
 //  The field from each individual beamline element is given by a
 //  ElementField object. Any number of overlapping ElementField
 //  objects can be added to the global field. Any element that
 //  represents an element with an EM field must add the appropriate
 //  ElementField to the global GlobalField object.
-
-typedef std::vector<MRKElementField*> FieldList;
-const int MAX_MRK_NUM_FIELDS = 1000;
-
 class MRKGlobalField: public G4ElectroMagneticField
 {
-//class MRKGlobalField : public G4MagneticField {
 
 private:
 

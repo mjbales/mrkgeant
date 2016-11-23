@@ -10,6 +10,7 @@ class G4UIcmdWithAString;
 class G4UIcmdWithADoubleAndUnit;
 class G4UIcmdWithABool;
 
+/// Defines macro commands which relate to a run
 class MRKRunActionMessenger: public G4UImessenger
 {
   public:

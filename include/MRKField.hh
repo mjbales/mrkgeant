@@ -12,6 +12,7 @@
 #include "MRKROOTField.hh"
 #include "MRKElementField.hh"
 
+///All the relevant inputs which define a field
 class FieldSettings
 {
 public:
@@ -45,6 +46,7 @@ public:
 	bool useCubicInterpolation;
 };
 
+/// Generalized field class for mrkgeant usage
 class MRKField: public MRKElementField
 {
 public:

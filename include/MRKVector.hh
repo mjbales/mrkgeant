@@ -4,6 +4,8 @@
 //Defines 2D and 3D physics vector classes and allows
 //normal operator manimulation of them
 //in addition to standard vector operations
+//
+//This really should be replaced by G4ThreeVector or TVector3
 ///////////////////////////////////////////////////
 #ifndef CVECTOR_H_INCLUDED
 #define CVECTOR_H_INCLUDED

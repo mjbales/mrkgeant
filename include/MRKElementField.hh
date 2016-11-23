@@ -19,7 +19,6 @@
 //  derive a class from this one and implement the computation for the
 //  element. The construct() function will add the derived object into
 //  GlobalField.
-
 class MRKElementField
 {
 

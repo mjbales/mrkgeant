@@ -7,6 +7,7 @@
 class MRKStepMax;
 class G4UIcmdWithADoubleAndUnit;
 
+/// Defines macro commands related the the MRKStepMax process
 class MRKStepMaxMessenger: public G4UImessenger
 {
 public:

@@ -5,6 +5,7 @@ class MRKSteppingVerbose;
 
 #include "G4SteppingVerbose.hh"
 
+/// Allows for control of how much should be outputted to stdout during the simulation.
 class MRKSteppingVerbose: public G4SteppingVerbose
 {
 public:

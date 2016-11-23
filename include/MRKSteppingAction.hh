@@ -5,6 +5,7 @@
 #include "G4ParticleDefinition.hh"
 #include "G4ParticleTable.hh"
 
+/// Defines processes which should be evaluated at every step
 class MRKSteppingAction: public G4UserSteppingAction
 {
 public:

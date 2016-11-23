@@ -27,6 +27,7 @@ enum GeneratorMode
 	PARTICLE_GUN = 0, RDKEVENTFILE = 1, RDKEVENTGENERATOR = 3, PARTICLE_SOURCE = 4
 };
 
+/// Class for the primary event generator.
 class MRKPrimaryGeneratorAction: public G4VUserPrimaryGeneratorAction
 {
 public:

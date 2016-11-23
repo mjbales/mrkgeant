@@ -14,8 +14,7 @@
 #include "MRKVector.hh" //NEED TO REPLACE WITH ROOT 3Vector
 #include "MRKVField.hh" //NEED TO REPLACE WITH MRFIELD
 
-
-
+///Generates information on daughters (proton, electron, neutrino, and photons) from neutron decay
 class MRKEvents
 {
 

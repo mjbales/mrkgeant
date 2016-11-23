@@ -12,6 +12,7 @@
 #include "MRKVector.hh"
 #include "MRKVField.hh"
 
+/// Class which defines the field for the electrostatic mirror
 class MRKMirror: public MRKElementField
 {
 public:

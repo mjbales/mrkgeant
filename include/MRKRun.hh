@@ -18,6 +18,7 @@
 
 class G4Event;
 
+///Defines a run, a group of events, all at the same setting
 class MRKRun: public G4Run
 {
 public:

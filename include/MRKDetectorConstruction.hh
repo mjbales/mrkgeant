@@ -16,6 +16,7 @@ enum class MRKExperimentModel
 	MODEL_RDK2, MODEL_SBDONLY
 };
 
+//Detector construction class, allows for selection of different RDK models
 class MRKDetectorConstruction: public G4VUserDetectorConstruction
 {
 public:
@@ -26,13 +27,18 @@ public:
 
 	G4VPhysicalVolume* Construct();
 
+	/// Defines the macro commands related to detector construction
 	void defineMacroCommands(MRKMacroMessenger* inpMacroMessenger);
 
+	/// Sets which experimental model to use
 	void setExperimentModel(std::string modelName);
+
+	/// Sets which experimental model to use
+	void setExperimentModel(G4String inpModelString);
 
 	inline const G4VPhysicalVolume* GetWorld()      {return physiWorld;};
 	inline MRKExperimentModel getExperimentModel(){ return experimentModel;}
-	void setExperimentModel(G4String inpModelString);
+
 
 	inline bool getUseSBDDetector(){return theGeometry->getUseSBDDetector();};
 	inline bool getUseBAPDDetectors(){return theGeometry->getUseBAPDDetectors();};

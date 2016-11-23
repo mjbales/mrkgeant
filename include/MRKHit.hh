@@ -21,6 +21,7 @@
 #define MRKPARTYPE_ELECTRON 2
 #define MRKPARTYPE_PHOTON 3
 
+/// Class which stores information on a hit on a detector
 class MRKHit: public G4VHit
 {
 public:

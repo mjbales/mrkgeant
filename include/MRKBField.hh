@@ -11,6 +11,7 @@
 #include "TVector3.h"
 #include "MRKROOTField.hh"
 
+/// Magnetic field class.  Values are stored in the ROOT field data structure.
 class MRKBField: public MRKElementField
 {
 public:
@@ -22,15 +23,15 @@ public:
 	~MRKBField();
 
     ///  getLength() returns the overall extents of the field diameter (bigger than necessary)
-    virtual G4double getLength() { return 17.6*CLHEP::cm; }
+    virtual G4double getLength() { return 1.*CLHEP::m; }
 
     ///  getWidth() returns the overall extents of the field diameter (bigger than necessary)
-    virtual G4double getWidth() { return 12.*CLHEP::cm; }
+    virtual G4double getWidth() { return 1.*CLHEP::m; }
 
     ///  getHeight() returns the overall extents of the field diameter (bigger than necessary)
-    virtual G4double getHeight() { return 100.*CLHEP::cm; }
+    virtual G4double getHeight() { return 1.*CLHEP::m; }
 
-	///  addFieldValue() adds the field for this solenoid into field[].
+	///  addFieldValue() adds the magnetic field into field[].
 	///  point[] is in global coordinates.
 	void addFieldValue(const G4double point[4], G4double field[6]);
 
@@ -38,7 +39,7 @@ public:
 
 private:
 
-	MRKROOTField bField;
+	MRKROOTField bField; //Field vectors defined here
 	TVector3 posIn, vecOut;
 	TVector3 fieldOffset;
 	double fieldScale;

@@ -10,6 +10,10 @@
 #include "G4DecayPhysics.hh"
 #include "G4RadioactiveDecayPhysics.hh"
 
+#include "G4EmStandardPhysicsSS.hh"
+#include "G4EmStandardPhysicsWVI.hh"
+#include "G4EmStandardPhysicsGS.hh"
+
 #include "MRKDetectorConstruction.hh"
 
 #include "G4LossTableManager.hh"
@@ -179,6 +183,29 @@ void MRKPhysicsList::AddPhysicsList(const G4String& name)
 		emPhysicsList = new G4EmPenelopePhysics();
 		G4ProductionCutsTable::GetProductionCutsTable()->SetEnergyRange(lowLimit, highLimit);
 
+	}
+	else if (name == "emstandardSS")
+	{
+
+		emName = name;
+		delete emPhysicsList;
+		emPhysicsList = new G4EmStandardPhysicsSS();
+
+	}
+	else if (name == "emstandardWVI")
+	{
+
+		emName = name;
+		delete emPhysicsList;
+		emPhysicsList = new G4EmStandardPhysicsWVI();
+
+	}
+	else if (name == "emstandardGS")
+	{
+
+		emName = name;
+		delete emPhysicsList;
+		emPhysicsList = new G4EmStandardPhysicsGS();
 	}
 	else
 	{

@@ -6,6 +6,7 @@
 #include "G4NistManager.hh"
 #include "G4SystemOfUnits.hh"
 
+/// Class which defines materials used in detector construction
 class MRKMaterials
 {
 public:
